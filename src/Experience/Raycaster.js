@@ -10,15 +10,14 @@ export default class Raycaster {
         this.canvas = this.experience.canvas
         this.camera = this.experience.camera
 
-        // this.raycastedObjectClick = null
-        this.raycastedObjectHover = null
+        this.raycastedObjectClick = {}
 
         this.setInstance()
 
-        window.addEventListener('click', (e) => {
-            this.clickingRaycast(e)
-        })
-
+        // window.addEventListener('click', (e) => {
+        //     this.raycastedObjectClick = "nothing"
+        //     this.clickingRaycast(e)
+        // })
     }
 
     // Definie la camera
@@ -36,9 +35,11 @@ export default class Raycaster {
         const intersects = this.instance.intersectObjects(this.scene.children)
 
         for (let i = 0; i < intersects.length; i++) {
-            this.raycastedObjectClick = intersects[0].object.name
-            console.log(this.raycastedObjectClick)
+            this.raycastedObjectClick.name = intersects[0].object.name
+            this.raycastedObjectClick.object = intersects[0].object
         }
+        console.log(this.raycastedObjectClick.name)
+
     }
 
     resize() {
@@ -47,5 +48,10 @@ export default class Raycaster {
 
     update() {
 
+    }
+
+    click(e) {
+        this.raycastedObjectClick.name = "nothing"
+        this.clickingRaycast(e)
     }
 }

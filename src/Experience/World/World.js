@@ -21,4 +21,10 @@ export default class World {
             this.couloir.update()
         }
     }
+
+    click(e) {
+        if (this.couloir) {
+            this.couloir.click(e)
+        }
+    }
 }

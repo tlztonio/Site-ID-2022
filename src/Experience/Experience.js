@@ -49,6 +49,11 @@ export default class Experience {
             this.update()
         })
 
+        //click
+        window.addEventListener('click', (e) => {
+            this.click(e)
+        })
+
     }
 
     resize() {
@@ -63,5 +68,11 @@ export default class Experience {
         this.raycaster.update()
         this.world.update()
         this.renderer.update()
+    }
+
+    click(e) {
+        this.raycaster.click(e)
+        this.camera.click(e)
+        this.world.click(e)
     }
 }
