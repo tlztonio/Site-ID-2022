@@ -1,6 +1,7 @@
+const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
         path: path.resolve(__dirname, '../dist')
     },
     devtool: 'source-map',
+    target: "web",
     plugins:
         [
             new CopyWebpackPlugin({
@@ -23,7 +25,10 @@ module.exports = {
                 template: path.resolve(__dirname, '../src/index.html'),
                 minify: true
             }),
-            new MiniCSSExtractPlugin()
+            new MiniCssExtractPlugin({
+                filename: "[name].css",
+            }),
+            new webpack.HotModuleReplacementPlugin(),
         ],
     module:
     {
@@ -48,12 +53,27 @@ module.exports = {
                         ]
                 },
 
+                // SCSS
+                {
+                    test: /\.scss$/i,
+                    use: [{
+                        loader: MiniCssExtractPlugin.loader,
+                        // options: {
+                        //     hot: process.env.NODE_ENV === 'development'
+                        // }
+                    },
+                        "css-loader",
+                        "postcss-loader",
+                        "sass-loader",
+                    ],
+                },
+
                 // CSS
                 {
                     test: /\.css$/,
                     use:
                         [
-                            MiniCSSExtractPlugin.loader,
+                            MiniCssExtractPlugin.loader,
                             'css-loader'
                         ]
                 },
@@ -66,6 +86,17 @@ module.exports = {
                     {
                         filename: 'assets/images/[hash][ext]'
                     }
+                },
+
+                // Videos
+                {
+                    test: /\.(mp4|webm)$/,
+                    use: [{
+                        loader: "file-loader",
+                        options: {
+                            outputPath: "assets/videos/",
+                        },
+                    },],
                 },
 
                 // Fonts
