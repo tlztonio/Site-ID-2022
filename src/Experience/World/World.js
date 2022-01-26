@@ -1,7 +1,7 @@
 import Experience from "../Experience"
 import Environment from "./Environment"
-import Couloir from "./Couloir"
-import Concert from "./Concert"
+import Sable from "./Sable"
+import Parasol from "./Parasol"
 
 export default class World {
     constructor() {
@@ -11,20 +11,16 @@ export default class World {
 
         this.resources.on("ready", () => {
             this.environment = new Environment()
-            this.couloir = new Couloir()
-            this.concert = new Concert()
+            this.sable = new Sable()
         })
     }
 
     update() {
-        if (this.couloir) {
-            this.couloir.update()
+        if (this.sable) {
+            this.sable.update()
         }
     }
 
     click(e) {
-        if (this.couloir) {
-            this.couloir.click(e)
-        }
     }
 }

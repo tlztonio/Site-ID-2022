@@ -22,7 +22,7 @@ export default class Camera {
     // Definie la camera
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 100)
-        this.instance.position.set(0, 3, 35)
+        this.instance.position.set(0, 3, 5)
         this.scene.add(this.instance)
         this.mouse = new THREE.Vector2()
     }
@@ -30,20 +30,6 @@ export default class Camera {
     setOrbitControls() {
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
-    }
-
-    animationPourPortes() {
-        // gsap.to(this.camera.position, {
-        //     z: () => -(height - document.documentElement.clientHeight),
-        //     ease: "none",
-        //     scrollTrigger: {
-        //         trigger: document.viewport,
-        //         start: "top top",
-        //         end: "bottom bottom",
-        //         scrub: 1,
-        //         invalidateOnRefresh: true
-        //     }
-        // })
     }
 
     mouseMouve(e) {
@@ -61,11 +47,5 @@ export default class Camera {
         // this.instance.position.z -= 0.02
         // this.instance.rotation.y += (this.mouse.x * -0.25 - this.instance.rotation.y) * 0.02
         // this.instance.rotation.x += (this.mouse.y * 0.25 - this.instance.rotation.x) * 0.02
-    }
-
-    click(e) {
-        // if (this.raycaster.raycastedObjectClick.name.lastIndexOf("porte", 0) === 0) {
-        //     this.animationPourPortes()
-        // }
     }
 }

@@ -13,8 +13,15 @@ export default class Environment {
             this.debugFolder = this.debug.ui.addFolder('Environment')
         }
 
-        this.setSunLight()
-        this.setEnvironmentMap()
+        // this.setSunLight()
+        // this.setFog()
+    }
+
+    setFog() {
+        this.blueColor = new THREE.Color(0x64889B)
+
+        this.scene.background = this.blueColor
+        this.scene.fog = new THREE.Fog(this.blueColor, 3, 8)
     }
 
     setSunLight() {
@@ -31,34 +38,6 @@ export default class Environment {
             this.helper = new THREE.PointLightHelper(this.sunLight, 3)
             this.scene.add(this.helper)
             this.debugFolder.add(this.sunLight.position, "y", 0, 15, 0.1)
-        }
-    }
-
-    setEnvironmentMap() {
-        this.environmentMap = {}
-        this.environmentMap.intensity = 0.4
-        this.environmentMap.texture = this.resources.items.environmentMapTexture
-        this.environmentMap.texture.encoding = THREE.sRGBEncoding
-
-        this.scene.environment = this.environmentMap.texture
-
-        this.environmentMap.updateMaterials = () => {
-            this.scene.traverse((child) => {
-                if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
-                    child.material.envMap = this.environmentMap.texture
-                    child.material.envMapIntensity = this.environmentMap.texture.intensity
-                    child.material.needsUpdate = true
-                }
-            })
-        }
-
-        this.environmentMap.updateMaterials()
-
-        if (this.debug.active) {
-            this.debugFolder
-                .add(this.environmentMap, 'intensity', 0, 4)
-                .name('envMapIntensity')
-                .onChange(this.environmentMap.updateMaterials)
         }
     }
 }

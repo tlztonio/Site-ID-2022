@@ -24,8 +24,8 @@ export default [
     //     path: 'textures/dirt/normal.jpg'
     // },
     {
-        name: 'couloirModel',
+        name: 'sableModel',
         type: 'gltfModel',
-        path: 'models/couloir/glTF/Couloir.gltf'
+        path: 'models/couloir/glTF/plage1.gltf'
     }
 ]

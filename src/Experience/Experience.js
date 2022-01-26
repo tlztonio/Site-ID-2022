@@ -71,8 +71,7 @@ export default class Experience {
     }
 
     click(e) {
-        this.raycaster.click(e)
-        this.camera.click(e)
+        // this.raycaster.click(e)
         this.world.click(e)
     }
 }
