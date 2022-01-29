@@ -3,7 +3,7 @@ import * as THREE from "three"
 import gsap from "gsap"
 
 export default class Parasol {
-    constructor(x, y, z) {
+    constructor(x, y, z, name) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
@@ -17,23 +17,28 @@ export default class Parasol {
         }
 
         // setup
-        this.model = this.resources.items.parasolModel.scene
+        this.model = this.resources.items.parasolModel.scene.clone()
+        this.model.name = name
+        this.x = x
+        this.y = y
+        this.z = z
 
-        this.setModel(x, y, z)
+        this.setModel()
         this.setAnimation()
     }
 
-    setModel(x, y, z) {
+    setModel() {
         // this.model = this.resource.scene
 
         this.tissu = this.model.children[1]
         //double side sur le tissu a activer que si necessaire pour l'animation
         this.tissu.traverse((o) => { if (o.isMesh) o.material.side = THREE.DoubleSide })
 
-        this.model.position.set(x, y, z)
+        this.model.position.set(this.x, this.y, this.z)
         this.model.rotation.set((Math.random() - 0.5) / 3, (Math.random() - 0.5) / 3, (Math.random() - 0.5) / 3)
 
         this.scene.add(this.model)
+        console.log('test')
     }
 
     setAnimation() {
@@ -65,7 +70,7 @@ export default class Parasol {
     }
 
     animate() {
-        if (this.raycaster.raycastedObject == 'tissu' || this.raycaster.raycastedObject == 'baton') {
+        if (this.raycaster.raycastedObjectName == this.model.name) {
             this.closeAnimation.play()
             this.tissu.rotation.y += 0.02
         } else {

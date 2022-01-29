@@ -12,10 +12,10 @@ export default class World {
         this.resources.on("ready", () => {
             this.environment = new Environment()
             this.sable = new Sable()
-            this.parasol1 = new Parasol(-2, 0, 0)
-            this.parasol2 = new Parasol(-1, 0, 0)
-            this.parasol3 = new Parasol(0, 0, 0)
-            this.parasol4 = new Parasol(0, 0, 0)
+            this.parasol1 = new Parasol(-3, 0, 0, 'parasol1')
+            this.parasol2 = new Parasol(0, 0, 0, 'parasol2')
+            this.parasol3 = new Parasol(3, 0, 0, 'parasol3')
+            this.parasol4 = new Parasol(6, 0, 0, 'parasol4')
             this.parasol = [this.parasol1, this.parasol2, this.parasol3, this.parasol4]
         })
     }
@@ -25,11 +25,9 @@ export default class World {
             this.sable.update()
         }
         if (this.parasol) {
-            this.parasol.forEach(e => {
+            this.parasol.forEach((e) => {
                 e.update()
-                // console.log(e)
             })
-            // this.parasol.update()
         }
     }
 

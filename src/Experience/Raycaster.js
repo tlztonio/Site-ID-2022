@@ -29,12 +29,12 @@ export default class Raycaster {
         // calculate objects intersecting the picking ray
         const intersects = this.instance.intersectObjects(this.scene.children)
 
-        this.raycastedObject = "nothing"
+        // reset value
+        this.raycastedObjectName = "nothing"
 
         for (let i = 0; i < intersects.length; i++) {
-            this.raycastedObject = intersects[0].object.name
+            this.raycastedObjectName = intersects[0].object.parent.name
         }
-        console.log(this.raycastedObject)
     }
 
     resize() {
