@@ -17,13 +17,12 @@ export default class Sable {
         }
 
         // setup
-        this.resource = this.experience.resources.items.sableModel
-
         this.setInstance()
     }
 
     setInstance() {
         this.geometry = new THREE.PlaneGeometry(10, 4, 200, 80)
+
 
         const count = this.geometry.attributes.position.count
         const randoms = new Float32Array(count)
@@ -45,13 +44,13 @@ export default class Sable {
                 uFrequency: { value: new THREE.Vector2(10, 5) },
                 uTime: { value: 0 },
             },
-            fog: true
+            fog: true,
         })
 
         this.mesh = new THREE.Mesh(this.geometry, this.material)
-        // this.mesh.scale.y = 2 / 3
-        // this.mesh.rotation.set(-Math.PI * 0.5, 0, 0)
+        this.mesh.rotation.set(-Math.PI * 0.5, 0, 0)
         this.scene.add(this.mesh)
+
 
         if (this.debug.active) {
             // this.debugFolder.add(this.porteObject.rotation, 'y').min(-3).max(3).step(0.01)

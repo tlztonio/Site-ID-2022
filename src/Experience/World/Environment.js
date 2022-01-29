@@ -13,15 +13,25 @@ export default class Environment {
             this.debugFolder = this.debug.ui.addFolder('Environment')
         }
 
-        // this.setSunLight()
-        // this.setFog()
+        this.setSun()
+        this.setSunLight()
+        this.setFog()
+    }
+
+    setSun() {
+        this.sun = {}
+        this.sun.geometry = new THREE.SphereGeometry(0.5, 20, 12)
+        this.sun.material = new THREE.MeshBasicMaterial({ color: 0xffff00 })
+        this.sun.mesh = new THREE.Mesh(this.sun.geometry, this.sun.material)
+        this.sun.mesh.position.set(2, 2, -5)
+        this.scene.add(this.sun.mesh)
     }
 
     setFog() {
         this.blueColor = new THREE.Color(0x64889B)
 
         this.scene.background = this.blueColor
-        this.scene.fog = new THREE.Fog(this.blueColor, 3, 8)
+        // this.scene.fog = new THREE.Fog(this.blueColor, 3, 8)
     }
 
     setSunLight() {

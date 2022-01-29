@@ -10,14 +10,9 @@ export default class Raycaster {
         this.canvas = this.experience.canvas
         this.camera = this.experience.camera
 
-        this.raycastedObjectClick = {}
+        // this.raycastedObject = {}
 
         this.setInstance()
-
-        // window.addEventListener('click', (e) => {
-        //     this.raycastedObjectClick = "nothing"
-        //     this.clickingRaycast(e)
-        // })
     }
 
     // Definie la camera
@@ -26,7 +21,7 @@ export default class Raycaster {
         this.mouse = new THREE.Vector2()
     }
 
-    clickingRaycast(e) {
+    hoverRaycast(e) {
         this.mouse.x = (e.clientX / this.sizes.width) * 2 - 1
         this.mouse.y = - (e.clientY / this.sizes.height) * 2 + 1
         // update the picking ray with the camera and mouse position
@@ -34,12 +29,12 @@ export default class Raycaster {
         // calculate objects intersecting the picking ray
         const intersects = this.instance.intersectObjects(this.scene.children)
 
-        for (let i = 0; i < intersects.length; i++) {
-            this.raycastedObjectClick.name = intersects[0].object.name
-            this.raycastedObjectClick.object = intersects[0].object
-        }
-        console.log(this.raycastedObjectClick.name)
+        this.raycastedObject = "nothing"
 
+        for (let i = 0; i < intersects.length; i++) {
+            this.raycastedObject = intersects[0].object.name
+        }
+        console.log(this.raycastedObject)
     }
 
     resize() {
@@ -51,7 +46,10 @@ export default class Raycaster {
     }
 
     click(e) {
-        this.raycastedObjectClick.name = "nothing"
-        this.clickingRaycast(e)
+
+    }
+
+    mouseMove(e) {
+        this.hoverRaycast(e)
     }
 }

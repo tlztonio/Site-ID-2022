@@ -21,7 +21,7 @@ export default class Camera {
 
     // Definie la camera
     setInstance() {
-        this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 100)
+        this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 300)
         this.instance.position.set(0, 3, 5)
         this.scene.add(this.instance)
         this.mouse = new THREE.Vector2()

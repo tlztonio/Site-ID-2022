@@ -14,13 +14,16 @@ void main()
     #include <project_vertex>
     #include <fog_vertex>
 
-    float newX = position.x*cos(-50.0) - position.z*sin(-50.0);
-    // float newZ = position.z*cos(45.0) + position.x*sin(45.0);
+    // float pi = 3.14159265359;
 
-    // vec4 modelPosition = modelMatrix * vec4(vec3(newX,position.y,position.z), 1.0);
+    // float rotationValue = -pi*0.5;
+
+    // float newY = position.y*cos(rotationValue) - position.z*sin(rotationValue);
+    // float newZ = position.z*cos(rotationValue) + position.y*sin(rotationValue);
+
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-    modelPosition.z += aRandom*0.02;
+    modelPosition.y += aRandom*0.02;
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;

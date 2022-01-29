@@ -49,9 +49,14 @@ export default class Experience {
             this.update()
         })
 
-        //click
+        // Click event
         window.addEventListener('click', (e) => {
             this.click(e)
+        })
+
+        // Mouse move event
+        window.addEventListener('mousemove', (e) => {
+            this.mouseMove(e)
         })
 
     }
@@ -73,5 +78,10 @@ export default class Experience {
     click(e) {
         // this.raycaster.click(e)
         this.world.click(e)
+    }
+
+    mouseMove(e) {
+        this.world.mouseMove(e)
+        this.raycaster.mouseMove(e)
     }
 }
