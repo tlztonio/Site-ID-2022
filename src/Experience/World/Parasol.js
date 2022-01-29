@@ -30,7 +30,7 @@ export default class Parasol {
     setModel() {
         // this.model = this.resource.scene
 
-        this.tissu = this.model.children[1]
+        this.tissu = this.model.children[0]
         //double side sur le tissu a activer que si necessaire pour l'animation
         this.tissu.traverse((o) => { if (o.isMesh) o.material.side = THREE.DoubleSide })
 
@@ -42,31 +42,11 @@ export default class Parasol {
     }
 
     setAnimation() {
-
-        // animation des portes qui se redefinie avec le nom de l'object raycasted
         this.closeAnimation = gsap.timeline({ paused: true })
-            .to(this.tissu.scale, { y: 3.7, duration: 1, ease: 'Power4.easeInOut' }, 0)
-            .to(this.tissu.scale, { x: 0.3, duration: 1, ease: 'Power4.easeInOut' }, 0)
-            .to(this.tissu.scale, { z: 0.3, duration: 1, ease: 'Power4.easeInOut' }, 0)
-            .to(this.tissu.position, { y: 0.85, duration: 1, ease: 'Power4.easeInOut' }, 0)
-        // this.openAnimation = gsap.timeline({ paused: true })
-        //     .to(this.tissu.scale, { y: 1, duration: 1, ease: 'Power4.easeInOut' }, 0)
-        //     .to(this.tissu.scale, { x: 1, duration: 1, ease: 'Power4.easeInOut' }, 0)
-        //     .to(this.tissu.scale, { z: 1, duration: 1, ease: 'Power4.easeInOut' }, 0)
-        //     .to(this.tissu.position, { y: 1.21, duration: 1, ease: 'Power4.easeInOut' }, 0)
-        // this.closeAnimation = gsap.timeline({ paused: true })
-        //     .to(this.raycaster.raycastedObjectClick.object.children[0].rotation, { x: 0, duration: 0.75, ease: 'Power4.easeIn' }, 0)
-        //     .to(this.raycaster.raycastedObjectClick.object.rotation, { y: 0, duration: 1, ease: 'Power4.easeInOut', delay: 0.35 }, 0)
-
-        // if (this.raycaster.raycastedObjectClick.object.rotation.y > - Math.PI * 0.22) {
-        //     // condition de la porte plutot fermée
-        //     console.log('open')
-        // this.closeAnimation.play()
-        // } else if (this.raycaster.raycastedObjectClick.object.rotation.y < - Math.PI * 0.22) {
-        //     // condition de la porte plutot ouverte
-        //     console.log('close')
-        //     this.closeAnimation.play()
-        // }
+            .to(this.tissu.scale, { y: 3, duration: 1, ease: 'Power4.easeInOut' }, 0)
+            .to(this.tissu.scale, { x: 0.2, duration: 1, ease: 'Power4.easeInOut' }, 0)
+            .to(this.tissu.scale, { z: 0.2, duration: 1, ease: 'Power4.easeInOut' }, 0)
+            .to(this.tissu.position, { y: -0.96, duration: 1, ease: 'Power4.easeInOut' }, 0)
     }
 
     animate() {
