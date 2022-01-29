@@ -23,6 +23,9 @@ void main()
 
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
+    // Smooth interpolation between these values, -1 to re-adjust and 0.75 to attenuate the hill
+    modelPosition.y += (smoothstep(-6.0,-3.0,modelPosition.x)-1.0)*0.5;
+
     modelPosition.y += aRandom*0.02;
 
     vec4 viewPosition = viewMatrix * modelPosition;
