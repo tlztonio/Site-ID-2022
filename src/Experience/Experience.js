@@ -82,6 +82,8 @@ export default class Experience {
 
     mouseMove(e) {
         this.world.mouseMove(e)
-        this.raycaster.mouseMove(e)
+        if (this.camera) {
+            this.raycaster.mouseMove(e)
+        }
     }
 }

@@ -50,6 +50,8 @@ export default class Raycaster {
     }
 
     mouseMove(e) {
-        this.hoverRaycast(e)
+        if (this.camera.instance.position.x > 0) {
+            this.hoverRaycast(e)
+        }
     }
 }

@@ -20,6 +20,7 @@ export default class Renderer {
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
             // antialias : true 
+            alpha: true
         })
 
         // A commenter pour les perfs donc on garde au cas ou

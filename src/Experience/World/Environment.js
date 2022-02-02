@@ -28,7 +28,7 @@ export default class Environment {
     }
 
     setFog() {
-        this.blueColor = new THREE.Color(0x64889B)
+        this.blueColor = new THREE.Color(0x87CEEB)
 
         this.scene.background = this.blueColor
         // this.scene.fog = new THREE.Fog(this.blueColor, 3, 8)

@@ -13,7 +13,7 @@ export default class Parasol {
 
         // debug
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('concert')
+            this.debugFolder = this.debug.ui.addFolder('Parasol')
         }
 
         // setup
@@ -38,7 +38,6 @@ export default class Parasol {
         this.model.rotation.set((Math.random() - 0.5) / 3, (Math.random() - 0.5) / 3, (Math.random() - 0.5) / 3)
 
         this.scene.add(this.model)
-        console.log('test')
     }
 
     setAnimation() {
