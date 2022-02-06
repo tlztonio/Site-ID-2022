@@ -10,6 +10,8 @@ export default class Sable {
         this.scene = this.experience.scene
         // this.raycaster = this.experience.raycaster
         this.debug = this.experience.debug
+        this.time = this.experience.time
+
 
         // debug
         if (this.debug.active) {
@@ -58,6 +60,6 @@ export default class Sable {
     }
 
     update() {
-
+        this.material.uniforms.uTime.value += this.time.delta
     }
 }

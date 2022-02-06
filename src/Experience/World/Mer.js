@@ -34,17 +34,12 @@ export default class Mer {
 
         this.geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
 
-        const waves = {
-            A: { direction: 0, steepness: 0.1, wavelength: 0.5 },
-            B: { direction: 30, steepness: 0.1, wavelength: 0.5 },
-            C: { direction: 60, steepness: 0.1, wavelength: 0.5 },
-        };
-
         this.material = new THREE.ShaderMaterial({
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
             uniforms: {
-                uFrequency: { value: new THREE.Vector2(10, 5) },
+                uDebug: { value: new THREE.Vector2(-1.0, 0.0) },
+                uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
                 transparent: true,
@@ -62,7 +57,9 @@ export default class Mer {
 
 
         if (this.debug.active) {
-            // this.debugFolder.add(this.porteObject.rotation, 'y').min(-3).max(3).step(0.01)
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(0).max(1).step(0.001)
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(0.25).max(0.75).step(0.001)
+            this.material.needsUpdate = true
         }
     }
 

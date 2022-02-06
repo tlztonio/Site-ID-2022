@@ -1,5 +1,6 @@
 uniform float uTime;
 uniform float PI;
+uniform vec2 uDebug;
 
 uniform vec4 waveA;
 uniform vec4 waveB;
@@ -8,6 +9,7 @@ uniform vec4 waveC;
 varying vec2 vUv;
 varying float vRandom;
 varying vec4 vPos;
+varying vec4 vGlPos;
 
 attribute float aRandom;
 
@@ -35,10 +37,10 @@ void main()
 
     //CHANGE LES DIVISER PAR DES FOIS
 
-    modelPosition.y += sin(modelPosition.x*1.5 + slowedTime)/40.0;
+    modelPosition.y += sin(modelPosition.x*1.5 + slowedTime)*0.025;
     modelPosition.y += sin(modelPosition.z*5.0 + slowedTime)/75.0;
     modelPosition.y += cos(modelPosition.z*7.0 + slowedTime)/75.0;
-    modelPosition.y += aRandom*0.02;
+    modelPosition.y += aRandom* -0.1*min((modelPosition.x+5.0)*0.2,0.0);
 
 
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -46,7 +48,8 @@ void main()
 
     gl_Position = projectedPosition;
     
-    vRandom = aRandom /4.0;
+    vRandom = aRandom*0.25;
     vUv = uv;
     vPos = modelPosition;
+    vGlPos = gl_Position;
 }
