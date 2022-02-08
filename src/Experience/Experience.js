@@ -34,9 +34,10 @@ export default class Experience {
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
         this.camera = new Camera()
-        this.raycaster = new Raycaster()
         this.renderer = new Renderer()
         this.world = new World()
+
+        this.raycaster = new Raycaster()
 
         // Resize event
         this.sizes.on('resize', () => { // traditionnal function will lose the this context

@@ -23,7 +23,7 @@ export default class Sable {
     }
 
     setInstance() {
-        this.geometry = new THREE.PlaneGeometry(10, 4, 200, 80)
+        this.geometry = new THREE.PlaneGeometry(5, 14, 80, 200)
 
 
         const count = this.geometry.attributes.position.count

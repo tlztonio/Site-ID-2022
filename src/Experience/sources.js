@@ -7,8 +7,19 @@ export default [
         path: 'models/Parasol/parasol.gltf'
     },
     {
-        name: 'textModel',
+        name: 'textureTissu',
+        type: 'texture',
+        path: 'textures/parasol/textureParasol.jpg'
+    },
+    {
+        name: 'textRockModel',
         type: 'gltfModel',
-        path: 'models/Text/20Text.gltf'
+        path: 'models/Rocks/Text/20Text.glb'
+    },
+    {
+        name: 'smallRock1Model',
+        type: 'gltfModel',
+        path: 'models/Rocks/smallRock1.glb'
     }
+
 ]

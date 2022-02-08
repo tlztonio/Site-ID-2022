@@ -1,6 +1,7 @@
 import Experience from "../Experience"
 import * as THREE from "three"
 import gsap from "gsap"
+import { Side } from "three"
 
 export default class Parasol {
     constructor(x, y, z, name) {
@@ -22,20 +23,21 @@ export default class Parasol {
         this.x = x
         this.y = y
         this.z = z
+        this.textureTissu = this.resources.items.textureTissu
 
         this.setModel()
         this.setAnimation()
     }
 
     setModel() {
-        // this.model = this.resource.scene
+        this.materialTissu = new THREE.MeshBasicMaterial({ map: this.textureTissu, side: THREE.DoubleSide })
 
         this.tissu = this.model.children[0]
         //double side sur le tissu a activer que si necessaire pour l'animation
-        this.tissu.traverse((o) => { if (o.isMesh) o.material.side = THREE.DoubleSide })
+        this.tissu.traverse((o) => { if (o.isMesh) o.material = this.materialTissu })
 
         this.model.position.set(this.x, this.y, this.z)
-        this.model.rotation.set((Math.random() - 0.5) / 3, (Math.random() - 0.5) / 3, (Math.random() - 0.5) / 3)
+        this.model.rotation.set((Math.random() - 0.5) / 3, (Math.random() - 0.5), (Math.random() - 0.5) / 3)
 
         this.scene.add(this.model)
     }

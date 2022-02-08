@@ -65,20 +65,17 @@ float clampTest(float mi, float ma, float value){
     return value;
 }
 
-float map(float value, float min1, float max1, float min2, float max2) {
-  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
-}
-
 void main()
 {
     float elevation = vRandom*0.16;
 
-    float r = smoothstep(0.0,0.8-vPos.y*0.2,0.39+vRandom*0.1);
-    float g = smoothstep(0.0,0.8-vPos.y*0.2,0.53+vRandom*0.1);
-    float b = smoothstep(0.0,0.8-vPos.y*0.2,0.6+vRandom*0.1);
+    float r = smoothstep(0.0,0.75-vPos.y*0.05,0.39+vRandom*0.1);
+    float g = smoothstep(0.0,0.75-vPos.y*0.05,0.53+vRandom*0.1);
+    float b = smoothstep(0.0,0.75-vPos.y*0.05,0.6+vRandom*0.1);
 
     // AD SINUS ON Z TO MAKE WAVY PATTERN ECUME
-    float ecume = max((vPos.x+15.0)-7.5+sin(uTime*0.0014)*0.2,0.0)*0.2;
+    // 7.5 = point de depart de la blancheur
+    float ecume = max(vPos.x+4.25-(sin(uTime*0.0014)*0.2) ,0.0)*0.2;
 
     r += ecume;
     g += ecume;
@@ -87,14 +84,15 @@ void main()
     vec2 st = -vUv.xy;
 
     // Scale the coordinate system to see some noise in action
-    vec2 pos = vec2(st*30.0);
+    vec2 pos = vec2(st.x*40.0-sin(uTime*0.0014),st.y*70.0);
 
     float foamLines = 0.127;
 
     // clamp le noise pour avoir les contours
     float noisy = clampTest(foamLines-0.07,foamLines,noise(pos));
-    // fait une parabole vers le haut pour rendre visible le noise que autour de la valeur en commun
-    float segment = smoothstep(-6.1,-5.3,vPos.x)-smoothstep(-5.5,-5.0,vPos.x);
+    // fait une parabole vers le haut pour rendre visible le noise que autour de la valeur centrale
+    float segment = smoothstep(-4.3,-3.0,vPos.x)-smoothstep(-3.5,-3.0,vPos.x);
+    // segmente le noise et augmente le pour le rendre plus blanc
     float finalFoam = noisy*segment*2.5;
 
     gl_FragColor = vec4(r+finalFoam,g+finalFoam,b+finalFoam, 1.0);

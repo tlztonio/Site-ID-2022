@@ -23,7 +23,7 @@ void main()
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
     // Smooth interpolation between these values, -1 to re-adjust and 0.5 to attenuate the hill
-    modelPosition.y += (smoothstep(-6.0,-3.0,modelPosition.x)-1.0)*0.5;
+    modelPosition.y += (smoothstep(-2.85,-0.85,modelPosition.x)-1.0)*0.4;
 
     // CHANGE SMOOTHNESS TO GET LISSE BEGINING OF BEACH
 

@@ -23,7 +23,7 @@ export default class Mer {
     }
 
     setInstance() {
-        this.geometry = new THREE.PlaneGeometry(4, 4, 80, 80)
+        this.geometry = new THREE.PlaneGeometry(5, 14, 40, 150)
 
         const count = this.geometry.attributes.position.count
         const randoms = new Float32Array(count)
@@ -42,17 +42,24 @@ export default class Mer {
                 uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
-                transparent: true,
             },
+            transparent: true,
+            // format: THREE.RGBAFormat
         })
+        // this.material.opacity = 0.5;
+        // this.alphaMode = AlphaBlend;
+        // this.alphaWrite = true;
+        // this.depthWrite = false;
+        // material.format = THREE.RGBAFormat
 
         // this.material.alphaTest = 0.5
 
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.rotation.set(-Math.PI * 0.5, 0, 0)
-        this.mesh.position.set(-5, -0.27, 0)
+        this.mesh.position.set(-4.2, -0.27, 0)
         // this.mesh.castShadow = true;
         // this.mesh.receiveShadow = true;
+        this.mesh.name = "sea"
         this.scene.add(this.mesh)
 
 

@@ -9,6 +9,7 @@ export default class Raycaster {
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
         this.camera = this.experience.camera
+        this.world = this.experience.world
 
         // this.raycastedObject = {}
 
@@ -19,6 +20,13 @@ export default class Raycaster {
     setInstance() {
         this.instance = new THREE.Raycaster()
         this.mouse = new THREE.Vector2()
+
+        // set group without sea for raycast
+        this.sceneArray = []
+        setTimeout(() => {
+            this.sceneArray.push(this.world.parasol1.model, this.world.parasol2.model, this.world.parasol3.model, this.world.parasol4.model)
+        }, 100)
+
     }
 
     hoverRaycast(e) {
@@ -27,7 +35,9 @@ export default class Raycaster {
         // update the picking ray with the camera and mouse position
         this.instance.setFromCamera(this.mouse, this.camera.instance)
         // calculate objects intersecting the picking ray
-        const intersects = this.instance.intersectObjects(this.scene.children)
+
+        // use group without sea for better performance
+        const intersects = this.instance.intersectObjects(this.sceneArray)
 
         // reset value
         this.raycastedObjectName = "nothing"
@@ -50,8 +60,8 @@ export default class Raycaster {
     }
 
     mouseMove(e) {
-        if (this.camera.instance.position.x > 0) {
-            this.hoverRaycast(e)
-        }
+        // if (this.camera.instance.position.z > -1 && this.camera.instance.position.x > 0) {
+        this.hoverRaycast(e)
+        // }
     }
 }
