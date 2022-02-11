@@ -23,7 +23,7 @@ export default class Environment {
         this.sun.geometry = new THREE.SphereGeometry(0.5, 20, 12)
         this.sun.material = new THREE.MeshBasicMaterial({ color: 0xffff00 })
         this.sun.mesh = new THREE.Mesh(this.sun.geometry, this.sun.material)
-        this.sun.mesh.position.set(2, 2, -5)
+        this.sun.mesh.position.set(-5, 3, -3)
         this.scene.add(this.sun.mesh)
     }
 
@@ -35,12 +35,15 @@ export default class Environment {
     }
 
     setSunLight() {
-        this.sunLight = new THREE.PointLight('#ffffff', 2)
-        // this.sunLight.castShadow = true
-        // this.sunLight.shadow.camera.far = 15
-        // this.sunLight.shadow.mapSize.set(1024, 1024)
+        this.sunLight = new THREE.DirectionalLight('#ffffff', 5)
+        this.sunLight.castShadow = true
+        this.sunLight.shadow.camera.near = 0.1
+        this.sunLight.shadow.camera.far = 20
+        // this.sunLight.shadow.camera.rotation.set(-5, 3, -3)
+        this.sunLight.shadow.mapSize.set(512, 512)
+
         // this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(0, 8, - 1.25)
+        this.sunLight.position.set(-5, 3, -3)
         this.scene.add(this.sunLight)
 
         // Debug
@@ -48,6 +51,8 @@ export default class Environment {
             this.helper = new THREE.PointLightHelper(this.sunLight, 3)
             this.scene.add(this.helper)
             this.debugFolder.add(this.sunLight.position, "y", 0, 15, 0.1)
+            this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera);
+            this.scene.add(this.shadowHelper);
         }
     }
 }

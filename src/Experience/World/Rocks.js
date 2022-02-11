@@ -30,8 +30,9 @@ export default class Rocks {
 
     setTextModel() {
 
-        this.model.text.position.set(-2.2, -0.31, 4.0) // -4.713, -0.319
+        this.model.text.position.set(-2.1, -0.33, 6) // -4.713, -0.319
         this.model.text.rotation.set(0.5, -1.167, 0.517)
+        this.model.text.castShadows = true
 
         this.scene.add(this.model.text)
 

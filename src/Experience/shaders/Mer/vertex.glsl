@@ -42,6 +42,12 @@ void main()
     modelPosition.y += cos(modelPosition.z*7.0 + slowedTime)/75.0;
     modelPosition.y += aRandom* -0.1*min((modelPosition.x+5.0)*0.2,0.0);
 
+    // deformation for rounded beach
+    float deformation1 = sin(modelPosition.z*0.75-4.0)*0.3;
+    float deformation2 = cos(modelPosition.z*1.75-4.0)*0.2;
+    float deformation3 = sin(modelPosition.z*0.50-4.0)*0.3;
+    modelPosition.x += deformation1+deformation2+deformation3;
+
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;

@@ -3,6 +3,8 @@ import * as THREE from "three"
 import gsap from "gsap"
 import fragmentShader from "../shaders/Sable/fragment.glsl"
 import vertexShader from "../shaders/Sable/vertex.glsl"
+import { mergeUniforms } from 'three/src/renderers/shaders/UniformsUtils.js'
+import { UniformsLib } from 'three/src/renderers/shaders/UniformsLib.js'
 
 export default class Sable {
     constructor() {
@@ -23,7 +25,7 @@ export default class Sable {
     }
 
     setInstance() {
-        this.geometry = new THREE.PlaneGeometry(5, 14, 80, 200)
+        this.geometry = new THREE.PlaneGeometry(6, 19, 70, 240)
 
 
         const count = this.geometry.attributes.position.count
@@ -38,24 +40,33 @@ export default class Sable {
         this.material = new THREE.ShaderMaterial({
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
-            uniforms: {
-                // fogColor: { value: this.scene.fog.color },
-                // fogDensity: { value: this.scene.fog.density },
-                // fogFar: { value: this.scene.fog.far },
-                // fogNear: { value: this.scene.fog.near },
-                uFrequency: { value: new THREE.Vector2(10, 5) },
-                uTime: { value: 0 },
-            },
-            fog: true,
+            uniforms: mergeUniforms([
+                UniformsLib.lights,
+                // UniformsLib.dithering,
+                // UniformsLib.fog,
+                {
+                    uDebug: { value: new THREE.Vector2(-1.0, 0.0) },
+                    uTime: { value: 0 },
+                },
+            ]),
+            lights: true,
+            // dithering: true,
+            // fog: true,
         })
+        // console.log(this.material.uniforms)
 
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.rotation.set(-Math.PI * 0.5, 0, 0)
+        this.mesh.position.set(0.65, 0, 0)
+        // this.mesh.castShadow = true;
+        this.mesh.receiveShadow = true;
         this.scene.add(this.mesh)
 
 
         if (this.debug.active) {
-            // this.debugFolder.add(this.porteObject.rotation, 'y').min(-3).max(3).step(0.01)
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-5).max(5).step(0.01)
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(-5).max(5).step(0.01)
+            this.material.needsUpdate = true
         }
     }
 
