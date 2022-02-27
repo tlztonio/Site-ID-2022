@@ -12,6 +12,11 @@ export default [
         path: 'textures/parasol/textureParasol.jpg'
     },
     {
+        name: 'textureRock',
+        type: 'texture',
+        path: 'textures/rock.png'
+    },
+    {
         name: 'textRockModel',
         type: 'gltfModel',
         path: 'models/Rocks/Text/20Text2.glb'

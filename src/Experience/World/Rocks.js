@@ -22,6 +22,7 @@ export default class Rocks {
         this.model = {}
         this.model.text = this.resources.items.textRockModel.scene
         this.model.stairsRock = this.resources.items.stairsRockModel.scene
+        this.model.textureRock = this.resources.items.textureRock
 
         this.setTextModel()
         this.setStairsModel()
@@ -62,6 +63,14 @@ export default class Rocks {
         this.model.stairsRock.position.set(2.55, 0, 1.1)// -4.75, -0.26
         this.model.stairsRock.rotation.set(0, -0.5 * Math.PI, 0)
         this.model.stairsRock.scale.set(0.4, 0.4, 0.4)
+
+        const textureRock = new THREE.MeshBasicMaterial({ map: this.model.textureRock })
+
+        this.model.stairsRock.traverse((o) => {
+            if (o.isMesh) {
+                o.material = textureRock
+            }
+        })
 
         this.scene.add(this.model.stairsRock)
 
