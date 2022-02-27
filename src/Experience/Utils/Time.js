@@ -16,7 +16,6 @@ export default class Time extends EventEmitter {
         window.requestAnimationFrame(() => {
             this.tick()
         })
-
     }
 
     tick() {

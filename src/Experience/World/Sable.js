@@ -5,6 +5,7 @@ import fragmentShader from "../shaders/Sable/fragment.glsl"
 import vertexShader from "../shaders/Sable/vertex.glsl"
 import { mergeUniforms } from 'three/src/renderers/shaders/UniformsUtils.js'
 import { UniformsLib } from 'three/src/renderers/shaders/UniformsLib.js'
+import { Color, MeshStandardMaterial } from "three"
 
 export default class Sable {
     constructor() {
@@ -42,29 +43,22 @@ export default class Sable {
             fragmentShader: fragmentShader,
             uniforms: mergeUniforms([
                 UniformsLib.lights,
-                // UniformsLib.dithering,
-                // UniformsLib.fog,
                 {
                     uDebug: { value: new THREE.Vector2(-1.0, 0.0) },
                     uTime: { value: 0 },
                 },
             ]),
             lights: true,
-            // dithering: true,
-            // fog: true,
         })
-        // console.log(this.material.uniforms)
 
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.rotation.set(-Math.PI * 0.5, 0, 0)
         this.mesh.position.set(0.65, 0, 0)
-        // this.mesh.castShadow = true;
         this.mesh.receiveShadow = true;
         this.scene.add(this.mesh)
 
-
         if (this.debug.active) {
-            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-5).max(5).step(0.01)
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-2).max(2).step(0.001)
             this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(-5).max(5).step(0.01)
             this.material.needsUpdate = true
         }

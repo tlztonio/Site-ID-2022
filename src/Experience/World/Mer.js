@@ -44,6 +44,7 @@ export default class Mer {
                 PI: { value: Math.PI },
             },
             transparent: true,
+            // wireframe: true
             // format: THREE.RGBAFormat
         })
         // this.material.opacity = 0.5;

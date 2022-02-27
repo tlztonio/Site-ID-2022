@@ -14,12 +14,17 @@ export default [
     {
         name: 'textRockModel',
         type: 'gltfModel',
-        path: 'models/Rocks/Text/20Text.glb'
+        path: 'models/Rocks/Text/20Text2.glb'
     },
     {
-        name: 'smallRock1Model',
+        name: 'stairsRockModel',
         type: 'gltfModel',
-        path: 'models/Rocks/smallRock1.glb'
-    }
+        path: 'models/Rocks/stairsRockTest.glb'
+    },
+    {
+        name: 'concertModel',
+        type: 'gltfModel',
+        path: 'models/Concert/concert.glb'
+    },
 
 ]

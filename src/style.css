@@ -7,7 +7,8 @@
 html,
 body
 {
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* height: 6000px; */
 }
 
 .webgl
@@ -16,4 +17,5 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: -1;
 }

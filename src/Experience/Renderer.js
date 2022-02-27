@@ -21,8 +21,6 @@ export default class Renderer {
             canvas: this.canvas,
             // antialias : true 
             alpha: true,
-
-            // premultipliedAlpha: false
         })
 
         // A commenter pour les perfs donc on garde au cas ou
@@ -30,7 +28,7 @@ export default class Renderer {
         // this.instance.outputEncoding = THREE.sRGBEncoding
         // this.instance.toneMapping = THREE.CineonToneMapping
         // this.instance.toneMappingExposure = 1.75
-        // this.instance.shadowMap.enabled = true
+        this.instance.shadowMap.enabled = true
         // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
         this.instance.setClearColor('#211d20')
         this.instance.setSize(this.sizes.width, this.sizes.height)

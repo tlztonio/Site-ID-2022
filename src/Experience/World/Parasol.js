@@ -30,19 +30,29 @@ export default class Parasol {
     }
 
     setModel() {
-        const materialTissu = new THREE.MeshBasicMaterial({ map: this.textureTissu, side: THREE.DoubleSide })
-        const materialBaton = new THREE.MeshBasicMaterial({ color: 0xd5cdd2 })
+        // maybe put basic cuz shadow too realistic idk see for perf
+        const materialTissu = new THREE.MeshStandardMaterial({ map: this.textureTissu, side: THREE.DoubleSide })
+        const materialBaton = new THREE.MeshStandardMaterial({ color: 0xd5cdd2 })
 
         this.tissu = this.model.children[0]
         this.baton = this.model.children[1]
         //double side sur le tissu a activer que si necessaire pour l'animation
-        this.tissu.traverse((o) => { if (o.isMesh) o.material = materialTissu })
-        this.baton.traverse((o) => { if (o.isMesh) o.material = materialBaton })
+        this.tissu.traverse((o) => {
+            if (o.isMesh) {
+                o.castShadow = true
+                o.material = materialTissu
+            }
+        })
+        this.baton.traverse((o) => {
+            if (o.isMesh) {
+                o.castShadow = true
+                o.material = materialBaton
+            }
+        })
 
         this.model.position.set(this.x, this.y, this.z)
         this.model.rotation.set((Math.random() - 0.5) / 3, (Math.random() - 0.5), (Math.random() - 0.5) / 3)
-        this.model.castShadows = true
-
+        this.model.castShadow = true
         this.scene.add(this.model)
     }
 
