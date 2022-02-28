@@ -23,6 +23,7 @@ export default class Rocks {
         this.model.text = this.resources.items.textRockModel.scene
         this.model.stairsRock = this.resources.items.stairsRockModel.scene
         this.model.textureRock = this.resources.items.textureRock
+        this.model.normalRock = this.resources.items.normalRock
 
         this.setTextModel()
         this.setStairsModel()
@@ -36,13 +37,13 @@ export default class Rocks {
         this.model.text.rotation.set(0.5, -1.167, 0.517)
         // this.model.text.receiveShadow = false
         // this.model.text.castShadow = true
-        const rockMaterial = new THREE.MeshStandardMaterial()
+        this.rockMaterial = new THREE.MeshStandardMaterial({ color: 0x5e5652 })
 
         this.model.text.traverse((o) => {
             if (o.isMesh) {
                 // o.castShadow = true
                 // o.receiveShadow = true
-                o.material.color.set(0xffffff)
+                o.material = this.rockMaterial
             }
         })
 
@@ -64,12 +65,16 @@ export default class Rocks {
         this.model.stairsRock.rotation.set(0, -0.5 * Math.PI, 0)
         this.model.stairsRock.scale.set(0.4, 0.4, 0.4)
 
-        const textureRock = new THREE.MeshBasicMaterial({ map: this.model.textureRock })
+        const textureWood = new THREE.MeshStandardMaterial({ color: 0x42291a })
 
         this.model.stairsRock.traverse((o) => {
             if (o.isMesh) {
-                o.material = textureRock
+                o.material = this.rockMaterial
             }
+        })
+
+        this.model.stairsRock.children[0].traverse((o) => {
+            o.material = textureWood
         })
 
         this.scene.add(this.model.stairsRock)

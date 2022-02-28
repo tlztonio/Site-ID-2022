@@ -8,6 +8,7 @@ import World from "./World/World"
 import Resources from "./Utils/Resources"
 import sources from './sources.js'
 import Debug from "./Utils/Debug"
+import Dom from "./Dom/domContent"
 
 // Singleton
 let instance = null
@@ -36,6 +37,7 @@ export default class Experience {
         this.camera = new Camera()
         this.renderer = new Renderer()
         this.world = new World()
+        this.dom = new Dom()
 
         this.raycaster = new Raycaster()
 
@@ -51,7 +53,7 @@ export default class Experience {
         })
 
         // Click event
-        window.addEventListener('click', (e) => {
+        this.canvas.addEventListener('click', (e) => {
             this.click(e)
         })
 
@@ -79,10 +81,12 @@ export default class Experience {
     click(e) {
         // this.raycaster.click(e)
         this.world.click(e)
+        this.dom.click(e)
     }
 
     mouseMove(e) {
         this.world.mouseMove(e)
+        this.dom.mouseMove(e)
         if (this.camera) {
             this.camera.mouseMove(e)
             this.raycaster.mouseMove(e)

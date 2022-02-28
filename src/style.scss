@@ -1,0 +1,36 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    z-index: -1;
+}
+
+section{
+    width: 65vw;
+    height: 100vh;
+    background-color: white;
+    font-size: 5em;
+    position: fixed;
+    transition: transform ease-in-out 1s;
+    transform: translateX(-100%);
+}
+
+.atelier1{
+}
+
+.atelier2{
+}
+
+.atelier3{
+}
+
+.atelier4{
+}

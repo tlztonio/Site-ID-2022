@@ -31,16 +31,34 @@ export default class Concert {
         this.model.concert.rotation.set(0, -Math.PI * 0.5, 0)
         // this.model.text.receiveShadow = false
         // this.model.text.castShadow = true
-        // const rockMaterial = new THREE.MeshStandardMaterial()
+        const tissuMaterial = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, color: 0xe4d7b5 })
+        const woodMaterial = new THREE.MeshStandardMaterial({ color: 0xe7b88d })
+        const darkMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 })
 
-        // this.model.concert.traverse((o) => {
-        //     if (o.isMesh) {
-        //         // o.castShadow = true
-        //         // o.receiveShadow = true
-        //         o.material.color.set(0xffffff)
-        //     }
-        // })
-        this.model.concert.children[12].material.side = THREE.DoubleSide
+        // bache
+        this.model.concert.children[13].traverse((o) => {
+            o.material = tissuMaterial
+
+        })
+        // enceintes
+
+        // potos
+        this.model.concert.children[9].traverse((o) => {
+            o.material = woodMaterial
+        })
+        this.model.concert.children[10].traverse((o) => {
+            o.material = woodMaterial
+        })
+        this.model.concert.children[11].traverse((o) => {
+            o.material = woodMaterial
+        })
+        this.model.concert.children[12].traverse((o) => {
+            o.material = woodMaterial
+        })
+        // this.model.concert.children[13].material.side = THREE.DoubleSide
+        // this.model.concert.children[13].material.color.set('#ffffff')
+
+        console.log(this.model.concert)
 
         this.scene.add(this.model.concert)
 

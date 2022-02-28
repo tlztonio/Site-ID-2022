@@ -66,6 +66,7 @@ module.exports = {
                         "postcss-loader",
                         "sass-loader",
                     ],
+                    // bien installer ces loaders plus 'sass' et tous les loader du fichier config de post css loader
                 },
 
                 // CSS

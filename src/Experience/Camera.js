@@ -23,7 +23,7 @@ export default class Camera {
         }
 
         this.setInstance()
-        this.setOrbitControls()
+        // this.setOrbitControls()
         this.travel()
         this.travelPath()
 
@@ -154,7 +154,7 @@ export default class Camera {
     travelUpdate() {
         const looptimePosition = 100000
         this.looptimeLookAt = 100000
-        const inactivityTime = 1000
+        const inactivityTime = 100000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
@@ -238,7 +238,7 @@ export default class Camera {
 
     update() {
         if (this.positionSplineGeometry && this.lookAtSplineGeometry) {
-            // this.travelUpdate()
+            this.travelUpdate()
         }
 
         if (this.progressPosition < 1) {
@@ -247,6 +247,6 @@ export default class Camera {
 
         this.scrolledAmountFinal += (this.scrolledAmount - this.scrolledAmountFinal) * 0.1
 
-        this.controls.update()
+        // this.controls.update()
     }
 }

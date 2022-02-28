@@ -17,10 +17,13 @@ varying vec3 vInitCoord;
 
 void main()
 {
-
-    float r = 0.6+max(vModelPosition.y+0.25,0.0)*vRandom/1.85;
-    float g = 0.46+max(vModelPosition.y+0.25,0.0)*vRandom/1.85;
-    float b = 0.39+max(vModelPosition.y+0.25,0.0)*vRandom/1.85;
+// original sand = 0.6, 0.46, 0.39
+// curry sand = 0.84, 0.66, 0.42
+// bright pink sand = 0.92, 0.78, 0.68
+// bright yellow sand = 0.99, 0.88, 0.67
+    float r = 0.80+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
+    float g = 0.67+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
+    float b = 0.50+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
 
     float wetLine = vModelPosition.y+sin(vModelPosition.z*7.0)*0.01;
 

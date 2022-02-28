@@ -10,6 +10,7 @@ export default class Raycaster {
         this.canvas = this.experience.canvas
         this.camera = this.experience.camera
         this.world = this.experience.world
+        this.dom = this.experience.dom
 
         // this.raycastedObject = {}
 
@@ -49,7 +50,9 @@ export default class Raycaster {
     }
 
     click(e) {
-
+        if (this.world.parasolModels) {
+            this.hoverRaycast(e)
+        }
     }
 
     mouseMove(e) {

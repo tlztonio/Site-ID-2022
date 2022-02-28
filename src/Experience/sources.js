@@ -17,6 +17,11 @@ export default [
         path: 'textures/rock.png'
     },
     {
+        name: 'normalRock',
+        type: 'texture',
+        path: 'textures/rockNormal.png'
+    },
+    {
         name: 'textRockModel',
         type: 'gltfModel',
         path: 'models/Rocks/Text/20Text2.glb'
