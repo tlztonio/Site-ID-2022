@@ -78,6 +78,8 @@ export default class Dom {
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol4') {
             this.removePages()
             this.pageFour()
+        } else {
+            this.removePages()
         }
     }
 

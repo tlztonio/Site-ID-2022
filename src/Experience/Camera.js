@@ -2,8 +2,8 @@ import * as THREE from "three"
 import Experience from "./Experience"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CompressedTextureLoader } from "three";
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { CompressedTextureLoader } from "three"
 gsap.registerPlugin(ScrollTrigger)
 
 export default class Camera {
@@ -33,12 +33,41 @@ export default class Camera {
         this.scrollPositionOld = 0 // previous distance scrolled to get direction of scroll
         this.scrollPositionActual = 0 // actual delta of pixels
         this.scrollTimer = 0 // a timer that lauches when the user doesnt scroll to detct inactivity
-        this.canvas.addEventListener('scroll', (e) => {
+
+        document.addEventListener('wheel', (e) => {
             this.scrollEvent(e)
         })
-        window.addEventListener('touchmove', (e) => {
-            this.scrollEvent(e)
+
+        // window.addEventListener('touchmove', (e) => {
+        //     this.scrollEvent(e)
+        // console.log(e)
+        // })
+
+        let start
+        window.addEventListener('touchstart', (e) => {
+            // let swipe = e.originalEvent.touches
+            // start = swipe[0].pageY
             console.log(e)
+            this.start = e.touches[0].clientY
+        })
+
+        window.addEventListener('touchmove', (e) => {
+            // let contact = e.originalEvent.touches
+            // let end = contact[0].pageY
+            // let distance = end - start
+
+            // if (distance < -30){
+            console.log(e)
+
+            this.end = e.touches[0].clientY
+            // console.log(this.end)
+            this.scrolledPhone = this.start - this.end
+            console.log(this.scrolledPhone)
+            //     .one('touchend', function () {
+
+            //         $(this).off('touchmove touchend');
+            //     })
+            this.scrollEvent(e)
         })
 
         // Progress
@@ -202,7 +231,11 @@ export default class Camera {
 
     scrollEvent(e) {
 
-        this.scrollPositionActual += e.deltaY
+        if (e.deltaY) {
+            this.scrollPositionActual += e.deltaY
+        } else {
+            this.scrollPositionActual += this.scrolledPhone
+        }
 
         if (this.scrollPositionActual > this.scrollPositionOld) {
             if (this.progressPosition < 1) {
@@ -212,7 +245,6 @@ export default class Camera {
         } else {
             this.scrolledAmount -= 1000
         }
-
 
         this.scrollPositionOld = this.scrollPositionActual
         this.scrollTimer = 0
