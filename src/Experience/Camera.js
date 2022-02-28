@@ -33,8 +33,12 @@ export default class Camera {
         this.scrollPositionOld = 0 // previous distance scrolled to get direction of scroll
         this.scrollPositionActual = 0 // actual delta of pixels
         this.scrollTimer = 0 // a timer that lauches when the user doesnt scroll to detct inactivity
-        window.addEventListener('wheel', (e) => {
+        document.addEventListener('scroll', (e) => {
             this.scrollEvent(e)
+        })
+        window.addEventListener('touchmove', (e) => {
+            this.scrollEvent(e)
+            console.log(e)
         })
 
         // Progress
