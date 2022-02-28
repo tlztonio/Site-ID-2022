@@ -6,7 +6,8 @@
 
 html{
     // height: 10000px;
-    // overscroll-behavior: none;
+    overscroll-behavior: contain;
+    overflow: hidden;
 }
 
 .webgl
