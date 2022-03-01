@@ -25,6 +25,9 @@ export default class Parasol {
         this.z = z
         this.textureTissu = this.resources.items.textureTissu
 
+        // rotation on click
+        this.clicked = false
+
         this.setModel()
         this.setAnimation()
     }
@@ -70,6 +73,10 @@ export default class Parasol {
             this.tissu.rotation.y += 0.02
         } else {
             this.closeAnimation.reverse()
+        }
+
+        if (this.clicked) {
+            this.tissu.rotation.y += 0.02
         }
     }
 

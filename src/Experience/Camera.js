@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { CompressedTextureLoader } from "three"
+import { normalize } from "gsap/all"
 gsap.registerPlugin(ScrollTrigger)
 
 export default class Camera {
@@ -25,7 +26,6 @@ export default class Camera {
 
         this.setInstance()
         // this.setOrbitControls()
-        this.travel()
         this.travelPath()
 
         //scroll
@@ -77,43 +77,6 @@ export default class Camera {
             this.debugFolder.add(this.instance.position, 'z').min(-10).max(5).step(0.01).name("PositionZ")
         }
 
-    }
-
-    travel() {
-
-        ScrollTrigger.defaults({
-            immediateRender: false,
-            ease: "none",
-            scrub: 1
-        })
-
-        this.travelTimeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top", // when the top of the trigger hits the top of the viewport
-                end: "bottom bottom", // end after scrolling 500px beyond the start
-            }
-        })
-            // .addLabel("toSable")
-            // .to(this.instance.position, { x: 0.4, y: 3, z: 6.4 }, "toSable")
-            // .to(this.instance.rotation, { x: -1.08, y: 0.08, z: 0.16 }, "toSable")
-            .addLabel("toParasol")
-            .to(this.instance.position, { x: 3.2, y: 0.5, z: 3 }, "toParasol")
-            .to(this.instance.rotation, { x: 0, y: 1.25, z: 0 }, "toParasol")
-            .addLabel("sliderParasol")
-            .to(this.instance.position, { x: 3.2, y: 0.5, z: 0 }, "sliderParasol")
-            .addLabel("finalScene")
-            .to(this.instance.position, { x: 3.2, y: 1, z: -2 }, "finalScene")
-            .to(this.instance.rotation, { x: 0, y: 0.6, z: 0 }, "finalScene")
-
-        // this.point = new THREE.Vector3(0.4, 0, 6.4)
-        // this.instance.lookAt(this.point)
-
-        // if (this.debug.active) {
-        //     this.debugFolder.add(this.point, 'x').min(-5).max(5).step(0.01).name("pointX")
-        //     this.debugFolder.add(this.point, 'y').min(-5).max(5).step(0.01).name("pointY")
-        //     this.debugFolder.add(this.point, 'z').min(-5).max(5).step(0.01).name("pointZ")
-        // }
     }
 
     travelPath() {
@@ -244,8 +207,6 @@ export default class Camera {
     resize() {
         this.instance.aspect = this.sizes.width / this.sizes.height
         this.instance.updateProjectionMatrix()
-        console.log(this.instance.position)
-        console.log(this.instance.rotation)
         console.log("progress : " + this.progressPosition)
         console.log("scrollResult : " + this.scrolledAmountFinal)
         console.log("scrollAction : " + this.scrolledAmount)
@@ -260,7 +221,8 @@ export default class Camera {
             this.scrollTimer += this.time.delta
         }
 
-        if (this.shouldMove == false) {
+        if (this.shouldMove == false && this.sizes.width > 1300) {
+            // normalize zoom to remove it for first parasol
             this.zoomPosition += (-0.4 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
         } else {
             this.zoomPosition += (0 - this.zoomPosition) * 0.08
