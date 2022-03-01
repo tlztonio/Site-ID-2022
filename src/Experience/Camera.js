@@ -34,45 +34,27 @@ export default class Camera {
         this.scrollPositionActual = 0 // actual delta of pixels
         this.scrollTimer = 0 // a timer that lauches when the user doesnt scroll to detct inactivity
 
+        // desktop scroll
         document.addEventListener('wheel', (e) => {
             this.scrollEvent(e)
         })
 
-        // window.addEventListener('touchmove', (e) => {
-        //     this.scrollEvent(e)
-        // console.log(e)
-        // })
-
-        let start
+        // mobile scroll
         window.addEventListener('touchstart', (e) => {
-            // let swipe = e.originalEvent.touches
-            // start = swipe[0].pageY
-            console.log(e)
             this.start = e.touches[0].clientY
         })
-
         window.addEventListener('touchmove', (e) => {
-            // let contact = e.originalEvent.touches
-            // let end = contact[0].pageY
-            // let distance = end - start
-
-            // if (distance < -30){
-            console.log(e)
-
             this.end = e.touches[0].clientY
-            // console.log(this.end)
             this.scrolledPhone = this.start - this.end
-            console.log(this.scrolledPhone)
-            //     .one('touchend', function () {
-
-            //         $(this).off('touchmove touchend');
-            //     })
             this.scrollEvent(e)
         })
 
         // Progress
         this.timeProgressPosition = 0
         this.timeProgressLookAt = 0
+
+        // Gestion scroll avec affichage pages 
+        this.shouldMove = true
 
     }
 
@@ -187,9 +169,9 @@ export default class Camera {
     travelUpdate() {
         const looptimePosition = 100000
         this.looptimeLookAt = 100000
-        const inactivityTime = 100000
+        const inactivityTime = 3000
 
-        if (this.scrollTimer > inactivityTime && this.progressPosition < 1) {
+        if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
             this.timeProgressPosition += this.time.delta
             this.timeProgressLookAt += this.time.delta
@@ -212,6 +194,9 @@ export default class Camera {
         if (this.progressPosition >= 1) {
             this.progressPosition = 1
             this.progressLookAt = 1
+            this.scrolledAmountFinal = looptimePosition
+            this.timeProgressPosition = 0
+            this.timeProgressLookAt = 0
         }
 
         const position = new THREE.Vector3()
@@ -231,14 +216,14 @@ export default class Camera {
 
     scrollEvent(e) {
 
-        if (e.deltaY) {
+        if (e.deltaY) { // scroll desktop
             this.scrollPositionActual += e.deltaY
-        } else {
+        } else { // scroll mobile
             this.scrollPositionActual += this.scrolledPhone
         }
 
         if (this.scrollPositionActual > this.scrollPositionOld) {
-            if (this.progressPosition < 1) {
+            if (this.progressPosition < 1 && this.scrolledAmountFinal < 100000) {
                 // prevent overflow of scroll 
                 this.scrolledAmount += 1000
             }
@@ -248,7 +233,6 @@ export default class Camera {
 
         this.scrollPositionOld = this.scrollPositionActual
         this.scrollTimer = 0
-
     }
 
     setOrbitControls() {

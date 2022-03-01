@@ -8,7 +8,7 @@ export default class Dom {
         // this.sizes = this.experience.sizes
         // this.scene = this.experience.scene
         // this.canvas = this.experience.canvas
-        this.camera = this.experience.camera
+        // this.camera = this.experience.camera
         // this.world = this.experience.world
         // this.raycaster = this.experience.raycaster
 
@@ -36,6 +36,7 @@ export default class Dom {
 
     pageOne() {
         this.atelierOne.style.transform = 'translateX(0)'
+        // this.experience.camera.instance.position.set()
     }
 
     pageTwo() {
@@ -69,17 +70,22 @@ export default class Dom {
         if (this.experience.raycaster.raycastedObjectName == 'parasol1') {
             this.removePages()
             this.pageOne()
+            this.experience.camera.shouldMove = false
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol2') {
             this.removePages()
             this.pageTwo()
+            this.experience.camera.shouldMove = false
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol3') {
             this.removePages()
             this.pageThree()
+            this.experience.camera.shouldMove = false
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol4') {
             this.removePages()
             this.pageFour()
+            this.experience.camera.shouldMove = false
         } else {
             this.removePages()
+            this.experience.camera.shouldMove = true
         }
     }
 
