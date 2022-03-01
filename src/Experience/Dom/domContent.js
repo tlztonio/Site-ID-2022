@@ -20,6 +20,10 @@ export default class Dom {
         // this.pageThree()
         // this.pageFour()
 
+        console.log("largeur d'ecran : " + window.innerWidth)
+
+        // mine is 1920
+        // 
 
     }
 
@@ -36,19 +40,30 @@ export default class Dom {
 
     pageOne() {
         this.atelierOne.style.transform = 'translateX(0)'
-        // this.experience.camera.instance.position.set()
+        let adaptScreen = (- window.innerWidth + 1920) / 7000
+        let diffPosition = ((0.56) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.experience.camera.scrolledAmount += diffPosition
     }
 
     pageTwo() {
         this.atelierTwo.style.transform = 'translateX(0)'
+        let adaptScreen = (- window.innerWidth + 1920) / 7000
+        let diffPosition = ((0.64) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.experience.camera.scrolledAmount += diffPosition
     }
 
     pageThree() {
         this.atelierThree.style.transform = 'translateX(0)'
+        let adaptScreen = (- window.innerWidth + 1920) / 7000
+        let diffPosition = ((0.715) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.experience.camera.scrolledAmount += diffPosition
     }
 
     pageFour() {
         this.atelierFour.style.transform = 'translateX(0)'
+        let adaptScreen = (- window.innerWidth + 1920) / 13000
+        let diffPosition = ((0.785 + adaptScreen) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.experience.camera.scrolledAmount += diffPosition
     }
 
     removePages() {
@@ -68,24 +83,24 @@ export default class Dom {
 
     click(e) {
         if (this.experience.raycaster.raycastedObjectName == 'parasol1') {
+            this.experience.camera.shouldMove = false
             this.removePages()
             this.pageOne()
-            this.experience.camera.shouldMove = false
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol2') {
+            this.experience.camera.shouldMove = false
             this.removePages()
             this.pageTwo()
-            this.experience.camera.shouldMove = false
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol3') {
+            this.experience.camera.shouldMove = false
             this.removePages()
             this.pageThree()
-            this.experience.camera.shouldMove = false
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol4') {
+            this.experience.camera.shouldMove = false
             this.removePages()
             this.pageFour()
-            this.experience.camera.shouldMove = false
         } else {
-            this.removePages()
             this.experience.camera.shouldMove = true
+            this.removePages()
         }
     }
 

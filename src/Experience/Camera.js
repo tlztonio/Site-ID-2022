@@ -16,6 +16,7 @@ export default class Camera {
         this.camera = this.experience.camera
         this.debug = this.experience.debug
         this.time = this.experience.time
+        this.dom = this.experience.dom
 
         // debug
         if (this.debug.active) {
@@ -35,7 +36,7 @@ export default class Camera {
         this.scrollTimer = 0 // a timer that lauches when the user doesnt scroll to detct inactivity
 
         // desktop scroll
-        document.addEventListener('wheel', (e) => {
+        this.canvas.addEventListener('wheel', (e) => {
             this.scrollEvent(e)
         })
 
@@ -49,12 +50,11 @@ export default class Camera {
             this.scrollEvent(e)
         })
 
-        // Progress
-        this.timeProgressPosition = 0
-        this.timeProgressLookAt = 0
-
         // Gestion scroll avec affichage pages 
         this.shouldMove = true
+
+        //zoomin sur les parasols
+        this.zoomPosition = 0
 
     }
 
@@ -167,18 +167,19 @@ export default class Camera {
     }
 
     travelUpdate() {
-        const looptimePosition = 100000
+        this.looptimePosition = 100000
         this.looptimeLookAt = 100000
         const inactivityTime = 3000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
-            this.timeProgressPosition += this.time.delta
-            this.timeProgressLookAt += this.time.delta
+            // this.timeProgressPosition += this.time.delta
+            // this.timeProgressLookAt += this.time.delta
+            this.scrolledAmount += 10 // a tweak maybe
         }
 
-        this.progressPosition = (this.scrolledAmountFinal + this.timeProgressPosition) / looptimePosition
-        this.progressLookAt = (this.scrolledAmountFinal + this.timeProgressLookAt) / (this.looptimeLookAt / (this.progressPosition / 1.75 + 0.425))
+        this.progressPosition = this.scrolledAmountFinal / this.looptimePosition
+        this.progressLookAt = this.scrolledAmountFinal / (this.looptimeLookAt / (this.progressPosition / 1.75 + 0.425))
 
         // console.log(this.progressLookAt)
 
@@ -187,16 +188,13 @@ export default class Camera {
             this.progressLookAt = 0
             this.scrolledAmountFinal = 0
             this.scrolledAmount = 0
-            this.timeProgressPosition = 0
-            this.timeProgressLookAt = 0
         }
 
-        if (this.progressPosition >= 1) {
+        if (this.progressPosition > 1) {
             this.progressPosition = 1
             this.progressLookAt = 1
-            this.scrolledAmountFinal = looptimePosition
-            this.timeProgressPosition = 0
-            this.timeProgressLookAt = 0
+            this.scrolledAmountFinal = this.looptimePosition
+            // this.scrolledAmount = this.looptimePosition
         }
 
         const position = new THREE.Vector3()
@@ -205,16 +203,14 @@ export default class Camera {
         this.positionSplineGeometry.parameters.path.getPointAt(this.progressPosition, position)
         this.lookAtSplineGeometry.parameters.path.getPointAt(this.progressLookAt, positionLookAt)
 
-        this.instance.position.copy(position)
-        // this.instance.lookAt(positionLookAt.x + this.mouse.x * 0.1, positionLookAt.y + this.mouse.y * 0.1, positionLookAt.z)
-        // positionLookAt.x += (this.mouse.x * 5 - positionLookAt.x) * 0.01
-        // positionLookAt.y += (this.mouse.y * 5 - positionLookAt.y) * 0.01
-        this.instance.lookAt(positionLookAt)
-
-        // console.log(this.timeProgressPosition)
+        this.instance.position.set(position.x + this.zoomPosition, position.y, position.z)
+        this.instance.lookAt(positionLookAt.x + this.zoomPosition, positionLookAt.y, positionLookAt.z)
     }
 
     scrollEvent(e) {
+
+        this.dom.removePages()
+        this.experience.camera.shouldMove = true
 
         if (e.deltaY) { // scroll desktop
             this.scrollPositionActual += e.deltaY
@@ -223,7 +219,7 @@ export default class Camera {
         }
 
         if (this.scrollPositionActual > this.scrollPositionOld) {
-            if (this.progressPosition < 1 && this.scrolledAmountFinal < 100000) {
+            if (this.progressPosition < 1) {
                 // prevent overflow of scroll 
                 this.scrolledAmount += 1000
             }
@@ -253,7 +249,6 @@ export default class Camera {
         console.log("progress : " + this.progressPosition)
         console.log("scrollResult : " + this.scrolledAmountFinal)
         console.log("scrollAction : " + this.scrolledAmount)
-        console.log("time : " + this.timeProgressPosition)
     }
 
     update() {
@@ -263,6 +258,12 @@ export default class Camera {
 
         if (this.progressPosition < 1) {
             this.scrollTimer += this.time.delta
+        }
+
+        if (this.shouldMove == false) {
+            this.zoomPosition += (-0.4 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
+        } else {
+            this.zoomPosition += (0 - this.zoomPosition) * 0.08
         }
 
         this.scrolledAmountFinal += (this.scrolledAmount - this.scrolledAmountFinal) * 0.1
