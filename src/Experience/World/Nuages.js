@@ -41,7 +41,7 @@ export default class Nuages {
         })
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.set(0, 2, 0)
-        this.mesh.rotation.set(0, Math.PI * 0.1, 0)
+        this.mesh.rotation.set(0, 0, 0)
         this.scene.add(this.mesh)
 
         // debug
