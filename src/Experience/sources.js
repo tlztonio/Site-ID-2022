@@ -19,7 +19,7 @@ export default [
     {
         name: 'stairsRockModel',
         type: 'gltfModel',
-        path: 'models/Rocks/stairsRock.glb'
+        path: 'models/Rocks/stairsRockOpti.glb'
     },
     {
         name: 'concertModel',
