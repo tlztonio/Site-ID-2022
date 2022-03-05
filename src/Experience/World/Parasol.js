@@ -11,6 +11,7 @@ export default class Parasol {
         this.time = this.experience.time
         this.debug = this.experience.debug
         this.raycaster = this.experience.raycaster
+        this.renderer = this.experience.renderer
 
         // debug
         if (this.debug.active) {
@@ -55,7 +56,6 @@ export default class Parasol {
 
         this.model.position.set(this.x, this.y, this.z)
         this.model.rotation.set((Math.random() - 0.5) / 3, (Math.random() - 0.5), (Math.random() - 0.5) / 3)
-        this.model.castShadow = true
         this.scene.add(this.model)
     }
 
@@ -71,12 +71,15 @@ export default class Parasol {
         if (this.raycaster.raycastedObjectName == this.model.name) {
             this.closeAnimation.play()
             this.tissu.rotation.y += 0.02
-        } else {
+            this.renderer.instance.shadowMap.needsUpdate = true
+        } else if (this.tissu.position.y < 0) {
             this.closeAnimation.reverse()
+            this.renderer.instance.shadowMap.needsUpdate = true
         }
 
         if (this.clicked) {
             this.tissu.rotation.y += 0.02
+            this.renderer.instance.shadowMap.needsUpdate = true
         }
     }
 

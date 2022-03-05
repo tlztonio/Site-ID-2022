@@ -9,17 +9,7 @@ export default [
     {
         name: 'textureTissu',
         type: 'texture',
-        path: 'textures/parasol/textureParasol.jpg'
-    },
-    {
-        name: 'textureRock',
-        type: 'texture',
-        path: 'textures/rock.png'
-    },
-    {
-        name: 'normalRock',
-        type: 'texture',
-        path: 'textures/rockNormal.png'
+        path: 'textures/parasol/textureParasolOpti.jpg'
     },
     {
         name: 'textRockModel',
@@ -29,12 +19,16 @@ export default [
     {
         name: 'stairsRockModel',
         type: 'gltfModel',
-        path: 'models/Rocks/stairsRockTest.glb'
+        path: 'models/Rocks/stairsRock.glb'
     },
     {
         name: 'concertModel',
         type: 'gltfModel',
         path: 'models/Concert/concert.glb'
     },
-
+    // {
+    //     name: 'stageShadow',
+    //     type: 'texture',
+    //     path: 'textures/shadows/stageShadow2.jpg'
+    // },
 ]

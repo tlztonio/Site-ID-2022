@@ -23,7 +23,7 @@ export default class Mer {
     }
 
     setInstance() {
-        this.geometry = new THREE.PlaneGeometry(4.5, 19, 35, 200)
+        this.geometry = new THREE.PlaneGeometry(6, 19, 10, 160)
 
         const count = this.geometry.attributes.position.count
         const randoms = new Float32Array(count)
@@ -57,7 +57,7 @@ export default class Mer {
 
         this.mesh = new THREE.Mesh(this.geometry, this.material)
         this.mesh.rotation.set(-Math.PI * 0.5, 0, 0)
-        this.mesh.position.set(-4.2, -0.27, 0)
+        this.mesh.position.set(-4, -0.27, 0)
         // this.mesh.castShadow = true;
         // this.mesh.receiveShadow = true;
         this.scene.add(this.mesh)

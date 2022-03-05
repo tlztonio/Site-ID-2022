@@ -39,6 +39,10 @@ export default class Environment {
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.near = 1
         this.sunLight.shadow.camera.far = 20
+        this.sunLight.shadow.camera.left = -10
+        this.sunLight.shadow.camera.right = 6
+
+        console.log(this.sunLight.rotation)
         // this.sunLight.shadow.camera.rotation.set(-5, 3, -3)
         this.sunLight.shadow.mapSize.set(1024, 1024)
 

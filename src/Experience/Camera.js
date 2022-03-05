@@ -25,7 +25,7 @@ export default class Camera {
         }
 
         this.setInstance()
-        // this.setOrbitControls()
+        this.setOrbitControls()
         this.travelPath()
 
         //scroll
@@ -55,14 +55,13 @@ export default class Camera {
 
         //zoomin sur les parasols
         this.zoomPosition = 0
-
     }
 
     setInstance() {
-        this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 50)
+        this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 75)
 
-        this.instance.position.set(-4, 1.8, 8.15)
-        this.instance.rotation.set(-0.8, -0.62, -0.59)
+        // this.instance.position.set(-3, 5, 0)
+        this.instance.position.set(-4.23, 0.42, 8.88)
 
         this.scene.add(this.instance)
         this.mouse = new THREE.Vector2()
@@ -72,11 +71,10 @@ export default class Camera {
             this.debugFolder.add(this.instance.rotation, 'x').min(-2).max(2).step(0.001).name("RotationX")
             this.debugFolder.add(this.instance.rotation, 'y').min(-2).max(2).step(0.001).name("RotationY")
             this.debugFolder.add(this.instance.rotation, 'z').min(-2).max(2).step(0.001).name("RotationZ")
-            this.debugFolder.add(this.instance.position, 'x').min(-5).max(5).step(0.01).name("PositionX")
+            this.debugFolder.add(this.instance.position, 'x').min(-7).max(5).step(0.01).name("PositionX")
             this.debugFolder.add(this.instance.position, 'y').min(-5).max(5).step(0.01).name("PositionY")
-            this.debugFolder.add(this.instance.position, 'z').min(-10).max(5).step(0.01).name("PositionZ")
+            this.debugFolder.add(this.instance.position, 'z').min(0).max(10).step(0.01).name("PositionZ")
         }
-
     }
 
     travelPath() {
@@ -104,13 +102,13 @@ export default class Camera {
         lookAtSpline.points.forEach(point => {
             this.cube = new THREE.Mesh(geometry, material)
             this.cube.position.copy(point)
-            this.scene.add(this.cube)
+            // this.scene.add(this.cube)
         })
 
         positionSpline.points.forEach(point => {
             this.cube = new THREE.Mesh(geometry, material)
             this.cube.position.copy(point)
-            this.scene.add(this.cube)
+            // this.scene.add(this.cube)
         })
 
         console.log(lookAtSpline)
@@ -124,8 +122,8 @@ export default class Camera {
         const positionMesh = new THREE.Mesh(this.positionSplineGeometry, material1)
         const lookAtMesh = new THREE.Mesh(this.lookAtSplineGeometry, material2)
 
-        this.scene.add(positionMesh)
-        this.scene.add(lookAtMesh)
+        // this.scene.add(positionMesh)
+        // this.scene.add(lookAtMesh)
 
     }
 
@@ -210,11 +208,14 @@ export default class Camera {
         console.log("progress : " + this.progressPosition)
         console.log("scrollResult : " + this.scrolledAmountFinal)
         console.log("scrollAction : " + this.scrolledAmount)
+
+        console.log(this.instance.position)
+        console.log(this.instance.rotation)
     }
 
     update() {
         if (this.positionSplineGeometry && this.lookAtSplineGeometry) {
-            this.travelUpdate()
+            // this.travelUpdate()
         }
 
         if (this.progressPosition < 1) {
@@ -230,6 +231,6 @@ export default class Camera {
 
         this.scrolledAmountFinal += (this.scrolledAmount - this.scrolledAmountFinal) * 0.1
 
-        // this.controls.update()
+        this.controls.update()
     }
 }

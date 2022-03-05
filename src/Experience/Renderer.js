@@ -20,7 +20,7 @@ export default class Renderer {
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
             // antialias : true 
-            alpha: true,
+            // alpha: true,
         })
 
         // A commenter pour les perfs donc on garde au cas ou
@@ -29,6 +29,8 @@ export default class Renderer {
         // this.instance.toneMapping = THREE.CineonToneMapping
         // this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
+        this.instance.shadowMap.autoUpdate = false
+        this.instance.shadowMap.needsUpdate = true
         // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
         this.instance.setClearColor('#211d20')
         this.instance.setSize(this.sizes.width, this.sizes.height)

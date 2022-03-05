@@ -2,11 +2,9 @@ uniform float uTime;
 uniform vec2 uResolution;
 uniform vec2 uDebug;
 
-
 varying float vRandom;
 varying vec2 vUv;
 varying vec4 vPos;
-varying vec4 vGlPos;
 
 // 2D Random
 float random (in vec2 st) {
@@ -44,11 +42,6 @@ float clampTest(float mi, float ma, float value){
 
 void main()
 {
-    float elevation = vRandom*0.16;
-
-    float r = smoothstep(0.0,0.75-vPos.y*0.05,0.39+vRandom*0.1);
-    float g = smoothstep(0.0,0.75-vPos.y*0.05,0.53+vRandom*0.1);
-    float b = smoothstep(0.0,0.75-vPos.y*0.05,0.6+vRandom*0.1);
 
     // deformation for rounded beach
     float deformation1 = sin(vPos.z*0.75-4.0)*0.3;
@@ -56,9 +49,21 @@ void main()
     float deformation3 = sin(vPos.z*0.50-4.0)*0.3;
     float tD = deformation1+deformation2+deformation3;
 
-    // AD SINUS ON Z TO MAKE WAVY PATTERN ECUME
-    // 7.5 = point de depart de la blancheur
-    float ecume = max(vPos.x+3.85-tD-(sin(uTime*0.0014)*0.1) ,0.0)*0.2;
+    // degradé sur x pour mieux blend l'ecume
+    float colorGradient = (vPos.x+5.5)*0.04;
+    // elevation du plane pour faire les iregularite de couleur sur la mer
+    // scaling pour le noise et deformation sur x avec variation temps mouvement 
+    vec2 elevationUv = vec2( (vUv.x-tD*0.2) * 25.0 + sin(uTime*0.0014) * 0.5, vUv.y * 100.0 );
+    float elevation = noise(elevationUv)*0.03;
+    // smoothstep pour faire une transition 
+    float r = smoothstep(0.0,0.75-vPos.y*0.05,0.35+colorGradient+elevation);
+    float g = smoothstep(0.0,0.75-vPos.y*0.05,0.6+colorGradient+elevation);
+    float b = smoothstep(0.0,0.75-vPos.y*0.05,0.8+colorGradient+elevation);
+
+    // blending with smoothstep and attenuation with 0.13
+    float timeDecalage = sin(uTime*0.0014)*0.1;
+    float whiteGradient = (vPos.x+3.7-tD)*1.5;
+    float ecume = max(whiteGradient - timeDecalage, 0.0) * smoothstep(-5.0, -3.0, vPos.x) * 0.13;
 
     r += ecume;
     g += ecume;
@@ -67,17 +72,16 @@ void main()
     vec2 st = -vUv.xy;
 
     // Scale the coordinate system to see some noise in action
-    vec2 pos = vec2(st.x*55.0-sin(uTime*0.0014),st.y*100.0);
+    vec2 pos = vec2(st.x * 55.0 - sin(uTime*0.0014), st.y * 100.0);
 
     float foamLines = 0.127;
 
     // clamp le noise pour avoir les contours
-    float noisy = clampTest(foamLines-0.07,foamLines,noise(pos));
+    float noisy = clampTest(foamLines-0.07, foamLines, noise(pos));
     // fait une parabole vers le haut pour rendre visible le noise que autour de la valeur centrale
-    float segment = smoothstep(-4.0+tD,-2.75+tD,vPos.x)-smoothstep(-3.25+tD,-2.75+tD,vPos.x);
+    float segment = smoothstep(-4.0+tD, -2.75+tD, vPos.x) - smoothstep(-3.25+tD, -2.75+tD, vPos.x);
     // segmente le noise et augmente le pour le rendre plus blanc
     float finalFoam = noisy*segment*2.5;
 
     gl_FragColor = vec4(r+finalFoam,g+finalFoam,b+finalFoam, 1.0);
-    //transparent not working check render
 }

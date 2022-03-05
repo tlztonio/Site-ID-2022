@@ -22,8 +22,6 @@ export default class Rocks {
         this.model = {}
         this.model.text = this.resources.items.textRockModel.scene
         this.model.stairsRock = this.resources.items.stairsRockModel.scene
-        this.model.textureRock = this.resources.items.textureRock
-        this.model.normalRock = this.resources.items.normalRock
 
         this.setTextModel()
         this.setStairsModel()
@@ -61,7 +59,7 @@ export default class Rocks {
 
     setStairsModel() {
 
-        this.model.stairsRock.position.set(2.55, 0, 1.1)// -4.75, -0.26
+        this.model.stairsRock.position.set(2.6, 0, 1.1)// -4.75, -0.26
         this.model.stairsRock.rotation.set(0, -0.5 * Math.PI, 0)
         this.model.stairsRock.scale.set(0.4, 0.4, 0.4)
 
@@ -70,11 +68,15 @@ export default class Rocks {
         this.model.stairsRock.traverse((o) => {
             if (o.isMesh) {
                 o.material = this.rockMaterial
+                o.receiveShadow = true
             }
         })
 
+        console.log(this.model.stairsRock)
+
         this.model.stairsRock.children[0].traverse((o) => {
             o.material = textureWood
+            o.castShadow = true
         })
 
         this.scene.add(this.model.stairsRock)

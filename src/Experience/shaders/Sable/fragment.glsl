@@ -1,13 +1,9 @@
 uniform float uTime;
-uniform vec2 uDebug;
+uniform vec3 uDebug;
 
 varying float vRandom;
-varying float vDef;
 varying vec2 vUv;
 varying vec4 vModelPosition;
-varying vec4 vModelPositionInit;
-varying vec3 vInitCoord;
-
 
 #include <common>
 #include <packing>
@@ -23,7 +19,7 @@ void main()
 // bright yellow sand = 0.99, 0.88, 0.67
     float r = 0.80+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
     float g = 0.67+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
-    float b = 0.50+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
+    float b = 0.5+max(vModelPosition.y+0.25,0.0)*vRandom*0.55;
 
     float wetLine = vModelPosition.y+sin(vModelPosition.z*7.0)*0.01;
 
@@ -43,27 +39,13 @@ void main()
     float shadowPower = 0.5;
     
     // declaration pour call directement le getshadow
-    DirectionalLightShadow directionalLight;
-	directionalLight = directionalLightShadows[ 0 ];
+    // DirectionalLightShadow directionalLight;
+	// directionalLight = directionalLightShadows[ 0 ];
+    // float finalShadow = getShadow( directionalShadowMap[ 0 ], directionalLight.shadowMapSize, 
+    // directionalLight.shadowBias, directionalLight.shadowRadius, vDirectionalShadowCoord[ 0 ]);
 
-        // deformation for rounded beach
-    float deformation1 = sin(vModelPositionInit.z*0.75-4.0)*0.3;
-    float deformation2 = cos(vModelPositionInit.z*1.75-4.0)*0.2;
-    float deformation3 = sin(vModelPositionInit.z*0.50-4.0)*0.3;
-    float totalDeformation = deformation1+deformation2+deformation3;
+    // vec4 stageShadow = texture2D(uStageShadow, newUv*2.0);
 
-    vec4 deformedShadowCoord = vDirectionalShadowCoord[ 0 ];
-    // vec4 deformedShadowCoord = vec4(vInitCoord,1.0);
-    // deformedShadowCoord.yz+=1.0 *uDebug.x; 
-    // yz c up and down a peu pres
-    // deformedShadowCoord=vec4(vDirectionalShadowCoord[ 0 ].x,vDirectionalShadowCoord[ 0 ].y,1.0,1.0);
-
-    float finalShadow = getShadow( directionalShadowMap[ 0 ], directionalLight.shadowMapSize, 
-    directionalLight.shadowBias, directionalLight.shadowRadius, deformedShadowCoord);
-
-    gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - 
-    finalShadow ) * shadowPower), 1.0);
-    // gl_FragColor = deformedShadowCoord;
-
-    //deform coordinates a la main 
+    gl_FragColor = vec4( mix(finalColor, shadowColor, (1.0 - getShadowMask() ) * shadowPower), 1.0);
+    // gl_FragColor += (vec4(stageShadow) - 1.0) * 0.35;
 }

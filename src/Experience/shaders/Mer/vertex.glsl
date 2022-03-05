@@ -9,7 +9,6 @@ uniform vec4 waveC;
 varying vec2 vUv;
 varying float vRandom;
 varying vec4 vPos;
-varying vec4 vGlPos;
 
 attribute float aRandom;
 
@@ -21,7 +20,6 @@ attribute float aRandom;
 //     vec2 d = normalize(wave.xy);
 //     float f = k * (dot(d, p.xy) - c * uTime/750.0);
 //     float a = steepness / k;
-
 //     return vec3(
 //         d.x * (a * cos(f)),
 //         d.y * (a * cos(f)),
@@ -36,17 +34,18 @@ void main()
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
     //CHANGE LES DIVISER PAR DES FOIS
+    float horizon = max((modelPosition.x+7.0)*0.2,0.0);
 
-    modelPosition.y += sin(modelPosition.x*1.5 + slowedTime)*0.025;
-    modelPosition.y += sin(modelPosition.z*5.0 + slowedTime)/75.0;
-    modelPosition.y += cos(modelPosition.z*7.0 + slowedTime)/75.0;
-    modelPosition.y += aRandom* -0.1*min((modelPosition.x+5.0)*0.2,0.0);
+    modelPosition.y += sin(modelPosition.x*1.5 + slowedTime)*0.025*horizon;
+    modelPosition.y += sin(modelPosition.z*5.0 + slowedTime)*0.013*horizon;
+    modelPosition.y += cos(modelPosition.z*7.0 + slowedTime)*0.013*horizon;
+    modelPosition.y += aRandom*0.1*min((modelPosition.x+3.0)*0.1,0.0);
 
     // deformation for rounded beach
-    float deformation1 = sin(modelPosition.z*0.75-4.0)*0.3;
-    float deformation2 = cos(modelPosition.z*1.75-4.0)*0.2;
-    float deformation3 = sin(modelPosition.z*0.50-4.0)*0.3;
-    modelPosition.x += deformation1+deformation2+deformation3;
+    // float deformation1 = sin(modelPosition.z*0.75-4.0)*0.3;
+    // float deformation2 = cos(modelPosition.z*1.75-4.0)*0.2;
+    // float deformation3 = sin(modelPosition.z*0.50-4.0)*0.3;
+    // modelPosition.x += deformation1+deformation2+deformation3;
 
 
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -57,5 +56,4 @@ void main()
     vRandom = aRandom*0.25;
     vUv = uv;
     vPos = modelPosition;
-    vGlPos = gl_Position;
 }

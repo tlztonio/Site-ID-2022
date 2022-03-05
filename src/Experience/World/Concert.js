@@ -29,8 +29,13 @@ export default class Concert {
 
         this.model.concert.position.set(0.5, 0, -7) // -4.713, -0.319
         this.model.concert.rotation.set(0, -Math.PI * 0.5, 0)
-        // this.model.text.receiveShadow = false
-        // this.model.text.castShadow = true
+
+        this.model.concert.traverse((o) => {
+            if (o.isMesh) {
+                o.castShadow = true
+            }
+        })
+
         const tissuMaterial = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, color: 0xe4d7b5 })
         const woodMaterial = new THREE.MeshStandardMaterial({ color: 0xe7b88d })
         const darkMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 })
@@ -58,7 +63,6 @@ export default class Concert {
         // this.model.concert.children[13].material.side = THREE.DoubleSide
         // this.model.concert.children[13].material.color.set('#ffffff')
 
-        console.log(this.model.concert)
 
         this.scene.add(this.model.concert)
 

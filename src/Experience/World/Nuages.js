@@ -27,31 +27,29 @@ export default class Nuages {
 
     setModel() {
 
-        this.geometry = new THREE.PlaneGeometry(50, 10, 1, 1);
+        this.geometry = new THREE.CylinderGeometry(12, 12, 10, 16, 1, true)
         this.material = new THREE.ShaderMaterial({
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
             uniforms: {
-                uDebug: { value: new THREE.Vector2(-1.0, 0.0) },
+                uDebug: { value: new THREE.Vector2(0.0, 0.0) },
                 uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
             },
-            transparent: true,
+            side: THREE.BackSide
         })
         this.mesh = new THREE.Mesh(this.geometry, this.material);
-        this.mesh.position.set(-8, 2, 0)
-        this.mesh.rotation.set(0, Math.PI * 0.5, 0)
-        this.scene.add(this.mesh);
+        this.mesh.position.set(0, 2, 0)
+        this.mesh.rotation.set(0, Math.PI * 0.1, 0)
+        this.scene.add(this.mesh)
 
         // debug
         if (this.debug.active) {
-            // this.debugFolder.add(this.model.text.rotation, 'x').min(0.5).max(1.5).step(0.001).name("RotationX")
-            // this.debugFolder.add(this.model.text.rotation, 'y').min(-1.5).max(-0.5).step(0.001).name("RotationY")
-            // this.debugFolder.add(this.model.text.rotation, 'z').min(0.5).max(1.5).step(0.001).name("RotationZ")
-            // this.debugFolder.add(this.model.text.position, 'x').min(-6).max(10).step(0.01).name("PositionX")
-            // this.debugFolder.add(this.model.text.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
-            // this.debugFolder.add(this.model.text.position, 'z').min(-3).max(10).step(0.01).name("PositionZ")
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(0).max(1).step(0.01).name("PositionX")
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-3).max(3).step(0.001).name("PositionY")
+
+            // this.debugFolder.add(this.geometry.parameters.radius).min(5).max(20).step(0.01).name("radius")
         }
     }
 
