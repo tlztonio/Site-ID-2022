@@ -41,6 +41,9 @@ export default class World {
         if (this.mer) {
             this.mer.update()
         }
+        if (this.nuages) {
+            this.nuages.update()
+        }
         if (this.parasol) {
             this.parasol.forEach((e) => {
                 e.update()

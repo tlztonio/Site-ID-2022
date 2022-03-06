@@ -1,6 +1,5 @@
 export default [
     // ceci n'est pas une classe
-
     {
         name: 'parasolModel',
         type: 'gltfModel',
@@ -14,7 +13,7 @@ export default [
     {
         name: 'textRockModel',
         type: 'gltfModel',
-        path: 'models/Rocks/Text/20Text2.glb'
+        path: 'models/Rocks/Text/20Text3.glb'
     },
     {
         name: 'stairsRockModel',
@@ -26,9 +25,4 @@ export default [
         type: 'gltfModel',
         path: 'models/Concert/concert.glb'
     },
-    // {
-    //     name: 'stageShadow',
-    //     type: 'texture',
-    //     path: 'textures/shadows/stageShadow2.jpg'
-    // },
 ]

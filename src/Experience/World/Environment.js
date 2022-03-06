@@ -56,12 +56,12 @@ export default class Environment {
 
         // Debug
         if (this.debug.active) {
-            this.helper = new THREE.DirectionalLightHelper(this.sunLight, 2)
-            this.scene.add(this.helper)
-            this.debugFolder.add(this.sunLight.position, "y", 0, 15, 0.1)
-            this.debugFolder.add(this.sunLight.position, "z", 0, 15, 0.1)
-            this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera)
-            this.scene.add(this.shadowHelper)
+            // this.helper = new THREE.DirectionalLightHelper(this.sunLight, 2)
+            // this.scene.add(this.helper)
+            // this.debugFolder.add(this.sunLight.position, "y", 0, 15, 0.1)
+            // this.debugFolder.add(this.sunLight.position, "z", 0, 15, 0.1)
+            // this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera)
+            // this.scene.add(this.shadowHelper)
         }
     }
 }

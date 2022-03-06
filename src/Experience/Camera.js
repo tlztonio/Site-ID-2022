@@ -79,7 +79,7 @@ export default class Camera {
 
     travelPath() {
         const positionSpline = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-5.25, 0.8, 8.5),
+            new THREE.Vector3(-5.25, 0.8, 8.75),
             new THREE.Vector3(0.4, 0.6, 6.4),
             new THREE.Vector3(2.7, 0.6, 3),
             new THREE.Vector3(2.7, 0.6, 0),
@@ -87,8 +87,8 @@ export default class Camera {
         ])
 
         const lookAtSpline = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-3.1, 0.25, 7.1), // rock high
-            new THREE.Vector3(-2.3, -0.25, 6.6), // rock very low
+            new THREE.Vector3(-3.2, 0.4, 7.1), // rock high
+            new THREE.Vector3(-2.3, -0.15, 6.6), // rock very low
             new THREE.Vector3(-0.75, 0.2, 5.95), // sable
             new THREE.Vector3(0.4, 0.3, 5), // parasol
             new THREE.Vector3(1, 0.3, -1), // parasol

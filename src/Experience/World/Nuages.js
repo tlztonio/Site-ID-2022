@@ -32,10 +32,11 @@ export default class Nuages {
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
             uniforms: {
-                uDebug: { value: new THREE.Vector2(0.0, 0.0) },
+                uDebug: { value: new THREE.Vector2(0.5, 0.0) },
                 uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
+                uRandomFbm: { value: Math.random() * 20 },
             },
             side: THREE.BackSide
         })
@@ -46,10 +47,8 @@ export default class Nuages {
 
         // debug
         if (this.debug.active) {
-            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(0).max(1).step(0.01).name("PositionX")
-            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-3).max(3).step(0.001).name("PositionY")
-
-            // this.debugFolder.add(this.geometry.parameters.radius).min(5).max(20).step(0.01).name("radius")
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(-1).max(1).step(0.01).name("uDebugX")
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-1).max(1).step(0.01).name("uDebugY")
         }
     }
 
@@ -62,7 +61,7 @@ export default class Nuages {
     }
 
     update() {
-
+        this.material.uniforms.uTime.value += this.time.delta
     }
 
     mouseMove(e) {
