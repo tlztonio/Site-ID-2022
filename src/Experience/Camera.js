@@ -89,8 +89,8 @@ export default class Camera {
         const lookAtSpline = new THREE.CatmullRomCurve3([
             new THREE.Vector3(-3.2, 0.45, 7.1), // rock high
             new THREE.Vector3(-2.3, -0.15, 6.6), // rock very low
-            new THREE.Vector3(-0.75, 0.25, 5.95), // sable
-            new THREE.Vector3(0.4, 0.35, 5), // parasol
+            new THREE.Vector3(-0.75, 0.35, 5.95), // sable
+            new THREE.Vector3(0.4, 0.4, 4.5), // parasol
             new THREE.Vector3(1, 0.35, -1), // parasol
             new THREE.Vector3(1, 0.6, -4), // scene
         ])
