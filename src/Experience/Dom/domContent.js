@@ -95,30 +95,30 @@ export default class Dom {
     }
 
     click(e) {
-        // if (this.experience.raycaster.raycastedObjectName == 'parasol1') {
-        //     this.experience.camera.shouldMove = false
-        //     this.removePages()
-        //     this.pageOne()
-        //     this.experience.world.parasol1.clicked = true
-        // } else if (this.experience.raycaster.raycastedObjectName == 'parasol2') {
-        //     this.experience.camera.shouldMove = false
-        //     this.removePages()
-        //     this.pageTwo()
-        //     this.experience.world.parasol2.clicked = true
-        // } else if (this.experience.raycaster.raycastedObjectName == 'parasol3') {
-        //     this.experience.camera.shouldMove = false
-        //     this.removePages()
-        //     this.pageThree()
-        //     this.experience.world.parasol3.clicked = true
-        // } else if (this.experience.raycaster.raycastedObjectName == 'parasol4') {
-        //     this.experience.camera.shouldMove = false
-        //     this.removePages()
-        //     this.pageFour()
-        //     this.experience.world.parasol4.clicked = true
-        // } else {
-        //     this.experience.camera.shouldMove = true
-        //     this.removePages()
-        // }
+        if (this.experience.raycaster.raycastedObjectName == 'parasol1') {
+            this.experience.camera.shouldMove = false
+            this.removePages()
+            this.pageOne()
+            this.experience.world.parasol1.clicked = true
+        } else if (this.experience.raycaster.raycastedObjectName == 'parasol2') {
+            this.experience.camera.shouldMove = false
+            this.removePages()
+            this.pageTwo()
+            this.experience.world.parasol2.clicked = true
+        } else if (this.experience.raycaster.raycastedObjectName == 'parasol3') {
+            this.experience.camera.shouldMove = false
+            this.removePages()
+            this.pageThree()
+            this.experience.world.parasol3.clicked = true
+        } else if (this.experience.raycaster.raycastedObjectName == 'parasol4') {
+            this.experience.camera.shouldMove = false
+            this.removePages()
+            this.pageFour()
+            this.experience.world.parasol4.clicked = true
+        } else {
+            this.experience.camera.shouldMove = true
+            this.removePages()
+        }
     }
 
     mouseMove(e) {

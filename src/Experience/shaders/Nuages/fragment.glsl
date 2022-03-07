@@ -105,7 +105,7 @@ void main()
     skyGradient += cloudMaker(2.5, 4.3, 6.0, 2.0,st);
 
 
-    float pointSoleil = distance(vec2(st.x-1.4,st.y), vec2(3.0,0.6));
+    float pointSoleil = distance(vec2(st.x-1.4,st.y), vec2(3.0,0.5));
 
     float contourSoleil = smoothstep(0.01,0.03,pointSoleil);
     float contourLueur = sin(smoothstep(0.03,0.2,pointSoleil));

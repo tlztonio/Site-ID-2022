@@ -25,7 +25,7 @@ export default class Camera {
         }
 
         this.setInstance()
-        this.setOrbitControls()
+        // this.setOrbitControls()
         this.travelPath()
 
         //scroll
@@ -79,7 +79,7 @@ export default class Camera {
 
     travelPath() {
         const positionSpline = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-5.25, 0.8, 8.75),
+            new THREE.Vector3(-5.1, 0.8, 9.2),
             new THREE.Vector3(0.4, 0.6, 6.4),
             new THREE.Vector3(2.7, 0.6, 3),
             new THREE.Vector3(2.7, 0.6, 0),
@@ -87,12 +87,12 @@ export default class Camera {
         ])
 
         const lookAtSpline = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-3.2, 0.4, 7.1), // rock high
+            new THREE.Vector3(-3.2, 0.45, 7.1), // rock high
             new THREE.Vector3(-2.3, -0.15, 6.6), // rock very low
-            new THREE.Vector3(-0.75, 0.2, 5.95), // sable
-            new THREE.Vector3(0.4, 0.3, 5), // parasol
-            new THREE.Vector3(1, 0.3, -1), // parasol
-            new THREE.Vector3(1, 0.4, -4), // scene
+            new THREE.Vector3(-0.75, 0.25, 5.95), // sable
+            new THREE.Vector3(0.4, 0.35, 5), // parasol
+            new THREE.Vector3(1, 0.35, -1), // parasol
+            new THREE.Vector3(1, 0.6, -4), // scene
         ])
 
         // vizualize the points of the curves
@@ -130,7 +130,7 @@ export default class Camera {
     travelUpdate() {
         this.looptimePosition = 100000
         this.looptimeLookAt = 100000
-        const inactivityTime = 3000
+        const inactivityTime = 2000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
@@ -182,10 +182,10 @@ export default class Camera {
         if (this.scrollPositionActual > this.scrollPositionOld) {
             if (this.progressPosition < 1) {
                 // prevent overflow of scroll 
-                this.scrolledAmount += 1000
+                this.scrolledAmount += 1500
             }
         } else {
-            this.scrolledAmount -= 1000
+            this.scrolledAmount -= 1500
         }
 
         this.scrollPositionOld = this.scrollPositionActual
@@ -215,7 +215,7 @@ export default class Camera {
 
     update() {
         if (this.positionSplineGeometry && this.lookAtSplineGeometry) {
-            // this.travelUpdate()
+            this.travelUpdate()
         }
 
         if (this.progressPosition < 1) {
@@ -231,6 +231,6 @@ export default class Camera {
 
         this.scrolledAmountFinal += (this.scrolledAmount - this.scrolledAmountFinal) * 0.1
 
-        this.controls.update()
+        // this.controls.update()
     }
 }
