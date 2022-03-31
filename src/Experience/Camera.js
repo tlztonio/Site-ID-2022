@@ -61,7 +61,11 @@ export default class Camera {
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 75)
 
         // this.instance.position.set(-3, 5, 0)
-        this.instance.position.set(-4.23, 0.42, 8.88)
+        // this.instance.position.set(-4.23, 0.42, 8.88)
+        this.instance.position.set(-4.23, 0.42, -5)
+        // this.instance.position.set(2, 2.25, 0)
+        // this.instance.rotation.set(0, -1.25, 0)
+
 
         this.scene.add(this.instance)
         this.mouse = new THREE.Vector2()
@@ -134,8 +138,6 @@ export default class Camera {
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
-            // this.timeProgressPosition += this.time.delta
-            // this.timeProgressLookAt += this.time.delta
             this.scrolledAmount += 10 // a tweak maybe
         }
 
@@ -181,7 +183,7 @@ export default class Camera {
 
         if (this.scrollPositionActual > this.scrollPositionOld) {
             if (this.progressPosition < 1) {
-                // prevent overflow of scroll 
+                // prevent overflow of scroll
                 this.scrolledAmount += 1500
             }
         } else {
@@ -211,6 +213,7 @@ export default class Camera {
 
         console.log(this.instance.position)
         console.log(this.instance.rotation)
+
     }
 
     update() {
@@ -222,9 +225,11 @@ export default class Camera {
             this.scrollTimer += this.time.delta
         }
 
-        if (this.shouldMove == false && this.sizes.width > 1300) {
+        if (this.shouldMove == false && this.sizes.width > 1400) {
             // normalize zoom to remove it for first parasol
             this.zoomPosition += (-0.4 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
+        } else if (this.shouldMove == false && this.sizes.width < 1400) {
+            this.zoomPosition += (-0.2 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
         } else {
             this.zoomPosition += (0 - this.zoomPosition) * 0.08
         }

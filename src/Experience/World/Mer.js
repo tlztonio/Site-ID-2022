@@ -43,7 +43,7 @@ export default class Mer {
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
             },
-            transparent: true,
+            // transparent: true,
             // wireframe: true
             // format: THREE.RGBAFormat
         })
@@ -65,7 +65,7 @@ export default class Mer {
 
         if (this.debug.active) {
             this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(0).max(1).step(0.001)
-            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(0.25).max(0.75).step(0.001)
+            this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(-5).max(10).step(0.1)
             this.material.needsUpdate = true
         }
     }

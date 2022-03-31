@@ -14,9 +14,9 @@ export default class Parasol {
         this.renderer = this.experience.renderer
 
         // debug
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Parasol')
-        }
+        // if (this.debug.active) {
+        //     this.debugFolder = this.debug.ui.addFolder('Parasol')
+        // }
 
         // setup
         this.model = this.resources.items.parasolModel.scene.clone()
@@ -70,7 +70,7 @@ export default class Parasol {
     animate() {
         if (this.raycaster.raycastedObjectName == this.model.name) {
             this.closeAnimation.play()
-            this.tissu.rotation.y += 0.02
+            this.tissu.rotation.y += 0.01
             this.renderer.instance.shadowMap.needsUpdate = true
         } else if (this.tissu.position.y < 0) {
             this.closeAnimation.reverse()
@@ -78,7 +78,7 @@ export default class Parasol {
         }
 
         if (this.clicked) {
-            this.tissu.rotation.y += 0.02
+            this.tissu.rotation.y += 0.01
             this.renderer.instance.shadowMap.needsUpdate = true
         }
     }

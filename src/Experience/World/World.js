@@ -21,12 +21,15 @@ export default class World {
             this.mer = new Mer()
             this.rocks = new Rocks()
             this.nuages = new Nuages()
-            this.parasol1 = new Parasol(0, 0, 2.75, 'parasol1')
-            this.parasol2 = new Parasol(0, 0, 1.5, 'parasol2')
-            this.parasol3 = new Parasol(0, 0, 0.25, 'parasol3')
-            this.parasol4 = new Parasol(0, 0, -1, 'parasol4')
-            this.parasol = [this.parasol1, this.parasol2, this.parasol3, this.parasol4]
-            this.parasolModels = [this.parasol1.model, this.parasol2.model, this.parasol3.model, this.parasol4.model]
+            let init = 3.2
+            let espace = 1.25
+            this.parasol1 = new Parasol(0, 0, init - espace * 0, 'parasol1')
+            this.parasol2 = new Parasol(0, 0, init - espace * 1, 'parasol2')
+            this.parasol3 = new Parasol(0, 0, init - espace * 2, 'parasol3')
+            this.parasol4 = new Parasol(0, 0, init - espace * 3, 'parasol4')
+            this.parasol5 = new Parasol(0, 0, init - espace * 4, 'parasol5')
+            this.parasol = [this.parasol1, this.parasol2, this.parasol3, this.parasol4, this.parasol5]
+            this.parasolModels = [this.parasol1.model, this.parasol2.model, this.parasol3.model, this.parasol4.model, this.parasol5.model]
             this.concert = new Concert()
         })
     }
@@ -44,6 +47,9 @@ export default class World {
         if (this.nuages) {
             this.nuages.update()
         }
+        // if (this.rocks) {
+        //     this.rocks.update()
+        // }
         if (this.parasol) {
             this.parasol.forEach((e) => {
                 e.update()

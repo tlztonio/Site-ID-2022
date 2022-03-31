@@ -16,13 +16,58 @@ export default [
         path: 'models/Rocks/Text/20Text3.glb'
     },
     {
+        name: 'degresRock',
+        type: 'gltfModel',
+        path: 'models/Rocks/Logos/degres2.glb'
+    },
+    {
+        name: 'battleRock',
+        type: 'gltfModel',
+        path: 'models/Rocks/Logos/battle2.glb'
+    },
+    {
+        name: 'radioRock',
+        type: 'gltfModel',
+        path: 'models/Rocks/Logos/webradio.glb'
+    },
+    {
+        name: 'photoRock',
+        type: 'gltfModel',
+        path: 'models/Rocks/Logos/photo.glb'
+    },
+    {
+        name: 'photomatonRock',
+        type: 'gltfModel',
+        path: 'models/Rocks/Logos/photomaton.glb'
+    },
+    {
         name: 'stairsRockModel',
         type: 'gltfModel',
-        path: 'models/Rocks/stairsRockOpti.glb'
+        path: 'models/Rocks/stairsRockOpti2.glb'
     },
     {
         name: 'concertModel',
         type: 'gltfModel',
-        path: 'models/Concert/concert.glb'
+        path: 'models/Concert/concert2.glb'
+    },
+    {
+        name: 'rockNormal',
+        type: 'texture',
+        path: 'textures/normal4.jpg'
+    },
+    {
+        name: 'rockHeight',
+        type: 'texture',
+        path: 'textures/ao.png'
+    },
+    {
+        name: 'rockColor',
+        type: 'texture',
+        path: 'textures/color4.jpg'
+    },
+    {
+        name: 'bakedStage',
+        type: 'texture',
+        path: 'textures/bakedStage.jpg'
     },
 ]

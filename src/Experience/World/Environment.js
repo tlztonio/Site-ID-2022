@@ -28,7 +28,7 @@ export default class Environment {
     }
 
     setFog() {
-        this.blueColor = new THREE.Color(0x87CEEB)
+        this.blueColor = new THREE.Color(0x19c5fe)
 
         this.scene.background = this.blueColor
         // this.scene.fog = new THREE.Fog(this.blueColor, 3, 8)
@@ -40,13 +40,13 @@ export default class Environment {
         this.sunLight.shadow.camera.near = 1
         this.sunLight.shadow.camera.far = 20
         this.sunLight.shadow.camera.left = -10
-        this.sunLight.shadow.camera.right = 6
+        this.sunLight.shadow.camera.right = 8
 
         console.log(this.sunLight.rotation)
         // this.sunLight.shadow.camera.rotation.set(-5, 3, -3)
         this.sunLight.shadow.mapSize.set(1024, 1024)
 
-        this.sunLight.shadow.normalBias = 0.05
+        // this.sunLight.shadow.normalBias = 0.05
         this.sunLight.position.set(-5, 3.6, -2.4)
         // this.sunLight.position.set(-5, 3, -3)
         this.sunLight.rotation.set(0, 0, 0)
@@ -56,12 +56,12 @@ export default class Environment {
 
         // Debug
         if (this.debug.active) {
-            // this.helper = new THREE.DirectionalLightHelper(this.sunLight, 2)
-            // this.scene.add(this.helper)
-            // this.debugFolder.add(this.sunLight.position, "y", 0, 15, 0.1)
-            // this.debugFolder.add(this.sunLight.position, "z", 0, 15, 0.1)
-            // this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera)
-            // this.scene.add(this.shadowHelper)
+            this.helper = new THREE.DirectionalLightHelper(this.sunLight, 2)
+            this.scene.add(this.helper)
+            this.debugFolder.add(this.sunLight.position, "y", 0, 15, 0.1)
+            this.debugFolder.add(this.sunLight.position, "z", 0, 15, 0.1)
+            this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera)
+            this.scene.add(this.shadowHelper)
         }
     }
 }

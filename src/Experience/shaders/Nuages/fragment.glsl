@@ -1,6 +1,4 @@
-#ifdef GL_ES
-precision mediump float;
-#endif
+
 
 uniform float uTime;
 uniform vec2 uResolution;
@@ -27,6 +25,7 @@ float noise (vec2 st) {
     float d = random(i + vec2(1.0, 1.0));
 
     vec2 u = f * f * (3.0 - 2.0 * f);
+    // vec2 u = smoothstep(0.0, 1.0, f);
 
     return mix(a, b, u.x) +
             (c - a)* u.y * (1.0 - u.x) +
@@ -55,7 +54,7 @@ float clampDown ( float value, float mi){
     return value;
 }
 
-vec3 cloudMaker (float posX,float posY, float sizeX, float sizeY, vec2 stC){
+vec3 cloudMaker (float posX,float posY, float sizeX, float sizeY, vec2 stC, float fbmResult){
     // position x, position y, taille X, taille Y
     posX +=uTime*0.00004;
 
@@ -69,7 +68,7 @@ vec3 cloudMaker (float posX,float posY, float sizeX, float sizeY, vec2 stC){
     float pointN = distance(stN, vec2(posX,posY));
     float contourN = smoothstep(0.0,0.7,pointN);
     float flatBottom = clamp( (stN.y-posY+0.33) * 2.0, 0.0, 1.0);
-    float finalN = clampDown( fbm(vec2(stC.x * 30.0 - uTime*0.0002 + uRandomFbm, stC.y * 30.0)) * (1.0-contourN),0.3) * 0.8 * flatBottom;
+    float finalN = clampDown( fbmResult * (1.0-contourN),0.3) * 0.8 * flatBottom;
     finalN = smoothstep(0.0, 0.7, finalN);
 
     return vec3(finalN,finalN*0.3,finalN);
@@ -90,19 +89,25 @@ void main()
     // float finalNuage = clampDown( fbm(vec2(st.x * 30.0 - uTime*0.0002, st.y * 30.0)) * (1.0-contourNuage),uDebug.y) * 0.8;
     // skyGradient += vec3(finalNuage,finalNuage*0.3,finalNuage);
 
+    // calculate the fbm only once and give it to function cloud
+    float fbmResult = fbm(vec2(st.x * 30.0 - uTime*0.0002 + uRandomFbm, st.y * 30.0));
+
     // minX 2, maxX 19, minY 4.0, maxY 6.0
     // three for first plan
-    skyGradient += cloudMaker(4.5, 4.2, 7.0, 1.5,st);
-    skyGradient += cloudMaker(5.5, 5.0, 7.3, 2.7,st);
-    skyGradient += cloudMaker(10.0, 4.0, 6.5, 3.0,st);
+    skyGradient += cloudMaker(4.5, 4.2, 7.0, 1.5,st,fbmResult);
+    skyGradient += cloudMaker(5.5, 5.0, 7.3, 2.7,st,fbmResult);
+    skyGradient += cloudMaker(10.0, 4.0, 6.5, 3.0,st,fbmResult);
+    // skyGradient += cloudMaker(5.2, 4.2, 7.0, 1.5,st);
+    // skyGradient += cloudMaker(6.1, 3.7, 7.0, 3.5,st);
+    // skyGradient += cloudMaker(8.5, 4.0, 6.5, 3.0,st);
     // after the scene/ close to it
-    skyGradient += cloudMaker(19.0, 4.0, 5.0, 0.5,st);
-    skyGradient += cloudMaker(13.0, 4.0, 7.0, 2.0,st);
-    skyGradient += cloudMaker(17.0, 4.0, 6.5, 3.0,st);
-    skyGradient += cloudMaker(24.0, 3.0, 5.5, 0.5,st);
-    skyGradient += cloudMaker(26.0, 3.5, 5.7, 2.5,st);
-    skyGradient += cloudMaker(20.0, 3.7, 7.0, 3.0,st);
-    skyGradient += cloudMaker(2.5, 4.3, 6.0, 2.0,st);
+    skyGradient += cloudMaker(19.0, 4.0, 5.0, 0.5,st,fbmResult);
+    skyGradient += cloudMaker(13.0, 4.0, 7.0, 2.0,st,fbmResult);
+    skyGradient += cloudMaker(17.0, 4.0, 6.5, 3.0,st,fbmResult);
+    skyGradient += cloudMaker(24.0, 4.25, 5.5, 0.5,st,fbmResult);
+    skyGradient += cloudMaker(26.0, 3.5, 5.7, 2.5,st,fbmResult);
+    skyGradient += cloudMaker(20.0, 3.7, 7.0, 3.0,st,fbmResult);
+    skyGradient += cloudMaker(2.5, 4.3, 6.0, 2.0,st,fbmResult);
 
 
     float pointSoleil = distance(vec2(st.x-1.4,st.y), vec2(3.0,0.5));

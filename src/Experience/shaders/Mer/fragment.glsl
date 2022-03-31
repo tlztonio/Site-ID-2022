@@ -49,12 +49,15 @@ void main()
     float deformation3 = sin(vPos.z*0.50-4.0)*0.3;
     float tD = deformation1+deformation2+deformation3;
 
-    // degradé sur x pour mieux blend l'ecume
-    float colorGradient = (vPos.x+5.5)*0.04;
+    // arrondir la ligne d'horizon pour les rocks
+    float roundedHorizon = sin((vPos.z+7.6)*0.2) * 3.0;
+    // degradé sur x pour mieux blend l'ecume et l'horizon
+    float colorGradient = (vPos.x + roundedHorizon + 6.0) *0.03;
+    // float colorGradient = max((vPos.x+5.5)*0.04, -0.1);
     // elevation du plane pour faire les iregularite de couleur sur la mer
     // scaling pour le noise et deformation sur x avec variation temps mouvement 
-    vec2 elevationUv = vec2( (vUv.x-tD*0.2) * 25.0 + sin(uTime*0.0014) * 0.5, vUv.y * 100.0 );
-    float elevation = noise(elevationUv)*0.03;
+    vec2 elevationUv = vec2( (vUv.x-tD*0.2) * 60.0 + sin(uTime*0.0014) * 0.5, vUv.y * 100.0 );
+    float elevation = noise(elevationUv) * 0.03;
     // smoothstep pour faire une transition 
     float r = smoothstep(0.0,0.75-vPos.y*0.05,0.35+colorGradient+elevation);
     float g = smoothstep(0.0,0.75-vPos.y*0.05,0.6+colorGradient+elevation);

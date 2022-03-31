@@ -1,9 +1,9 @@
 import Experience from "../Experience"
-import gsap from 'gsap'
+import { SmoothTranslate } from './smoothTranslate.js';
+
 
 export default class Dom {
     constructor() {
-        // Permet de recuperer les valeurs du script Experience dans celui ci avec le Singleton
         this.experience = new Experience()
         this.sizes = this.experience.sizes
         // this.scene = this.experience.scene
@@ -16,15 +16,45 @@ export default class Dom {
 
         this.indicationOverlay()
         this.buttonBeach()
-
-        console.log("largeur d'ecran : " + window.innerWidth)
     }
 
     setInstance() {
+        // the section that is translating on X and Y
         this.atelierOne = document.getElementById('atelier1')
         this.atelierTwo = document.getElementById('atelier2')
         this.atelierThree = document.getElementById('atelier3')
         this.atelierFour = document.getElementById('atelier4')
+        this.atelierFive = document.getElementById('atelier5')
+
+        this.smoothTranslateOne = new SmoothTranslate({
+            container: this.atelierOne,
+            threshold: 1,
+            useRaf: true
+        })
+
+        this.smoothTranslateTwo = new SmoothTranslate({
+            container: this.atelierTwo,
+            threshold: 1,
+            useRaf: true
+        })
+
+        this.smoothTranslateThree = new SmoothTranslate({
+            container: this.atelierThree,
+            threshold: 1,
+            useRaf: true
+        })
+
+        this.smoothTranslateFour = new SmoothTranslate({
+            container: this.atelierFour,
+            threshold: 1,
+            useRaf: true
+        })
+
+        this.smoothTranslateFive = new SmoothTranslate({
+            container: this.atelierFive,
+            threshold: 1,
+            useRaf: true
+        })
     }
 
     indicationOverlay() {
@@ -41,53 +71,74 @@ export default class Dom {
     }
 
     pageOne() {
-        // 1600 start et end a 1300 maybe 
-        if (this.sizes.width) {
+        this.smoothTranslateOne.slide.active = true
+        this.smoothTranslateOne.update()
 
-        } else if (this.sizes.width) {
-
-        }
-        this.atelierOne.style.transform = 'translateX(0)'
-        let adaptScreen = (- window.innerWidth + 1920) / 7000
-        let adaptScreen2 = (1 - (this.experience.camera.instance.aspect - 1)) * 0.05
-        let diffPosition = ((0.56) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        let adaptScreen = (- this.sizes.width + 1920) / 7000
+        let diffPosition = ((0.54) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
         this.experience.camera.scrolledAmount += diffPosition
     }
 
     pageTwo() {
-        this.atelierTwo.style.transform = 'translateX(0)'
-        let adaptScreen = (- window.innerWidth + 1920) / 7000
-        let diffPosition = ((0.64) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.smoothTranslateTwo.slide.active = true
+        this.smoothTranslateTwo.update()
+
+        let adaptScreen = (- this.sizes.width + 1920) / 7000
+        let diffPosition = ((0.62) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
         this.experience.camera.scrolledAmount += diffPosition
     }
 
     pageThree() {
-        this.atelierThree.style.transform = 'translateX(0)'
-        let adaptScreen = (- window.innerWidth + 1920) / 7000
-        let diffPosition = ((0.715) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.smoothTranslateThree.slide.active = true
+        this.smoothTranslateThree.update()
+        //more zoom here 
+        let adaptScreen = (- this.sizes.width + 1920) / 7000
+        let diffPosition = ((0.7) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
         this.experience.camera.scrolledAmount += diffPosition
     }
 
     pageFour() {
-        this.atelierFour.style.transform = 'translateX(0)'
-        let adaptScreen = (- window.innerWidth + 1920) / 13000
-        let diffPosition = ((0.785) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.smoothTranslateFour.slide.active = true
+        this.smoothTranslateFour.update()
+        //more zoom here 
+        let adaptScreen = (- this.sizes.width + 1920) / 13000
+        let diffPosition = ((0.78) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
+        this.experience.camera.scrolledAmount += diffPosition
+    }
+
+    pageFive() {
+        this.smoothTranslateFive.slide.active = true
+        this.smoothTranslateFive.update()
+        // less zoom maybe 
+        let adaptScreen = (- this.sizes.width + 1920) / 13000
+        let diffPosition = ((0.855) * this.experience.camera.looptimePosition) - this.experience.camera.scrolledAmountFinal
         this.experience.camera.scrolledAmount += diffPosition
     }
 
     removePages() {
-        this.atelierOne.style.transform = 'translateX(-100%)'
-        this.atelierTwo.style.transform = 'translateX(-100%)'
-        this.atelierThree.style.transform = 'translateX(-100%)'
-        this.atelierFour.style.transform = 'translateX(-100%)'
+        // to remove slide on X
+        this.smoothTranslateOne.slide.active = false
+        this.smoothTranslateTwo.slide.active = false
+        this.smoothTranslateThree.slide.active = false
+        this.smoothTranslateFour.slide.active = false
+        this.smoothTranslateFive.slide.active = false
+
         this.experience.world.parasol1.clicked = false
         this.experience.world.parasol2.clicked = false
         this.experience.world.parasol3.clicked = false
         this.experience.world.parasol4.clicked = false
+        this.experience.world.parasol5.clicked = false
+
+        // reset scroll Y for the pages
+        document.body.style.height = 0 + "px"
     }
 
     resize() {
-
+        this.smoothTranslateOne.resize()
+        this.smoothTranslateTwo.resize()
+        this.smoothTranslateThree.resize()
+        this.smoothTranslateFour.resize()
+        this.smoothTranslateFive.resize()
     }
 
     update() {
@@ -115,6 +166,11 @@ export default class Dom {
             this.removePages()
             this.pageFour()
             this.experience.world.parasol4.clicked = true
+        } else if (this.experience.raycaster.raycastedObjectName == 'parasol5') {
+            this.experience.camera.shouldMove = false
+            this.removePages()
+            this.pageFive()
+            this.experience.world.parasol5.clicked = true
         } else {
             this.experience.camera.shouldMove = true
             this.removePages()

@@ -58,7 +58,7 @@ export default class Experience {
         })
 
         // Mouse move event
-        window.addEventListener('mousemove', (e) => {
+        this.canvas.addEventListener('mousemove', (e) => {
             this.mouseMove(e)
         })
 
@@ -68,6 +68,10 @@ export default class Experience {
         // call la methode de l'objet voulu qui doit etre creer dans le script de l'objet 
         this.camera.resize()
         this.renderer.resize()
+        this.dom.resize()
+        // if (this.resources.loadingDone == false) {
+        this.resources.resize()
+        // }
     }
 
     update() {
@@ -76,6 +80,10 @@ export default class Experience {
         this.raycaster.update()
         this.world.update()
         this.renderer.update()
+        if (this.resources.loadingDone === false) {
+            this.resources.update()
+        }
+        // console.log(document.querySelector(".atelier2").clientHeight)
     }
 
     click(e) {

@@ -24,6 +24,7 @@ export default class Raycaster {
     }
 
     hoverRaycast(e) {
+        // changed for teaser
         this.mouse.x = (e.clientX / this.sizes.width) * 2 - 1
         this.mouse.y = - (e.clientY / this.sizes.height) * 2 + 1
         // update the picking ray with the camera and mouse position
@@ -59,5 +60,6 @@ export default class Raycaster {
         if (this.world.parasolModels) {
             this.hoverRaycast(e)
         }
+        // console.log('test')
     }
 }

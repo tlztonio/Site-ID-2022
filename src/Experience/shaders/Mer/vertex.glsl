@@ -33,13 +33,16 @@ void main()
 
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
-    //CHANGE LES DIVISER PAR DES FOIS
-    float horizon = max((modelPosition.x+7.0)*0.2,0.0);
+    float horizonFlat = max((modelPosition.x+7.0)*0.2,0.0);
 
-    modelPosition.y += sin(modelPosition.x*1.5 + slowedTime)*0.025*horizon;
-    modelPosition.y += sin(modelPosition.z*5.0 + slowedTime)*0.013*horizon;
-    modelPosition.y += cos(modelPosition.z*7.0 + slowedTime)*0.013*horizon;
-    modelPosition.y += aRandom*0.1*min((modelPosition.x+3.0)*0.1,0.0);
+    modelPosition.y += sin(modelPosition.x*1.5 + slowedTime) * 0.025 * horizonFlat;
+    modelPosition.y += sin(modelPosition.z*5.0 + slowedTime) * 0.013 * horizonFlat;
+    modelPosition.y += cos(modelPosition.z*7.0 + slowedTime) * 0.013 * horizonFlat;
+    modelPosition.y += aRandom * 0.1 * min( (modelPosition.x+3.0) * 0.1, 0.0) * horizonFlat;
+
+    float horizonStrech  = min(modelPosition.x+2.0,0.0);
+
+    modelPosition.x += horizonStrech;
 
     // deformation for rounded beach
     // float deformation1 = sin(modelPosition.z*0.75-4.0)*0.3;
