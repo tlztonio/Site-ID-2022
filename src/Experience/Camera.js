@@ -55,6 +55,11 @@ export default class Camera {
 
         //zoomin sur les parasols
         this.zoomPosition = 0
+
+        // video concert
+        this.concertVideo = document.getElementById('hidden-video')
+        this.concertVideoPlayed = false
+
     }
 
     setInstance() {
@@ -117,8 +122,8 @@ export default class Camera {
 
         console.log(lookAtSpline)
 
-        this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.01, 4, false)
-        this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.01, 4, false)
+        this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.1, 4, false)
+        this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.1, 4, false)
 
         const material1 = new THREE.MeshBasicMaterial({ color: 0xff00ff })
         const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 })
@@ -160,6 +165,13 @@ export default class Camera {
             // this.scrolledAmount = this.looptimePosition
         }
 
+        if (this.progressPosition > 0.9) {
+            // this.concertVideoPlayed = true
+            this.concertVideo.play()
+        } else if (this.progressPosition < 0.9) {
+            this.concertVideo.pause()
+        }
+
         const position = new THREE.Vector3()
         const positionLookAt = new THREE.Vector3()
 
@@ -177,17 +189,19 @@ export default class Camera {
 
         if (e.deltaY) { // scroll desktop
             this.scrollPositionActual += e.deltaY
+            this.scrollScale = 1.0
         } else { // scroll mobile
-            this.scrollPositionActual += this.scrolledPhone
+            this.scrollPositionActual += this.scrolledPhone * 0.5
+            this.scrollScale = 0.5
         }
 
         if (this.scrollPositionActual > this.scrollPositionOld) {
             if (this.progressPosition < 1) {
                 // prevent overflow of scroll
-                this.scrolledAmount += 1500
+                this.scrolledAmount += 1500 * this.scrollScale
             }
         } else {
-            this.scrolledAmount -= 1500
+            this.scrolledAmount -= 1500 * this.scrollScale
         }
 
         this.scrollPositionOld = this.scrollPositionActual

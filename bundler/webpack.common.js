@@ -81,7 +81,7 @@ module.exports = {
 
                 // Images
                 {
-                    test: /\.(jpg|png|gif|svg)$/,
+                    test: /\.(mp4|jpg|png|gif|svg)$/,
                     type: 'asset/resource',
                     generator:
                     {
@@ -89,16 +89,11 @@ module.exports = {
                     }
                 },
 
-                // Videos
-                {
-                    test: /\.(mp4|webm)$/,
-                    use: [{
-                        loader: "file-loader",
-                        options: {
-                            outputPath: "assets/videos/",
-                        },
-                    },],
-                },
+                // // Videos
+                // {
+                //     test: /\.(mp4|webm)$/,
+                //     use: 'file-loader?name=videos/[name].[ext]',
+                // },
 
                 // Fonts
                 {

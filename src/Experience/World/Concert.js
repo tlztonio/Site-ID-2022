@@ -48,6 +48,12 @@ export default class Concert {
         console.log(this.model.concert)
 
         // ecran
+        const video = document.getElementById('hidden-video')
+        const videoTexture = new THREE.VideoTexture(video)
+        videoTexture.flipY = false
+        const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture })
+
+        this.model.concert.children[3].material = videoMaterial
 
         // scene
         this.model.concert.children[0].material = bakedMaterial
@@ -71,6 +77,7 @@ export default class Concert {
     }
 
     update() {
+
     }
 
     mouseMove(e) {

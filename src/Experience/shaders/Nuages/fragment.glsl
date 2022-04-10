@@ -57,7 +57,6 @@ float clampDown ( float value, float mi){
 vec3 cloudMaker (float posX,float posY, float sizeX, float sizeY, vec2 stC, float fbmResult){
     // position x, position y, taille X, taille Y
     posX +=uTime*0.00004;
-
     float tourComplet = 7.0*(10.0-sizeX);
 
     if(posX>tourComplet){
