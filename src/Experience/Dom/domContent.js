@@ -7,7 +7,7 @@ export default class Dom {
         this.experience = new Experience()
         this.sizes = this.experience.sizes
 
-        this.bodyHeight = 10000
+        this.bodyHeight = 5000
 
         this.setInstance()
 
