@@ -29,16 +29,26 @@ export default class Camera {
         this.travelPath()
 
         //scroll
-        window.scrollTo(0, 0) // reset scroll
+        this.scrolledAmount = 0 // distance scrolled scaled with the direction 
+        this.scrolledAmountFinal = 0 // distance scrolled scaled with the direction 
+        this.scrollPositionOld = 0 // previous distance scrolled to get direction of scroll
+        this.scrollPositionActual = 0 // actual delta of pixels
         this.scrollTimer = 0 // a timer that lauches when the user doesnt scroll to detct inactivity
 
-        // this.bodyHeight = document.body.clientHeight // does not work maybe because of timing but numeric value is safer
-        // console.log(this.bodyHeight)
-        this.pageHeight = window.innerHeight
-        this.scrollHeight = this.dom.bodyHeight - this.pageHeight
+        // desktop scroll
+        this.canvas.addEventListener('wheel', (e) => {
+            this.scrollEvent(e)
+        })
 
-        this.progressPosition = 0
-        this.progressLookAt = 0
+        // mobile scroll
+        window.addEventListener('touchstart', (e) => {
+            this.start = e.touches[0].clientY
+        })
+        window.addEventListener('touchmove', (e) => {
+            this.end = e.touches[0].clientY
+            this.scrolledPhone = this.start - this.end
+            this.scrollEvent(e)
+        })
 
         // Gestion scroll avec affichage pages 
         this.shouldMove = true
@@ -49,10 +59,6 @@ export default class Camera {
         // video concert
         this.concertVideo = document.getElementById('hidden-video')
         this.concertVideoPlayed = false
-
-        this.canvas.addEventListener('wheel', () => {
-            this.scrollEvent()
-        })
 
     }
 
@@ -114,7 +120,7 @@ export default class Camera {
             // this.scene.add(this.cube)
         })
 
-        // console.log(lookAtSpline)
+        console.log(lookAtSpline)
 
         this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.1, 4, false)
         this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.1, 4, false)
@@ -127,35 +133,40 @@ export default class Camera {
 
         // this.scene.add(positionMesh)
         // this.scene.add(lookAtMesh)
+
     }
 
     travelUpdate() {
         this.looptimePosition = 100000
         this.looptimeLookAt = 100000
-        const inactivityTime = 3000
+        const inactivityTime = 2000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
-            window.scroll(0, window.pageYOffset + 1)
+            this.scrolledAmount += 10 // a tweak maybe
         }
 
-        // lerp format for scroll value in percentage
-        this.progressPosition += ((window.pageYOffset / this.scrollHeight) - this.progressPosition)*0.1
-        // modification of the scrollHeight according the non-lerped position value for better view on parasol
-        let progressScrollHeight = this.scrollHeight / ( (window.pageYOffset / this.scrollHeight) / 1.75 + 0.425)
-        this.progressLookAt += ((window.pageYOffset / progressScrollHeight) - this.progressLookAt)*0.1
+        this.progressPosition = this.scrolledAmountFinal / this.looptimePosition
+        this.progressLookAt = this.scrolledAmountFinal / (this.looptimeLookAt / (this.progressPosition / 1.75 + 0.425))
+
+        // console.log(this.progressLookAt)
 
         if (this.progressPosition < 0) {
             this.progressPosition = 0
             this.progressLookAt = 0
+            this.scrolledAmountFinal = 0
+            this.scrolledAmount = 0
         }
 
         if (this.progressPosition > 1) {
             this.progressPosition = 1
             this.progressLookAt = 1
+            this.scrolledAmountFinal = this.looptimePosition
+            // this.scrolledAmount = this.looptimePosition
         }
 
         if (this.progressPosition > 0.9) {
+            // this.concertVideoPlayed = true
             this.concertVideo.play()
         } else if (this.progressPosition < 0.9) {
             this.concertVideo.pause()
@@ -171,15 +182,29 @@ export default class Camera {
         this.instance.lookAt(positionLookAt.x + this.zoomPosition, positionLookAt.y, positionLookAt.z)
     }
 
-    scrollEvent() {
+    scrollEvent(e) {
+
         this.dom.removePages()
-
-        // if (!this.experience.camera.shouldMove) {
-        //     document.body.style.height = this.dom.bodyHeight + "px"
-        // }
-
         this.experience.camera.shouldMove = true
 
+        if (e.deltaY) { // scroll desktop
+            this.scrollPositionActual += e.deltaY
+            this.scrollScale = 1.0
+        } else { // scroll mobile
+            this.scrollPositionActual += this.scrolledPhone * 0.5
+            this.scrollScale = 0.5
+        }
+
+        if (this.scrollPositionActual > this.scrollPositionOld) {
+            if (this.progressPosition < 1) {
+                // prevent overflow of scroll
+                this.scrolledAmount += 1500 * this.scrollScale
+            }
+        } else {
+            this.scrolledAmount -= 1500 * this.scrollScale
+        }
+
+        this.scrollPositionOld = this.scrollPositionActual
         this.scrollTimer = 0
     }
 
@@ -196,11 +221,13 @@ export default class Camera {
     resize() {
         this.instance.aspect = this.sizes.width / this.sizes.height
         this.instance.updateProjectionMatrix()
+        console.log("progress : " + this.progressPosition)
+        console.log("scrollResult : " + this.scrolledAmountFinal)
+        console.log("scrollAction : " + this.scrolledAmount)
 
-        this.pageHeight = window.innerHeight
+        console.log(this.instance.position)
+        console.log(this.instance.rotation)
 
-        // console.log(this.instance.position)
-        // console.log(this.instance.rotation)
     }
 
     update() {
@@ -212,10 +239,6 @@ export default class Camera {
             this.scrollTimer += this.time.delta
         }
 
-        if (this.shouldMove == false && this.sizes.width < 1200) {
-
-        }
-
         if (this.shouldMove == false && this.sizes.width > 1400) {
             // normalize zoom to remove it for first parasol
             this.zoomPosition += (-0.4 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
@@ -224,6 +247,8 @@ export default class Camera {
         } else {
             this.zoomPosition += (0 - this.zoomPosition) * 0.08
         }
+
+        this.scrolledAmountFinal += (this.scrolledAmount - this.scrolledAmountFinal) * 0.1
 
         // this.controls.update()
     }

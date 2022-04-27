@@ -71,16 +71,16 @@ export class SmoothTranslate {
 
         // page scrolled on load
         if (this.scroll.current !== 0) {
-            this.scrollTo(this.scroll.current);
+            this.scrollTo(this.scroll.current)
             setTimeout(() => {
-                this.emitScroll();
+                this.emitScroll()
             }, 0);
         }
 
-        window.addEventListener("scroll", () => this.scrollEvent());
+        window.addEventListener("scroll", () => this.scrollEvent())
 
         if (this._useRaf) {
-            this.animate();
+            this.animate()
         }
     }
 
@@ -88,13 +88,13 @@ export class SmoothTranslate {
      * Update our store sizes
      */
     update() {
-        this.store.documentHeight = this.container.clientHeight;
-        this.store.windowHeight = window.innerHeight;
-        document.body.style.height = this.container.clientHeight + "px";
+        this.store.documentHeight = this.container.clientHeight
+        this.store.windowHeight = window.innerHeight
+        // document.body.style.height = this.container.clientHeight + "px"
         // the document height is only after quite some time so just make it work after the loader is complete
-        console.log("pageHeight : " + this.store.documentHeight)
-
     }
+
+    // MAKE A CONTAINER WITH ONLY THE CANVAS AND DETECT SCROLL IN IT NOT ON WINDOW 
 
     /**
      * Reset our store and scroll values
@@ -176,7 +176,7 @@ export class SmoothTranslate {
      * Translate our container
      */
     updatePosition() {
-        this.container.style.transform = "translate(" + this.slide.current + "px," + -this.scroll.current + "px)"
+        this.container.style.transform = "translate(" + this.slide.current + "px," + 0 + "px)"
     }
 
     /**
