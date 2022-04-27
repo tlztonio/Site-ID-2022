@@ -174,10 +174,6 @@ export default class Camera {
     scrollEvent() {
         this.dom.removePages()
 
-        // if (!this.experience.camera.shouldMove) {
-        //     document.body.style.height = this.dom.bodyHeight + "px"
-        // }
-
         this.experience.camera.shouldMove = true
 
         this.scrollTimer = 0
@@ -198,6 +194,7 @@ export default class Camera {
         this.instance.updateProjectionMatrix()
 
         this.pageHeight = window.innerHeight
+        this.scrollHeight = this.dom.bodyHeight - this.pageHeight
 
         // console.log(this.instance.position)
         // console.log(this.instance.rotation)
