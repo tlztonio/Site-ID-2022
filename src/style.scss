@@ -35,12 +35,15 @@ html{
 }
 
 body{
-    height: 5000px;
+    height: 7500px;
+    @media only screen and (max-width: 1200px)  {
+        height: 2500px;
+    }
 }
 
-// ::-webkit-scrollbar {
-//     display: none;
-// }
+::-webkit-scrollbar {
+    display: none;
+}
 
 .loader {
     position: fixed;
