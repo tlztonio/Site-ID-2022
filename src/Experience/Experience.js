@@ -83,7 +83,6 @@ export default class Experience {
         if (this.resources.loadingDone === false) {
             this.resources.update()
         }
-        // console.log(document.querySelector(".atelier2").clientHeight)
     }
 
     click(e) {

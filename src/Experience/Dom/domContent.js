@@ -7,9 +7,10 @@ export default class Dom {
         this.experience = new Experience()
         this.sizes = this.experience.sizes
 
-        this.bodyHeight = 7500
         if (window.innerWidth<1200) {
             this.bodyHeight = 2500
+        } else {
+            this.bodyHeight = 7500
         }
 
         this.setInstance()
@@ -111,6 +112,11 @@ export default class Dom {
     }
 
     resize() {
+        if (window.innerWidth<1200) {
+            this.bodyHeight = 2500
+        } else {
+            this.bodyHeight = 7500
+        }
     }
 
     update() {
