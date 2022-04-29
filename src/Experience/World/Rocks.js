@@ -71,13 +71,7 @@ export default class Rocks {
         const materialRock = new THREE.MeshStandardMaterial({
             color: 0x909090,
             map: this.resources.items.rockColor,
-            // normalMap: this.resources.items.rockNormal
         })
-
-        // const geometryRock = new THREE.PlaneGeometry(1, 1, 16, 16)
-        // const planeRock = new THREE.Mesh(geometryRock, materialRock)
-        // planeRock.rotation.set(0, -Math.PI * 0.5, Math.PI * 0.5)
-        // this.scene.add(planeRock)
 
         this.model.stairsRock.traverse((o) => {
             if (o.isMesh) {

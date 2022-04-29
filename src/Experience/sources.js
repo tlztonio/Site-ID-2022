@@ -51,14 +51,9 @@ export default [
         path: 'models/Concert/concert2.glb'
     },
     {
-        name: 'rockNormal',
-        type: 'texture',
-        path: 'textures/normal4.jpg'
-    },
-    {
-        name: 'rockHeight',
-        type: 'texture',
-        path: 'textures/ao.png'
+        name: 'guitareModel',
+        type: 'gltfModel',
+        path: 'models/Concert/guitare.glb'
     },
     {
         name: 'rockColor',
@@ -68,6 +63,11 @@ export default [
     {
         name: 'bakedStage',
         type: 'texture',
-        path: 'textures/bakedStage.jpg'
+        path: 'textures/concert/bakedStage.jpg'
+    },
+    {
+        name: 'bakedGuitare',
+        type: 'texture',
+        path: 'textures/concert/guitareTexture.jpg'
     },
 ]

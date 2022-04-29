@@ -20,12 +20,14 @@ export default class Concert {
         // setup
         this.model = {}
         this.model.concert = this.resources.items.concertModel.scene
+        this.model.guitare = this.resources.items.guitareModel.scene
 
-        this.setModel()
+        this.setModelConcert()
+        this.setModelGuitare()
         // this.setAnimation()
     }
 
-    setModel() {
+    setModelConcert() {
 
         this.model.concert.position.set(0.5, 0, -7) // -4.713, -0.319
         this.model.concert.rotation.set(0, -Math.PI * 0.5, 0)
@@ -74,6 +76,37 @@ export default class Concert {
             this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
             this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
         }
+    }
+
+    setModelGuitare() {
+
+        this.model.guitare.position.set(0, 0.29, -6.8) // -4.713, -0.319
+        // this.model.guitare.rotation.set(0, -Math.PI * 0.5, 0)
+
+        const guitareTexture = this.resources.items.bakedGuitare
+        guitareTexture.flipY = false
+        const guitareMaterial = new THREE.MeshStandardMaterial({
+            map: guitareTexture
+        })
+
+        this.model.guitare.traverse((o) => {
+            if (o.isMesh) {
+                o.castShadow = true
+                // o.receiveShadow = false
+                o.material = guitareMaterial
+            }
+        })
+
+        this.scene.add(this.model.guitare)
+
+        // if (this.debug.active) {
+        //     this.debugFolder.add(this.model.concert.rotation, 'x').min(0.5).max(1.5).step(0.001).name("RotationX")
+        //     this.debugFolder.add(this.model.concert.rotation, 'y').min(-1.5).max(-0.5).step(0.001).name("RotationY")
+        //     this.debugFolder.add(this.model.concert.rotation, 'z').min(0.5).max(1.5).step(0.001).name("RotationZ")
+        //     this.debugFolder.add(this.model.concert.position, 'x').min(-6).max(10).step(0.01).name("PositionX")
+        //     this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
+        //     this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
+        // }
     }
 
     update() {
