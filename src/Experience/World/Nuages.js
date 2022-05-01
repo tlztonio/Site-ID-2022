@@ -7,11 +7,10 @@ export default class Nuages {
     constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
-        this.camera = this.experience.camera
-        this.renderer = this.experience.renderer.instance
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
+        this.sizes = this.experience.sizes
 
         // debug
         if (this.debug.active) {
@@ -33,7 +32,7 @@ export default class Nuages {
             fragmentShader: fragmentShader,
             uniforms: {
                 uDebug: { value: new THREE.Vector2(0.5, 0.0) },
-                uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                uResolution: { value: new THREE.Vector2(this.sizes.width, this.sizes.height) },
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
                 uRandomFbm: { value: Math.random() * 20 },

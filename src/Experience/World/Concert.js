@@ -21,9 +21,11 @@ export default class Concert {
         this.model = {}
         this.model.concert = this.resources.items.concertModel.scene
         this.model.guitare = this.resources.items.guitareModel.scene
+        this.model.drums = this.resources.items.drumsModel.scene
 
         this.setModelConcert()
         this.setModelGuitare()
+        this.setModelDrums()
         // this.setAnimation()
     }
 
@@ -68,14 +70,14 @@ export default class Concert {
 
         this.scene.add(this.model.concert)
 
-        if (this.debug.active) {
-            this.debugFolder.add(this.model.concert.rotation, 'x').min(0.5).max(1.5).step(0.001).name("RotationX")
-            this.debugFolder.add(this.model.concert.rotation, 'y').min(-1.5).max(-0.5).step(0.001).name("RotationY")
-            this.debugFolder.add(this.model.concert.rotation, 'z').min(0.5).max(1.5).step(0.001).name("RotationZ")
-            this.debugFolder.add(this.model.concert.position, 'x').min(-6).max(10).step(0.01).name("PositionX")
-            this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
-            this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
-        }
+        // if (this.debug.active) {
+        //     this.debugFolder.add(this.model.concert.rotation, 'x').min(0.5).max(1.5).step(0.001).name("RotationX")
+        //     this.debugFolder.add(this.model.concert.rotation, 'y').min(-1.5).max(-0.5).step(0.001).name("RotationY")
+        //     this.debugFolder.add(this.model.concert.rotation, 'z').min(0.5).max(1.5).step(0.001).name("RotationZ")
+        //     this.debugFolder.add(this.model.concert.position, 'x').min(-6).max(10).step(0.01).name("PositionX")
+        //     this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
+        //     this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
+        // }
     }
 
     setModelGuitare() {
@@ -107,6 +109,37 @@ export default class Concert {
         //     this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
         //     this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
         // }
+    }
+
+    setModelDrums() {
+
+        this.model.drums.position.set(0.9, 0.29, -6.8) // -4.713, -0.319
+        this.model.drums.rotation.set(0, 5.9, 0)
+
+        const drumsTexture = this.resources.items.bakedDrums
+        drumsTexture.flipY = false
+        const drumsMaterial = new THREE.MeshStandardMaterial({
+            map: drumsTexture
+        })
+
+        this.model.drums.traverse((o) => {
+            if (o.isMesh) {
+                o.castShadow = true
+                // o.receiveShadow = false
+                o.material = drumsMaterial
+            }
+        })
+
+        this.scene.add(this.model.drums)
+
+        if (this.debug.active) {
+            this.debugFolder.add(this.model.drums.rotation, 'x').min(0).max(10).step(0.1).name("RotationX")
+            this.debugFolder.add(this.model.drums.rotation, 'y').min(0).max(10).step(0.1).name("RotationY")
+            this.debugFolder.add(this.model.drums.rotation, 'z').min(0).max(10).step(0.1).name("RotationZ")
+            this.debugFolder.add(this.model.drums.position, 'x').min(0).max(10).step(0.1).name("PositionX")
+            this.debugFolder.add(this.model.drums.position, 'y').min(0).max(10).step(0.1).name("PositionY")
+            this.debugFolder.add(this.model.drums.position, 'z').min(0).max(10).step(0.1).name("PositionZ")
+        }
     }
 
     update() {

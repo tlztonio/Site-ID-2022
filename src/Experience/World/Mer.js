@@ -39,7 +39,7 @@ export default class Mer {
             fragmentShader: fragmentShader,
             uniforms: {
                 uDebug: { value: new THREE.Vector2(-1.0, 0.0) },
-                uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                uResolution: { value: new THREE.Vector2(this.sizes.width, this.sizes.height) },
                 uTime: { value: 0 },
                 PI: { value: Math.PI },
             },

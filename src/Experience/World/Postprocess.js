@@ -51,7 +51,7 @@ export default class Postprocessing {
             uniforms:
             {
                 tDiffuse: { value: null },
-                uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                uResolution: { value: new THREE.Vector2(this.sizes.width, this.sizes.height) },
                 uTime: { value: 0 },
             },
             vertexShader: vertexShader,

@@ -34,14 +34,16 @@ export default class Camera {
 
         // this.bodyHeight = document.body.clientHeight // does not work maybe because of timing but numeric value is safer
         // console.log(this.bodyHeight)
-        this.pageHeight = window.innerHeight
-        this.scrollHeight = this.dom.bodyHeight - this.pageHeight
+        this.scrollHeight = this.dom.bodyHeight - this.sizes.height
 
         this.progressPosition = 0
         this.progressLookAt = 0
 
         // Gestion scroll avec affichage pages 
         this.shouldMove = true
+
+        // Gestion overlay indication
+        this.hasScrolled = false
 
         //zoomin sur les parasols
         this.zoomPosition = 0
@@ -52,6 +54,11 @@ export default class Camera {
 
         this.canvas.addEventListener('wheel', () => {
             this.scrollEvent()
+        })
+
+        window.addEventListener('touchmove', (e) => {
+            this.scrollTimer = 0
+            this.hasScrolled = true
         })
 
     }
@@ -132,7 +139,7 @@ export default class Camera {
     travelUpdate() {
         this.looptimePosition = 100000
         this.looptimeLookAt = 100000
-        const inactivityTime = 3000
+        const inactivityTime = 5000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
@@ -150,15 +157,28 @@ export default class Camera {
             this.progressLookAt = 0
         }
 
-        if (this.progressPosition > 1) {
-            this.progressPosition = 1
-            this.progressLookAt = 1
+        if (this.progressPosition < 0.45 && this.scrollTimer > inactivityTime && !this.hasScrolled) {
+            this.dom.overlayScroll.classList.add("visible")
+        } else {
+            this.dom.overlayScroll.classList.remove("visible")
+        }
+
+        if (this.progressPosition > 0.55 && !this.dom.hasClicked) {
+            this.dom.overlayParasol.classList.add("visible")
+        } else {
+            this.dom.overlayParasol.classList.remove("visible")
         }
 
         if (this.progressPosition > 0.9) {
+            this.dom.overlayParasol.classList.remove("visible")
             this.concertVideo.play()
         } else if (this.progressPosition < 0.9) {
             this.concertVideo.pause()
+        }
+
+        if (this.progressPosition > 1) {
+            this.progressPosition = 1
+            this.progressLookAt = 1
         }
 
         const position = new THREE.Vector3()
@@ -175,6 +195,8 @@ export default class Camera {
         this.dom.removePages()
 
         this.experience.camera.shouldMove = true
+
+        this.hasScrolled = true
 
         this.scrollTimer = 0
     }
@@ -193,8 +215,7 @@ export default class Camera {
         this.instance.aspect = this.sizes.width / this.sizes.height
         this.instance.updateProjectionMatrix()
 
-        this.pageHeight = window.innerHeight
-        this.scrollHeight = this.dom.bodyHeight - this.pageHeight
+        this.scrollHeight = this.dom.bodyHeight - this.sizes.height
 
         // console.log(this.instance.position)
         // console.log(this.instance.rotation)
@@ -207,10 +228,6 @@ export default class Camera {
 
         if (this.progressPosition < 1) {
             this.scrollTimer += this.time.delta
-        }
-
-        if (this.shouldMove == false && this.sizes.width < 1200) {
-
         }
 
         if (this.shouldMove == false && this.sizes.width > 1400) {

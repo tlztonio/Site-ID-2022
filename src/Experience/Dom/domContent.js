@@ -7,19 +7,19 @@ export default class Dom {
         this.experience = new Experience()
         this.sizes = this.experience.sizes
 
-        if (window.innerWidth<1200) {
+        if (this.sizes.width<1200) {
             this.bodyHeight = 2500
         } else {
             this.bodyHeight = 7500
         }
 
-        this.setInstance()
+        this.setInstances()
 
         this.indicationOverlay()
         this.buttonBeach()
     }
 
-    setInstance() {
+    setInstances() {
         // the section that is translating on X and Y
         this.atelierOne = document.getElementById('atelier1')
         this.atelierTwo = document.getElementById('atelier2')
@@ -37,11 +37,12 @@ export default class Dom {
                 }
             })
         })
-        // this.smoothTranslateOne = new SmoothTranslate({
-        //     container: this.atelierOne,
-        //     threshold: 1,
-        //     useRaf: true
-        // })
+
+        // the overlay to indicate the user what to do
+        this.overlayScroll = document.getElementById('scroll')
+        this.overlayParasol = document.getElementById('parasol')
+
+        this.hasClicked = false
     }
 
     indicationOverlay() {
@@ -103,7 +104,7 @@ export default class Dom {
     }
 
     lockScroll(){
-        if (window.innerWidth < 1200) {
+        if (this.sizes.width < 1200) {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop
             window.onscroll = function() {
                 window.scrollTo(0, scrollTop)
@@ -112,7 +113,7 @@ export default class Dom {
     }
 
     resize() {
-        if (window.innerWidth<1200) {
+        if (this.sizes.width < 1200) {
             this.bodyHeight = 2500
         } else {
             this.bodyHeight = 7500
@@ -129,30 +130,35 @@ export default class Dom {
             this.pageOne()
             this.lockScroll()
             this.experience.world.parasol1.clicked = true
+            this.hasClicked = true
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol2') {
             this.experience.camera.shouldMove = false
             this.removePages()
             this.pageTwo()
             this.lockScroll()
             this.experience.world.parasol2.clicked = true
+            this.hasClicked = true
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol3') {
             this.experience.camera.shouldMove = false
             this.removePages()
             this.pageThree()
             this.lockScroll()
             this.experience.world.parasol3.clicked = true
+            this.hasClicked = true
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol4') {
             this.experience.camera.shouldMove = false
             this.removePages()
             this.pageFour()
             this.lockScroll()
             this.experience.world.parasol4.clicked = true
+            this.hasClicked = true
         } else if (this.experience.raycaster.raycastedObjectName == 'parasol5') {
             this.experience.camera.shouldMove = false
             this.removePages()
             this.pageFive()
             this.lockScroll()
             this.experience.world.parasol5.clicked = true
+            this.hasClicked = true
         } else {
             this.experience.camera.shouldMove = true
             this.removePages()

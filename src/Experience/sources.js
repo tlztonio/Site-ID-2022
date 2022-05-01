@@ -56,6 +56,11 @@ export default [
         path: 'models/Concert/guitare.glb'
     },
     {
+        name: 'drumsModel',
+        type: 'gltfModel',
+        path: 'models/Concert/drums.glb'
+    },
+    {
         name: 'rockColor',
         type: 'texture',
         path: 'textures/color4.jpg'
@@ -69,5 +74,10 @@ export default [
         name: 'bakedGuitare',
         type: 'texture',
         path: 'textures/concert/guitareTexture.jpg'
+    },
+    {
+        name: 'bakedDrums',
+        type: 'texture',
+        path: 'textures/concert/drumsTexture.jpg'
     },
 ]

@@ -1,6 +1,7 @@
 import EventEmitter from "./EventEmitter"
 import * as THREE from "three"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import Experience from "../Experience"
 
 export default class Resources extends EventEmitter {
     // Pour load des trucs c'est ici, pensez a mettre le path, type et name dans sources.js
@@ -12,11 +13,13 @@ export default class Resources extends EventEmitter {
 
         // Options
         this.sources = sources
+        this.experience = new Experience()
 
         // Setup
         this.items = {}
         this.toLoad = this.sources.length
         this.loaded = 0
+        this.sizes = this.experience.sizes
 
         this.setLoadingManager()
         this.setDomLoader()
@@ -29,7 +32,6 @@ export default class Resources extends EventEmitter {
         this.loadingManager = new THREE.LoadingManager(
             // Loaded
             () => {
-                // console.log('finito')
             },
             // Progress
             (itemUrl, itemsLoaded, itemsTotal) => {
@@ -69,18 +71,21 @@ export default class Resources extends EventEmitter {
             }
         })
 
-
         this.numberUpdate = 0
         this.loadingDone = false
         // get the inner width of the loader the padding is 3.5 em two times moins la taille du texte
-        this.widthTranslate = window.innerWidth - 3.5 * 16 * 2 - 19 * 16
+        if (this.sizes.width>1200) {
+            this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 19 * 16) / (19 * 16) * 100
+        } else {
+            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 12.66 * 16) / (12.66 * 16) * 100
+        }
 
         const updatePercent = () => {
             this.progressRatio = (this.domProgressRatio + this.threeProgressRatio) / 2
             if (this.progressRatio > 0) {
                 this.numberUpdate += (this.progressRatio - this.numberUpdate) * 0.3 //classic lerp
                 this.number.innerHTML = 2001 + Math.round(this.numberUpdate * 21)
-                this.position = (this.progressRatio * this.widthTranslate / (19 * 16) * 100).toFixed(2)
+                this.position = ( this.progressRatio * this.widthTranslate ).toFixed(2)
             }
             if (this.numberUpdate > 0.999) {
                 this.loadingDone = true
@@ -88,12 +93,17 @@ export default class Resources extends EventEmitter {
                 clearInterval(interval)
             }
         }
-        let interval = setInterval(updatePercent, 70)
+        let interval = setInterval(updatePercent, 10)
     }
 
     resize() {
-        this.widthTranslate = window.innerWidth - 3.5 * 16 * 2 - 19 * 16
-        this.position = (this.progressRatio * this.widthTranslate / (19 * 16) * 100).toFixed(2)
+        if (this.sizes.width>1200) {
+            this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 19 * 16) / (19 * 16) * 100
+            this.position = (this.progressRatio * this.widthTranslate ).toFixed(2)
+        } else {
+            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 12.66 * 16) / (12.66 * 16) * 100
+            this.position = (this.progressRatio * this.widthTranslate ).toFixed(2)
+        }
         this.update()
     }
 
