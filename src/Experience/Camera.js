@@ -137,8 +137,6 @@ export default class Camera {
     }
 
     travelUpdate() {
-        this.looptimePosition = 100000
-        this.looptimeLookAt = 100000
         const inactivityTime = 5000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {

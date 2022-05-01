@@ -8,7 +8,7 @@ export default class Dom {
         this.sizes = this.experience.sizes
 
         if (this.sizes.width<1200) {
-            this.bodyHeight = 2500
+            this.bodyHeight = 3500
         } else {
             this.bodyHeight = 7500
         }
