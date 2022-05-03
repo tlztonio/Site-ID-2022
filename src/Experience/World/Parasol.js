@@ -13,6 +13,17 @@ export default class Parasol {
         this.raycaster = this.experience.raycaster
         this.renderer = this.experience.renderer
 
+        // reuse material
+        if (name == "parasol1") {
+            const tissuMaterial = new THREE.MeshStandardMaterial({ map: this.resources.items.textureTissu, side: THREE.DoubleSide })
+            const batonMaterial = new THREE.MeshStandardMaterial({ color: 0xd5cdd2 })
+            this.materialBaton = batonMaterial
+            this.materialTissu = tissuMaterial
+        } else {
+            this.materialBaton = this.experience.world.parasol1.materialBaton
+            this.materialTissu = this.experience.world.parasol1.materialTissu
+        }
+
         // debug
         // if (this.debug.active) {
         //     this.debugFolder = this.debug.ui.addFolder('Parasol')
@@ -24,7 +35,6 @@ export default class Parasol {
         this.x = x
         this.y = y
         this.z = z
-        this.textureTissu = this.resources.items.textureTissu
 
         // rotation on click
         this.clicked = false
@@ -34,23 +44,20 @@ export default class Parasol {
     }
 
     setModel() {
-        // maybe put basic cuz shadow too realistic idk see for perf
-        const materialTissu = new THREE.MeshStandardMaterial({ map: this.textureTissu, side: THREE.DoubleSide })
-        const materialBaton = new THREE.MeshStandardMaterial({ color: 0xd5cdd2 })
-
         this.tissu = this.model.children[0]
         this.baton = this.model.children[1]
+        
         //double side sur le tissu a activer que si necessaire pour l'animation
         this.tissu.traverse((o) => {
             if (o.isMesh) {
                 o.castShadow = true
-                o.material = materialTissu
+                o.material = this.materialTissu
             }
         })
         this.baton.traverse((o) => {
             if (o.isMesh) {
                 o.castShadow = true
-                o.material = materialBaton
+                o.material = this.materialBaton
             }
         })
 

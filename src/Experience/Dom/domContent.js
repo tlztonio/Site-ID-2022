@@ -1,7 +1,6 @@
 import Experience from "../Experience"
 import { SmoothTranslate } from './smoothTranslate.js';
 
-
 export default class Dom {
     constructor() {
         this.experience = new Experience()
