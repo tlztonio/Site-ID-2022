@@ -49,7 +49,7 @@ export default class Concert {
         })
         const woodMaterial = new THREE.MeshStandardMaterial({ color: 0xe7b88d })
 
-        console.log(this.model.concert)
+        // console.log(this.model.concert)
 
         // ecran
         const video = document.getElementById('hidden-video')

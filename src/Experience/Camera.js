@@ -174,7 +174,7 @@ export default class Camera {
             this.concertVideo.pause()
         }
 
-        if (this.progressPosition > 1) {
+        if (this.progressPosition >= 1) {
             this.progressPosition = 1
             this.progressLookAt = 1
         }

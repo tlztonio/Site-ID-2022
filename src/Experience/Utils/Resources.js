@@ -46,7 +46,7 @@ export default class Resources extends EventEmitter {
     setDomLoader() {
         let imgsCollection = document.images
         let imgs = [...imgsCollection]
-        console.log('images :' + imgs)
+        // console.log('images :' + imgs)
         let len = imgs.length
         let counter = 0
         // let bar = document.getElementById("bar"),
@@ -84,7 +84,7 @@ export default class Resources extends EventEmitter {
             this.progressRatio = (this.domProgressRatio + this.threeProgressRatio) / 2
             if (this.progressRatio > 0) {
                 this.numberUpdate += (this.progressRatio - this.numberUpdate) * 0.3 //classic lerp
-                this.number.innerHTML = 2001 + Math.round(this.numberUpdate * 21)
+                this.number.innerHTML = 2001 + Math.round(this.numberUpdate * 20)
                 this.position = ( this.progressRatio * this.widthTranslate ).toFixed(2)
             }
             if (this.numberUpdate > 0.999) {
@@ -154,7 +154,7 @@ export default class Resources extends EventEmitter {
         this.loaded++
 
         if (this.loaded === this.toLoad) {
-            console.log("finished loading")
+            console.log("bonsoir")
             // en mettant un trigger on peut faire un listener on ready 
             this.trigger("ready")
         }

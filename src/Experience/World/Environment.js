@@ -42,7 +42,6 @@ export default class Environment {
         this.sunLight.shadow.camera.left = -10
         this.sunLight.shadow.camera.right = 8
 
-        console.log(this.sunLight.rotation)
         // this.sunLight.shadow.camera.rotation.set(-5, 3, -3)
         this.sunLight.shadow.mapSize.set(1024, 1024)
 
@@ -53,6 +52,20 @@ export default class Environment {
         this.scene.add(this.sunLight)
         const light = new THREE.AmbientLight(0x404040) // soft white light
         this.scene.add(light)
+
+        // NOT REALLY WAT I WANT I HAVE TO SET IT FROM THE LENS FLARE SHADER 
+
+        // let vector = new THREE.Vector3()
+        // vector.setFromMatrixPosition( object.matrixWorld )
+        // vector.applyMatrix4( viewProjectionMatrix )
+
+        // let element = document.getElementById('sun')
+        // let style = 'translate(-50%,-50%) translate(' + ( vector.x * _widthHalf + _widthHalf ) + 'px,' + ( - vector.y * _heightHalf + _heightHalf ) + 'px)'
+
+        // element.style.WebkitTransform = style
+        // element.style.MozTransform = style
+        // element.style.oTransform = style
+        // element.style.transform = style
 
         // Debug
         if (this.debug.active) {

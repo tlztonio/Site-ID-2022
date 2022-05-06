@@ -80,4 +80,14 @@ export default [
         type: 'texture',
         path: 'textures/concert/drumsTexture.jpg'
     },
+    // {
+    //     name: 'lensflare0',
+    //     type: 'texture',
+    //     path: 'textures/lensflare/lensflare0.png'
+    // },
+    // {
+    //     name: 'lensflare3',
+    //     type: 'texture',
+    //     path: 'textures/lensflare/lensflare3.png'
+    // },
 ]
