@@ -1,6 +1,5 @@
 import Experience from "../Experience"
 import Environment from "./Environment"
-import Postprocess from "./Postprocess"
 import Sable from "./Sable"
 import Parasol from "./Parasol"
 import Mer from "./Mer"
@@ -16,7 +15,6 @@ export default class World {
 
         this.resources.on("ready", () => {
             this.environment = new Environment()
-            // this.postProcess = new Postprocess()
             this.sable = new Sable()
             this.mer = new Mer()
             this.rocks = new Rocks()
@@ -35,9 +33,6 @@ export default class World {
     }
 
     update() {
-        if (this.postProcess) {
-            this.postProcess.update()
-        }
         if (this.sable) {
             this.sable.update()
         }

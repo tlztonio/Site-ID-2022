@@ -70,6 +70,7 @@ export default class Experience {
         // call la methode de l'objet voulu qui doit etre creer dans le script de l'objet 
         this.camera.resize()
         this.renderer.resize()
+        // this.postprocess.resize()
         this.dom.resize()
         // if (this.resources.loadingDone == false) {
         this.resources.resize()

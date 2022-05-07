@@ -113,7 +113,7 @@ export default class Dom {
 
     resize() {
         if (this.sizes.width < 1200) {
-            this.bodyHeight = 2500
+            this.bodyHeight = 3500
         } else {
             this.bodyHeight = 7500
         }

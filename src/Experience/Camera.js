@@ -121,8 +121,6 @@ export default class Camera {
             // this.scene.add(this.cube)
         })
 
-        // console.log(lookAtSpline)
-
         this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.1, 4, false)
         this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.1, 4, false)
 
@@ -174,7 +172,7 @@ export default class Camera {
             this.concertVideo.pause()
         }
 
-        if (this.progressPosition >= 1) {
+        if (this.progressPosition > 1) {
             this.progressPosition = 1
             this.progressLookAt = 1
         }
