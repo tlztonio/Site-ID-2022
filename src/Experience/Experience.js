@@ -9,6 +9,7 @@ import Resources from "./Utils/Resources"
 import sources from './sources.js'
 import Debug from "./Utils/Debug"
 import Dom from "./Dom/domContent"
+// import Postprocess from "./Postprocess"
 
 // Singleton
 let instance = null
@@ -37,6 +38,7 @@ export default class Experience {
         this.dom = new Dom()
         this.camera = new Camera()
         this.renderer = new Renderer()
+        // this.postprocess = new Postprocess()
         this.world = new World()
 
         this.raycaster = new Raycaster()
@@ -80,6 +82,7 @@ export default class Experience {
         this.raycaster.update()
         this.world.update()
         this.renderer.update()
+        // this.postprocess.update()
         if (this.resources.loadingDone === false) {
             this.resources.update()
         }
