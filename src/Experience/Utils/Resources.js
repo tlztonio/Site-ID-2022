@@ -75,9 +75,9 @@ export default class Resources extends EventEmitter {
         this.loadingDone = false
         // get the inner width of the loader the padding is 3.5 em two times moins la taille du texte
         if (this.sizes.width>1200) {
-            this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 19 * 16) / (19 * 16) * 100
+            this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 17.5 * 16) / (17.5 * 16) * 100
         } else {
-            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 12.66 * 16) / (12.66 * 16) * 100
+            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 8.75 * 16) / (8.75 * 16) * 100
         }
 
         const updatePercent = () => {
@@ -89,7 +89,7 @@ export default class Resources extends EventEmitter {
             }
             if (this.numberUpdate > 0.999) {
                 this.loadingDone = true
-                setTimeout(() => { loaderContainer.classList.add('done') }, 1300)
+                setTimeout(() => { loaderContainer.classList.add('done') }, 1500)
                 clearInterval(interval)
             }
         }
@@ -98,10 +98,10 @@ export default class Resources extends EventEmitter {
 
     resize() {
         if (this.sizes.width>1200) {
-            this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 19 * 16) / (19 * 16) * 100
+            this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 17.5 * 16) / (17.5 * 16) * 100
             this.position = (this.progressRatio * this.widthTranslate ).toFixed(2)
         } else {
-            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 12.66 * 16) / (12.66 * 16) * 100
+            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 8.75 * 16) / (8.75 * 16) * 100
             this.position = (this.progressRatio * this.widthTranslate ).toFixed(2)
         }
         this.update()
