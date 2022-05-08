@@ -38,6 +38,7 @@ export default class Camera {
 
         this.progressPosition = 0
         this.progressLookAt = 0
+        this.easingValue = this.sizes.width > 1200 ? 0.05 : 0.1
 
         // Gestion scroll avec affichage pages 
         this.shouldMove = true
@@ -143,10 +144,10 @@ export default class Camera {
         }
 
         // lerp format for scroll value in percentage
-        this.progressPosition += ((window.pageYOffset / this.scrollHeight) - this.progressPosition)*0.04
+        this.progressPosition += ((window.pageYOffset / this.scrollHeight) - this.progressPosition)*this.easingValue
         // modification of the scrollHeight according the non-lerped position value for better view on parasol
         let progressScrollHeight = this.scrollHeight / ( (window.pageYOffset / this.scrollHeight) / 1.75 + 0.425)
-        this.progressLookAt += ((window.pageYOffset / progressScrollHeight) - this.progressLookAt)*0.04
+        this.progressLookAt += ((window.pageYOffset / progressScrollHeight) - this.progressLookAt)*this.easingValue
 
         if (this.progressPosition < 0) {
             this.progressPosition = 0
@@ -212,6 +213,7 @@ export default class Camera {
         this.instance.updateProjectionMatrix()
 
         this.scrollHeight = this.dom.bodyHeight - this.sizes.height
+        this.easingValue = this.sizes.width > 1200 ? 0.05 : 0.1
 
         // console.log(this.instance.position)
         // console.log(this.instance.rotation)
