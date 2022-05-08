@@ -72,13 +72,10 @@ export default class Experience {
         this.renderer.resize()
         // this.postprocess.resize()
         this.dom.resize()
-        // if (this.resources.loadingDone == false) {
         this.resources.resize()
-        // }
     }
 
     update() {
-        // call la methode de l'objet voulu qui doit etre creer dans le script de l'objet 
         this.camera.update()
         this.raycaster.update()
         this.world.update()
