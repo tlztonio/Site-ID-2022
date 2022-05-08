@@ -143,10 +143,10 @@ export default class Camera {
         }
 
         // lerp format for scroll value in percentage
-        this.progressPosition += ((window.pageYOffset / this.scrollHeight) - this.progressPosition)*0.1
+        this.progressPosition += ((window.pageYOffset / this.scrollHeight) - this.progressPosition)*0.04
         // modification of the scrollHeight according the non-lerped position value for better view on parasol
         let progressScrollHeight = this.scrollHeight / ( (window.pageYOffset / this.scrollHeight) / 1.75 + 0.425)
-        this.progressLookAt += ((window.pageYOffset / progressScrollHeight) - this.progressLookAt)*0.1
+        this.progressLookAt += ((window.pageYOffset / progressScrollHeight) - this.progressLookAt)*0.04
 
         if (this.progressPosition < 0) {
             this.progressPosition = 0

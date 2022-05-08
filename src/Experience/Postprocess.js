@@ -16,6 +16,7 @@ export default class Postprocess {
         this.camera = this.experience.camera
         this.renderer = this.experience.renderer
         this.time = this.experience.time
+        this.environment = this.experience.world.environment
 
         this.setComposer()
         this.setShader()
@@ -38,6 +39,7 @@ export default class Postprocess {
                 tDiffuse: { value: null },
                 uResolution: { value: new THREE.Vector2(this.sizes.width, this.sizes.height) },
                 uTime: { value: 0 },
+                uSunpos: { value: new THREE.Vector2(0, 0) },
             },
             vertexShader: vertexShader,
             fragmentShader: fragmentShader
@@ -45,6 +47,18 @@ export default class Postprocess {
         this.shaderPass = new ShaderPass(this.shader)
         this.composer.addPass(this.shaderPass)
 
+    }
+
+    createVector(x, y, z, width, height) {
+        let vector = new THREE.Vector3(-5, 3.6, -2.4)
+        let viewMatrix = new THREE.Matrix4()
+	    let viewProjectionMatrix = new THREE.Matrix4()
+        // console.log(this.experience.world.environment.sunLight)
+
+        // vector.setFromMatrixPosition( this.environment.sunLight.matrixWorld )
+        vector.applyMatrix4( viewProjectionMatrix )
+
+        return vector
     }
 
     resize() {
@@ -59,6 +73,7 @@ export default class Postprocess {
     update() {
         this.composer.render()
         this.shader.uniforms.uTime.value += this.time.delta
+        this.shader.uniforms.uSunpos.value = this.createVector()
     }
 
 

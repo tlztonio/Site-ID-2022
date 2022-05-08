@@ -1,4 +1,5 @@
 uniform sampler2D tDiffuse;
+uniform vec3 uSunpos;
 uniform vec2 uResolution;
 uniform float uTime;
 

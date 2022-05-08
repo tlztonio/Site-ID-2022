@@ -38,8 +38,8 @@ export default class Experience {
         this.dom = new Dom()
         this.camera = new Camera()
         this.renderer = new Renderer()
-        // this.postprocess = new Postprocess()
         this.world = new World()
+        // this.postprocess = new Postprocess()
 
         this.raycaster = new Raycaster()
 
