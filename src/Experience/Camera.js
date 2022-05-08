@@ -135,7 +135,7 @@ export default class Camera {
     }
 
     travelUpdate() {
-        const inactivityTime = 5000
+        const inactivityTime = 3000
 
         if (this.scrollTimer > inactivityTime && this.progressPosition < 1 && this.shouldMove) {
             // verifie l'inactivité et verifie pour ne pas ajouter du temps si le chemin est fini
