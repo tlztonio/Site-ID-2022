@@ -17,10 +17,6 @@ export default class Nuages {
             this.debugFolder = this.debug.ui.addFolder('Nuages')
         }
 
-        // setup
-        this.cloud = {}
-        this.cloud.texture = this.resources.items.textureNuage1
-
         this.setModel()
     }
 
@@ -49,14 +45,6 @@ export default class Nuages {
             this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(-1).max(1).step(0.01).name("uDebugX")
             this.debugFolder.add(this.material.uniforms.uDebug.value, 'y').min(-1).max(1).step(0.01).name("uDebugY")
         }
-    }
-
-    setAnimation() {
-
-    }
-
-    animate() {
-
     }
 
     update() {

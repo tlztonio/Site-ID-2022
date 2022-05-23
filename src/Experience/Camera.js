@@ -1,11 +1,6 @@
 import * as THREE from "three"
 import Experience from "./Experience"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { CompressedTextureLoader } from "three"
-import { normalize } from "gsap/all"
-gsap.registerPlugin(ScrollTrigger)
 
 export default class Camera {
     constructor() {
@@ -67,12 +62,9 @@ export default class Camera {
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 75)
 
-        // this.instance.position.set(-3, 5, 0)
-        // this.instance.position.set(-4.23, 0.42, 8.88)
-        this.instance.position.set(-4.23, 0.42, -5)
-        // this.instance.position.set(2, 2.25, 0)
-        // this.instance.rotation.set(0, -1.25, 0)
-
+        this.instance.position.set(0, 1, 0)
+        // this.instance.lookAt(0, 0, 0)
+        // this.instance.rotation.set(0, Math.PI * 0.5, 0)
 
         this.scene.add(this.instance)
         this.mouse = new THREE.Vector2()
@@ -225,7 +217,7 @@ export default class Camera {
         }
 
         if (this.progressPosition < 1) {
-            this.scrollTimer += this.time.delta
+            // this.scrollTimer += this.time.delta
         }
 
         if (this.shouldMove == false && this.sizes.width > 1400) {

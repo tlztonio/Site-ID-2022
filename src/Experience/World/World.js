@@ -1,3 +1,5 @@
+import * as THREE from "three"
+
 import Experience from "../Experience"
 import Environment from "./Environment"
 import Sable from "./Sable"
@@ -14,6 +16,7 @@ export default class World {
         this.resources = this.experience.resources
 
         this.resources.on("ready", () => {
+            this.setSceneModel()
             this.environment = new Environment()
             this.sable = new Sable()
             this.mer = new Mer()
@@ -30,6 +33,24 @@ export default class World {
             this.parasolModels = [this.parasol1.model, this.parasol2.model, this.parasol3.model, this.parasol4.model, this.parasol5.model]
             this.concert = new Concert()
         })
+    }
+
+    setSceneModel(){
+        this.sceneModel = this.resources.items.sceneModel.scene
+        this.atlasTexture = this.resources.items.atlasTexture
+        this.atlasTexture.flipY = false
+
+        const atlasMaterial = new THREE.MeshStandardMaterial({ map : this.atlasTexture })
+
+        this.sceneModel.traverse((o) => {
+            if (o.isMesh) {
+                o.receiveShadow = true
+                o.castShadow = true
+                o.material = atlasMaterial
+            }
+        })
+
+        this.scene.add(this.sceneModel)
     }
 
     update() {

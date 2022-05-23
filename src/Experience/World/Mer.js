@@ -68,11 +68,13 @@ export default class Mer {
             this.debugFolder.add(this.material.uniforms.uDebug.value, 'x').min(-5).max(10).step(0.1)
             this.material.needsUpdate = true
         }
+        
     }
 
     update() {
+
         this.material.uniforms.uTime.value += this.time.delta
-        // console.log(this.material.uniforms.uTime.value)
+
     }
 
 }

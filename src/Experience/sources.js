@@ -3,7 +3,7 @@ export default [
     {
         name: 'parasolModel',
         type: 'gltfModel',
-        path: 'models/Parasol/parasol.gltf'
+        path: 'models/Parasol/parasol2.glb'
     },
     {
         name: 'textureTissu',
@@ -11,83 +11,98 @@ export default [
         path: 'textures/parasol/textureParasolOpti.jpg'
     },
     {
-        name: 'textRockModel',
-        type: 'gltfModel',
-        path: 'models/Rocks/Text/20Text3.glb'
-    },
-    {
-        name: 'degresRock',
-        type: 'gltfModel',
-        path: 'models/Rocks/Logos/degres2.glb'
-    },
-    {
-        name: 'battleRock',
-        type: 'gltfModel',
-        path: 'models/Rocks/Logos/battle2.glb'
-    },
-    {
-        name: 'radioRock',
-        type: 'gltfModel',
-        path: 'models/Rocks/Logos/webradio.glb'
-    },
-    {
-        name: 'photoRock',
-        type: 'gltfModel',
-        path: 'models/Rocks/Logos/photo.glb'
-    },
-    {
-        name: 'photomatonRock',
-        type: 'gltfModel',
-        path: 'models/Rocks/Logos/photomaton.glb'
-    },
-    {
-        name: 'stairsRockModel',
-        type: 'gltfModel',
-        path: 'models/Rocks/stairsRockOpti2.glb'
-    },
-    {
-        name: 'concertModel',
-        type: 'gltfModel',
-        path: 'models/Concert/concert2.glb'
-    },
-    {
-        name: 'guitareModel',
-        type: 'gltfModel',
-        path: 'models/Concert/guitare.glb'
-    },
-    {
-        name: 'drumsModel',
-        type: 'gltfModel',
-        path: 'models/Concert/drums.glb'
-    },
-    {
-        name: 'rockColor',
+        name: 'lensflare1',
         type: 'texture',
-        path: 'textures/color4.jpg'
+        path: 'textures/lensflare/lensflare0.png'
     },
     {
-        name: 'bakedStage',
+        name: 'lensflare2',
         type: 'texture',
-        path: 'textures/concert/bakedStage.jpg'
+        path: 'textures/lensflare/lensflare3.png'
     },
     {
-        name: 'bakedGuitare',
+        name: 'lensflare3',
         type: 'texture',
-        path: 'textures/concert/guitareTexture.jpg'
+        path: 'textures/lensflare/tex5.png'
     },
     {
-        name: 'bakedDrums',
+        name: 'sceneModel',
+        type: 'gltfModel',
+        path: 'models/completeScene.glb'
+    },
+    {
+        name: 'atlasTexture',
         type: 'texture',
-        path: 'textures/concert/drumsTexture.jpg'
+        path: 'textures/atlasTexture.jpg'
     },
     // {
-    //     name: 'lensflare0',
-    //     type: 'texture',
-    //     path: 'textures/lensflare/lensflare0.png'
+    //     name: 'textRockModel',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/Text/20Text3.glb'
     // },
     // {
-    //     name: 'lensflare3',
+    //     name: 'degresRock',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/Logos/degres2.glb'
+    // },
+    // {
+    //     name: 'battleRock',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/Logos/battle2.glb'
+    // },
+    // {
+    //     name: 'radioRock',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/Logos/webradio.glb'
+    // },
+    // {
+    //     name: 'photoRock',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/Logos/photo.glb'
+    // },
+    // {
+    //     name: 'photomatonRock',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/Logos/photomaton.glb'
+    // },
+    // {
+    //     name: 'stairsRockModel',
+    //     type: 'gltfModel',
+    //     path: 'models/Rocks/stairsRockOpti2.glb'
+    // },
+    // {
+    //     name: 'concertModel',
+    //     type: 'gltfModel',
+    //     path: 'models/Concert/concert2.glb'
+    // },
+    // {
+    //     name: 'guitareModel',
+    //     type: 'gltfModel',
+    //     path: 'models/Concert/guitare.glb'
+    // },
+    // {
+    //     name: 'drumsModel',
+    //     type: 'gltfModel',
+    //     path: 'models/Concert/drums.glb'
+    // },
+    // {
+    //     name: 'rockColor',
     //     type: 'texture',
-    //     path: 'textures/lensflare/lensflare3.png'
+    //     path: 'textures/rock/color4.jpg'
+    // },
+    // {
+    //     name: 'bakedStage',
+    //     type: 'texture',
+    //     path: 'textures/concert/bakedStage.jpg'
+    // },
+    // {
+    //     name: 'bakedGuitare',
+    //     type: 'texture',
+    //     path: 'textures/concert/guitareTexture.jpg'
+    // },
+    // {
+    //     name: 'bakedDrums',
+    //     type: 'texture',
+    //     path: 'textures/concert/drumsTexture.jpg'
     // },
 ]

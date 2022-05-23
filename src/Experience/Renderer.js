@@ -20,7 +20,6 @@ export default class Renderer {
         this.instance = new THREE.WebGLRenderer({
             canvas: this.canvas,
             // antialias : true
-            // alpha: true,
         })
 
         // A commenter pour les perfs donc on garde au cas ou
@@ -44,7 +43,7 @@ export default class Renderer {
 
 
     update() {
-        this.instance.render(this.scene, this.camera.instance)
+        // this.instance.render(this.scene, this.camera.instance)
     }
 
 

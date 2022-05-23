@@ -15,13 +15,10 @@ export default class Parasol {
 
         // reuse material
         if (name == "parasol1") {
-            const tissuMaterial = new THREE.MeshStandardMaterial({ map: this.resources.items.textureTissu, side: THREE.DoubleSide })
-            const batonMaterial = new THREE.MeshStandardMaterial({ color: 0xd5cdd2 })
-            this.materialBaton = batonMaterial
-            this.materialTissu = tissuMaterial
+            const parasolMaterial = new THREE.MeshStandardMaterial({ map: this.resources.items.textureTissu, side: THREE.DoubleSide })
+            this.material = parasolMaterial
         } else {
-            this.materialBaton = this.experience.world.parasol1.materialBaton
-            this.materialTissu = this.experience.world.parasol1.materialTissu
+            this.material = this.experience.world.parasol1.material
         }
 
         // debug
@@ -46,18 +43,12 @@ export default class Parasol {
     setModel() {
         this.tissu = this.model.children[0]
         this.baton = this.model.children[1]
-        
-        //double side sur le tissu a activer que si necessaire pour l'animation
-        this.tissu.traverse((o) => {
+
+        this.model.traverse((o) => {
             if (o.isMesh) {
                 o.castShadow = true
-                o.material = this.materialTissu
-            }
-        })
-        this.baton.traverse((o) => {
-            if (o.isMesh) {
-                o.castShadow = true
-                o.material = this.materialBaton
+                o.material = this.material
+                o.receiveShadows = false
             }
         })
 
@@ -77,7 +68,7 @@ export default class Parasol {
     animate() {
         if (this.raycaster.raycastedObjectName == this.model.name) {
             this.closeAnimation.play()
-            this.tissu.rotation.y += 0.01
+            this.tissu.rotation.y += 0.005
             this.renderer.instance.shadowMap.needsUpdate = true
         } else if (this.tissu.position.y < 0) {
             this.closeAnimation.reverse()
@@ -85,7 +76,7 @@ export default class Parasol {
         }
 
         if (this.clicked) {
-            this.tissu.rotation.y += 0.01
+            this.tissu.rotation.y += 0.005
             this.renderer.instance.shadowMap.needsUpdate = true
         }
     }

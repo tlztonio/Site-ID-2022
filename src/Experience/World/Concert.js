@@ -10,136 +10,34 @@ export default class Concert {
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
-        // this.raycaster = this.experience.raycaster
+        // this.bache = this.experience.world.sceneModel.children[49]
+        // this.ecran = this.experience.world.sceneModel.children[1]
+        this.sceneModel = this.experience.world.sceneModel
+
+        console.log(this.experience.world.sceneModel)
 
         // debug
         if (this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('Concert')
         }
 
-        // setup
-        this.model = {}
-        this.model.concert = this.resources.items.concertModel.scene
-        this.model.guitare = this.resources.items.guitareModel.scene
-        this.model.drums = this.resources.items.drumsModel.scene
-
-        this.setModelConcert()
-        this.setModelGuitare()
-        this.setModelDrums()
-        // this.setAnimation()
+        this.setBache()
+        this.setVideo()
     }
 
-    setModelConcert() {
+    setBache(){
+        const bacheMaterial = new THREE.MeshBasicMaterial({ color: 0x726c5a, side: THREE.DoubleSide })
+        const bache = this.sceneModel.children.filter(object => object.name === 'bache');
+        bache[0].material = bacheMaterial
+    }
 
-        this.model.concert.position.set(0.5, 0, -7) // -4.713, -0.319
-        this.model.concert.rotation.set(0, -Math.PI * 0.5, 0)
-
-        this.model.concert.traverse((o) => {
-            if (o.isMesh) {
-                o.castShadow = true
-                o.receiveShadow = true
-            }
-        })
-
-        const tissuMaterial = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, color: 0xe4d7b5 })
-        const bakedTexture = this.resources.items.bakedStage
-        bakedTexture.flipY = false
-        const bakedMaterial = new THREE.MeshStandardMaterial({
-            map: bakedTexture
-        })
-        const woodMaterial = new THREE.MeshStandardMaterial({ color: 0xe7b88d })
-
-        // console.log(this.model.concert)
-
-        // ecran
+    setVideo(){
         const video = document.getElementById('hidden-video')
         const videoTexture = new THREE.VideoTexture(video)
         videoTexture.flipY = false
         const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture })
-
-        this.model.concert.children[3].material = videoMaterial
-
-        // scene
-        this.model.concert.children[0].material = bakedMaterial
-
-        // bache
-        this.model.concert.children[2].material = tissuMaterial
-
-        // potos
-        this.model.concert.children[1].material = woodMaterial
-
-        this.scene.add(this.model.concert)
-
-        // if (this.debug.active) {
-        //     this.debugFolder.add(this.model.concert.rotation, 'x').min(0.5).max(1.5).step(0.001).name("RotationX")
-        //     this.debugFolder.add(this.model.concert.rotation, 'y').min(-1.5).max(-0.5).step(0.001).name("RotationY")
-        //     this.debugFolder.add(this.model.concert.rotation, 'z').min(0.5).max(1.5).step(0.001).name("RotationZ")
-        //     this.debugFolder.add(this.model.concert.position, 'x').min(-6).max(10).step(0.01).name("PositionX")
-        //     this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
-        //     this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
-        // }
-    }
-
-    setModelGuitare() {
-
-        this.model.guitare.position.set(0, 0.29, -6.8) // -4.713, -0.319
-        // this.model.guitare.rotation.set(0, -Math.PI * 0.5, 0)
-
-        const guitareTexture = this.resources.items.bakedGuitare
-        guitareTexture.flipY = false
-        const guitareMaterial = new THREE.MeshStandardMaterial({
-            map: guitareTexture
-        })
-
-        this.model.guitare.traverse((o) => {
-            if (o.isMesh) {
-                o.castShadow = true
-                // o.receiveShadow = false
-                o.material = guitareMaterial
-            }
-        })
-
-        this.scene.add(this.model.guitare)
-
-        // if (this.debug.active) {
-        //     this.debugFolder.add(this.model.concert.rotation, 'x').min(0.5).max(1.5).step(0.001).name("RotationX")
-        //     this.debugFolder.add(this.model.concert.rotation, 'y').min(-1.5).max(-0.5).step(0.001).name("RotationY")
-        //     this.debugFolder.add(this.model.concert.rotation, 'z').min(0.5).max(1.5).step(0.001).name("RotationZ")
-        //     this.debugFolder.add(this.model.concert.position, 'x').min(-6).max(10).step(0.01).name("PositionX")
-        //     this.debugFolder.add(this.model.concert.position, 'y').min(-3).max(3).step(0.001).name("PositionY")
-        //     this.debugFolder.add(this.model.concert.position, 'z').min(-8).max(0).step(0.01).name("PositionZ")
-        // }
-    }
-
-    setModelDrums() {
-
-        this.model.drums.position.set(0.9, 0.29, -6.8) // -4.713, -0.319
-        this.model.drums.rotation.set(0, 5.9, 0)
-
-        const drumsTexture = this.resources.items.bakedDrums
-        drumsTexture.flipY = false
-        const drumsMaterial = new THREE.MeshStandardMaterial({
-            map: drumsTexture
-        })
-
-        this.model.drums.traverse((o) => {
-            if (o.isMesh) {
-                o.castShadow = true
-                // o.receiveShadow = false
-                o.material = drumsMaterial
-            }
-        })
-
-        this.scene.add(this.model.drums)
-
-        if (this.debug.active) {
-            this.debugFolder.add(this.model.drums.rotation, 'x').min(0).max(10).step(0.1).name("RotationX")
-            this.debugFolder.add(this.model.drums.rotation, 'y').min(0).max(10).step(0.1).name("RotationY")
-            this.debugFolder.add(this.model.drums.rotation, 'z').min(0).max(10).step(0.1).name("RotationZ")
-            this.debugFolder.add(this.model.drums.position, 'x').min(0).max(10).step(0.1).name("PositionX")
-            this.debugFolder.add(this.model.drums.position, 'y').min(0).max(10).step(0.1).name("PositionY")
-            this.debugFolder.add(this.model.drums.position, 'z').min(0).max(10).step(0.1).name("PositionZ")
-        }
+        const ecran = this.sceneModel.children.filter(object => object.name === 'planeEcran');
+        ecran[0].material = videoMaterial
     }
 
     update() {
@@ -147,5 +45,6 @@ export default class Concert {
     }
 
     mouseMove(e) {
+        
     }
 }
