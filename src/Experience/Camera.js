@@ -217,7 +217,7 @@ export default class Camera {
         }
 
         if (this.progressPosition < 1) {
-            // this.scrollTimer += this.time.delta
+            this.scrollTimer += this.time.delta
         }
 
         if (this.shouldMove == false && this.sizes.width > 1400) {
