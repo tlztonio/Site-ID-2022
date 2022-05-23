@@ -19,14 +19,16 @@ export default class Postprocess {
         this.resources = this.experience.resources
 
         this.setComposer()
-        this.resources.on("ready", ()=> {
-            this.setShader()
-        })
+        // this.resources.on("ready", ()=> {
+        // this.setShader()
+        // })
 
         this.viewMatrix = new THREE.Matrix4()
 	    this.viewProjectionMatrix = new THREE.Matrix4()
         this.sunDom = document.querySelector(".sun")
         this.aspectRatio = this.sizes.width / this.sizes.height
+
+        this.setShader()
     }
 
     setComposer() {
@@ -47,9 +49,9 @@ export default class Postprocess {
                 uAspectRatio: { value: this.aspectRatio },
                 uTime: { value: 0 },
                 uSunCoords: { value: new THREE.Vector2(0.5,0) },
-                tLensFlare1: { value: null },
-                tLensFlare2: { value: null },
-                tLensFlare3: { value: null },
+                // tLensFlare1: { value: null },
+                // tLensFlare2: { value: null },
+                // tLensFlare3: { value: null },
             },
             vertexShader: vertexShader,
             fragmentShader: fragmentShader
@@ -58,9 +60,9 @@ export default class Postprocess {
         this.shaderPass = new ShaderPass( this.shader )
         this.composer.addPass( this.shaderPass )
 
-        this.shaderPass.uniforms.tLensFlare1.value = this.experience.resources.items.lensflare1
-        this.shaderPass.uniforms.tLensFlare2.value = this.experience.resources.items.lensflare2
-        this.shaderPass.uniforms.tLensFlare3.value = this.experience.resources.items.lensflare3
+        // this.shaderPass.uniforms.tLensFlare1.value = this.experience.resources.items.lensflare1
+        // this.shaderPass.uniforms.tLensFlare2.value = this.experience.resources.items.lensflare2
+        // this.shaderPass.uniforms.tLensFlare3.value = this.experience.resources.items.lensflare3
     }
 
     screenSunPos() {

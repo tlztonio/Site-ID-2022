@@ -3,28 +3,28 @@ export default [
     {
         name: 'parasolModel',
         type: 'gltfModel',
-        path: 'models/Parasol/parasol2.glb'
+        path: 'models/parasol2.glb'
     },
     {
         name: 'textureTissu',
         type: 'texture',
         path: 'textures/parasol/textureParasolOpti.jpg'
     },
-    {
-        name: 'lensflare1',
-        type: 'texture',
-        path: 'textures/lensflare/lensflare0.png'
-    },
-    {
-        name: 'lensflare2',
-        type: 'texture',
-        path: 'textures/lensflare/lensflare3.png'
-    },
-    {
-        name: 'lensflare3',
-        type: 'texture',
-        path: 'textures/lensflare/tex5.png'
-    },
+    // {
+    //     name: 'lensflare1',
+    //     type: 'texture',
+    //     path: 'textures/lensflare/lensflare0.png'
+    // },
+    // {
+    //     name: 'lensflare2',
+    //     type: 'texture',
+    //     path: 'textures/lensflare/lensflare0.png'
+    // },
+    // {
+    //     name: 'lensflare3',
+    //     type: 'texture',
+    //     path: 'textures/lensflare/sun.png'
+    // },
     {
         name: 'sceneModel',
         type: 'gltfModel',
@@ -34,75 +34,5 @@ export default [
         name: 'atlasTexture',
         type: 'texture',
         path: 'textures/atlasTexture.jpg'
-    },
-    // {
-    //     name: 'textRockModel',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/Text/20Text3.glb'
-    // },
-    // {
-    //     name: 'degresRock',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/Logos/degres2.glb'
-    // },
-    // {
-    //     name: 'battleRock',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/Logos/battle2.glb'
-    // },
-    // {
-    //     name: 'radioRock',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/Logos/webradio.glb'
-    // },
-    // {
-    //     name: 'photoRock',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/Logos/photo.glb'
-    // },
-    // {
-    //     name: 'photomatonRock',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/Logos/photomaton.glb'
-    // },
-    // {
-    //     name: 'stairsRockModel',
-    //     type: 'gltfModel',
-    //     path: 'models/Rocks/stairsRockOpti2.glb'
-    // },
-    // {
-    //     name: 'concertModel',
-    //     type: 'gltfModel',
-    //     path: 'models/Concert/concert2.glb'
-    // },
-    // {
-    //     name: 'guitareModel',
-    //     type: 'gltfModel',
-    //     path: 'models/Concert/guitare.glb'
-    // },
-    // {
-    //     name: 'drumsModel',
-    //     type: 'gltfModel',
-    //     path: 'models/Concert/drums.glb'
-    // },
-    // {
-    //     name: 'rockColor',
-    //     type: 'texture',
-    //     path: 'textures/rock/color4.jpg'
-    // },
-    // {
-    //     name: 'bakedStage',
-    //     type: 'texture',
-    //     path: 'textures/concert/bakedStage.jpg'
-    // },
-    // {
-    //     name: 'bakedGuitare',
-    //     type: 'texture',
-    //     path: 'textures/concert/guitareTexture.jpg'
-    // },
-    // {
-    //     name: 'bakedDrums',
-    //     type: 'texture',
-    //     path: 'textures/concert/drumsTexture.jpg'
-    // },
+    }
 ]

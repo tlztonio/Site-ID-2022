@@ -1,8 +1,8 @@
 uniform sampler2D tDiffuse;
 
-uniform sampler2D tLensFlare1;
-uniform sampler2D tLensFlare2;
-uniform sampler2D tLensFlare3;
+// uniform sampler2D tLensFlare1;
+// uniform sampler2D tLensFlare2;
+// uniform sampler2D tLensFlare3;
 
 uniform vec2 uSunCoords;
 uniform vec2 uResolution;
