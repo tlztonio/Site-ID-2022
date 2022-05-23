@@ -14,7 +14,7 @@ export default class Concert {
         // this.ecran = this.experience.world.sceneModel.children[1]
         this.sceneModel = this.experience.world.sceneModel
 
-        console.log(this.experience.world.sceneModel)
+        // console.log(this.experience.world.sceneModel)
 
         // debug
         if (this.debug.active) {
