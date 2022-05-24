@@ -52,7 +52,7 @@ export default class Camera {
             this.scrollEvent()
         })
 
-        window.addEventListener('touchmove', (e) => {
+        window.addEventListener('touchend', (e) => {
             this.scrollTimer = 0
             this.hasScrolled = true
         })
