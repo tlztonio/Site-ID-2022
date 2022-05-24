@@ -206,9 +206,6 @@ export default class Camera {
 
         this.scrollHeight = this.dom.bodyHeight - this.sizes.height
         this.easingValue = this.sizes.width > 1200 ? 0.05 : 0.1
-
-        // console.log(this.instance.position)
-        // console.log(this.instance.rotation)
     }
 
     update() {
@@ -216,14 +213,14 @@ export default class Camera {
             this.travelUpdate()
         }
 
-        if (this.progressPosition < 1) {
+        if (this.progressPosition < 1 && this.shouldMove) {
             this.scrollTimer += this.time.delta
         }
 
-        if (this.shouldMove == false && this.sizes.width > 1400) {
+        if (!this.shouldMove && this.sizes.width > 1400) {
             // normalize zoom to remove it for first parasol
             this.zoomPosition += (-0.4 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
-        } else if (this.shouldMove == false && this.sizes.width < 1400) {
+        } else if (!this.shouldMove && this.sizes.width < 1400) {
             this.zoomPosition += (-0.2 - (this.progressPosition - 0.56) * 2.5 - this.zoomPosition) * 0.08
         } else {
             this.zoomPosition += (0 - this.zoomPosition) * 0.08

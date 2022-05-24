@@ -25,7 +25,7 @@ export default class Postprocess {
 
         this.viewMatrix = new THREE.Matrix4()
 	    this.viewProjectionMatrix = new THREE.Matrix4()
-        this.sunDom = document.querySelector(".sun")
+        // this.sunDom = document.querySelector(".sun")
         this.aspectRatio = this.sizes.width / this.sizes.height
 
         this.setShader()

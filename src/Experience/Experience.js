@@ -88,12 +88,12 @@ export default class Experience {
 
     click(e) {
         // this.raycaster.click(e)
-        this.world.click(e)
+        // this.world.click(e)
         this.dom.click(e)
     }
 
     mouseMove(e) {
-        this.world.mouseMove(e)
+        // this.world.mouseMove(e)
         this.dom.mouseMove(e)
         if (this.camera) {
             this.camera.mouseMove(e)
