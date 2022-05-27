@@ -75,7 +75,7 @@ void main()
     vec2 st = -vUv.xy;
 
     // Scale the coordinate system to see some noise in action
-    vec2 pos = vec2(st.x * 55.0 - sin(uTime*0.0014), st.y * 100.0);
+    vec2 pos = vec2(st.x * 55.0 - sin(uTime*0.0014)*0.5, st.y * 100.0);
 
     float foamLines = 0.127;
 

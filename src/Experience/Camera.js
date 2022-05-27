@@ -169,6 +169,11 @@ export default class Camera {
             this.progressPosition = 1
             this.progressLookAt = 1
         }
+        
+        if (this.progressLookAt > 1) {
+            this.progressPosition = 1
+            this.progressLookAt = 1
+        }
 
         const position = new THREE.Vector3()
         const positionLookAt = new THREE.Vector3()

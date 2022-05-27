@@ -111,12 +111,12 @@ void main()
 
     float pointSoleil = distance(vec2(st.x-1.4,st.y), vec2(3.0,0.5));
 
-    float contourSoleil = smoothstep(0.01,0.03,pointSoleil);
+    // float contourSoleil = smoothstep(0.01,0.03,pointSoleil);
     float contourLueur = sin(smoothstep(0.03,0.2,pointSoleil));
 
-    vec3 soleil = vec3(1.0-contourSoleil);
+    // vec3 soleil = vec3(1.0-contourSoleil);
     
     vec3 lueur = vec3(1.0-contourLueur)*0.1*vec3(1.0,1.0,0.0);
 
-    gl_FragColor = vec4(skyGradient+soleil+lueur,1.0);
+    gl_FragColor = vec4(skyGradient + lueur,1.0);
 }

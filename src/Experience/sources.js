@@ -12,7 +12,7 @@ export default [
     {
         name: 'lensflare1',
         type: 'texture',
-        path: 'textures/lensflare/lensflare0.png'
+        path: 'textures/lensflare/lensflare0smooth.png'
     },
     {
         name: 'sceneModel',
