@@ -78,7 +78,7 @@ export default class Resources extends EventEmitter {
         if (this.sizes.width>1200) {
             this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 17.5 * 16) / (17.5 * 16) * 100
         } else {
-            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 8.75 * 16) / (8.75 * 16) * 100
+            this.widthTranslate = (this.sizes.width - 1.25 * 16 * 2 - 8.75 * 16) / (8.75 * 16) * 100
         }
 
         const updatePercent = () => {
@@ -102,7 +102,7 @@ export default class Resources extends EventEmitter {
             this.widthTranslate = (this.sizes.width - 3.5 * 16 * 2 - 17.5 * 16) / (17.5 * 16) * 100
             this.position = (this.progressRatio * this.widthTranslate ).toFixed(2)
         } else {
-            this.widthTranslate = (this.sizes.width - 1.75 * 16 * 2 - 8.75 * 16) / (8.75 * 16) * 100
+            this.widthTranslate = (this.sizes.width - 1.25 * 16 * 2 - 8.75 * 16) / (8.75 * 16) * 100
             this.position = (this.progressRatio * this.widthTranslate ).toFixed(2)
         }
         this.update()

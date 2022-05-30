@@ -24,13 +24,15 @@ $marron: #9B7764;
 $bleuC: #64889B;
 $bleuF: #092327;
 
-.sun{
-    width: 10px;
-    height: 10px;
-    position: fixed;
-    z-index: 150;
-    background-color: #fb00ff;
-}
+// #cursor{
+//     width: 20px;
+//     height: 20px;
+//     position: fixed;
+//     z-index: 150;
+//     background-color: $bleuC;
+//     border-radius: 100%;
+//     transform: translate(50vw, 75vh);
+// }
 
 * {
     margin: 0;
@@ -76,7 +78,7 @@ body{
         color: $bleuC;
     }
     @media only screen and (max-width: 1200px)  {
-        padding: 1.5em 1.75em;
+        padding: 1em 1.5em;
         &__number{
             width: 8.75em;
         }
@@ -130,13 +132,14 @@ section{
     top: 0;
     left: 0;
     width: 60vw;
-    min-height: 100vh;
+    height: 100vh;
     background-color: white;
     padding: 3em 3.5em;
     position: fixed;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    overflow-y: auto;
     transform: translateX(-100%);
     transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
     @media only screen and (max-width: 1200px)  {
@@ -159,6 +162,9 @@ section{
         font-weight: 400;
         text-transform: uppercase;
         color: $bleuC;
+        @media only screen and (max-width: 340px) {
+            word-wrap: break-word;
+        }
     }
     &__small {
         font-family: "Urbanist";
@@ -172,12 +178,13 @@ section{
     height: 1px;
     width: 100%;
     background-color: $bleuC;
+    flex-shrink: 0;
 }
 
 .yt {
     position: relative;
     display: block;
-    width: 100%;
+    max-width: 100%;
     /* width of iframe wrapper */
     height: 0;
     padding: 0% 0% 56.25%;
@@ -222,128 +229,12 @@ button{
     align-self: flex-end;
 }
 
-#atelier1{
-    .pictures1 {
-        &__img {
-            max-width: 43%;
-            margin-right: 4em;
-        }
-        &__side {
-            max-width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            .date {
-                margin-top: 4em;
-                margin-bottom: 4em;
-            }
-            &--img {
-                max-width: 100%;
-            }
-        }
-    }
-    .pictures2 {
-        &__left {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            max-width: 55%;
-            margin-right: 4em;
-            &--img {
-                max-width: 100%;
-            }
-        }
-        &__right {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            max-width: 40%;
-            .date {
-                margin-bottom: 4em;
-            }
-            &--img {
-                max-width: 100%;
-            }
-        }
-    }
-}
-
-#atelier2{
-    // margin: 0 auto;
-    .pictures1 {
-        margin: 8em 0 8em 0;
-        display: flex;
-        width: 100%;
-        height: 30em;
-        // background-color: antiquewhite;
-        &__img{
-            margin: 3em 10% 0 3em;
-            width: 31%;
-            align-self: start;
-        }
-        &__right {
-            // background-color: aliceblue;
-            width: 46%;
-            display: flex;
-            flex-direction: column;
-            &--text{
-                max-width: 90%;
-            }
-            &--img{
-                margin: 15% 0 0 15%;
-                width: 90%;
-            }
-        }
-    }
-    .pictures2 {
-        // background-color: #9B7764;
-        justify-content: flex-start;
-        max-width: 100%;
-        &__left {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            max-width: 53%;
-            margin-right: 3em;
-            &--img {
-                max-width: 100%;
-            }
-        }
-        &__img {
-            max-width: 35%;
-        }
-    }
-}
-
-#atelier3{
-}
-
-#atelier4{
-}
-
-@media only screen and (max-width: 1500px) {
-    #atelier2 {
-        .pictures1__img {
-            margin: 3em 10% 0 0;
-            width: 35%;
-        }
-        .pictures2__right {
-            &--text{
-                width: 100%;
-            }
-            margin: 3em 10% 0 0;
-            width: 35%;
-        }
-    }
-}
-
 @media only screen and (max-width: 700px) {
     section{
-        padding: 1.5em 1.75em;
+        padding: 1em 1.25em;
     }
 
     .titles {
-        margin-bottom: 1.5em;
         &__big {
             font-size: 5em;
         }
@@ -351,16 +242,16 @@ button{
             font-size: 1.5em;
         }
     }
-
-    button{
-        // font-size: 0.9em;
-    }
 }
 
 @media only screen and (max-width: 450px) {
     .titles{
         flex-direction: column;
+        margin-bottom: 1.5em;
         &__big {
+            margin-bottom: 0.25em;
+        }
+        &__small {
             margin-bottom: 0.25em;
         }
     }

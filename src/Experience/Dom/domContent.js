@@ -1,5 +1,4 @@
 import Experience from "../Experience"
-import { SmoothTranslate } from './smoothTranslate.js';
 
 export default class Dom {
     constructor() {
@@ -13,7 +12,7 @@ export default class Dom {
         }
 
         this.setInstances()
-
+        // this.setCursor()
         this.indicationOverlay()
         this.buttonBeach()
     }
@@ -42,6 +41,10 @@ export default class Dom {
         this.overlayParasol = document.getElementById('parasol')
 
         this.hasClicked = false
+    }
+
+    setCursor(){
+        // this.cursorElement = document.getElementById('cursor')
     }
 
     indicationOverlay() {
@@ -165,6 +168,6 @@ export default class Dom {
     }
 
     mouseMove(e) {
-
+        // this.cursorElement.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px)"
     }
 }

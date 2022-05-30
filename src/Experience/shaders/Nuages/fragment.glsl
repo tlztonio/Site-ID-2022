@@ -82,12 +82,6 @@ void main()
 
     vec3 skyGradient = mix(blue,whiteBlue,vec3(-vUv.y*1.3+1.4));
 
-    // vec2 stNuage = vec2(st.x*2.5,st.y*8.0);
-    // float pointNuage = distance(stNuage, vec2(2.0+uTime*0.00003,5.5));
-    // float contourNuage = smoothstep(0.0,uDebug.x,pointNuage);
-    // float finalNuage = clampDown( fbm(vec2(st.x * 30.0 - uTime*0.0002, st.y * 30.0)) * (1.0-contourNuage),uDebug.y) * 0.8;
-    // skyGradient += vec3(finalNuage,finalNuage*0.3,finalNuage);
-
     // calculate the fbm only once and give it to function cloud
     float fbmResult = fbm(vec2(st.x * 30.0 - uTime*0.0002 + uRandomFbm, st.y * 30.0));
 
@@ -115,8 +109,7 @@ void main()
     float contourLueur = sin(smoothstep(0.03,0.2,pointSoleil));
 
     // vec3 soleil = vec3(1.0-contourSoleil);
-    
-    vec3 lueur = vec3(1.0-contourLueur)*0.1*vec3(1.0,1.0,0.0);
+    vec3 lueur = vec3(1.0-contourLueur)*0.05*vec3(1.0,1.0,0.0);
 
     gl_FragColor = vec4(skyGradient + lueur,1.0);
 }

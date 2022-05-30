@@ -53,7 +53,7 @@ void main()
     float roundedHorizon = sin((vPos.z+7.6)*0.2) * 3.0;
     // degradé sur x pour mieux blend l'ecume et l'horizon
     float colorGradient = (vPos.x + roundedHorizon + 6.0) *0.03;
-    // float colorGradient = max((vPos.x+5.5)*0.04, -0.1);
+    // float colorGradient = min((vPos.x + roundedHorizon + 6.0) *0.03, 0.15);
     // elevation du plane pour faire les iregularite de couleur sur la mer
     // scaling pour le noise et deformation sur x avec variation temps mouvement 
     vec2 elevationUv = vec2( (vUv.x-tD*0.2) * 60.0 + sin(uTime*0.0014) * 0.5, vUv.y * 100.0 );
@@ -66,7 +66,7 @@ void main()
     // blending with smoothstep and attenuation with 0.13
     float timeDecalage = sin(uTime*0.0014)*0.1;
     float whiteGradient = (vPos.x+3.7-tD)*1.5;
-    float ecume = max(whiteGradient - timeDecalage, 0.0) * smoothstep(-5.0, -3.0, vPos.x) * 0.13;
+    float ecume = max(whiteGradient - timeDecalage, 0.0) * smoothstep(-5.0, -3.0, vPos.x) * 0.12;
 
     r += ecume;
     g += ecume;

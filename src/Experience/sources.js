@@ -22,6 +22,6 @@ export default [
     {
         name: 'atlasTexture',
         type: 'texture',
-        path: 'textures/atlasTexture.jpg'
+        path: 'textures/atlasTexture2.jpg'
     }
 ]

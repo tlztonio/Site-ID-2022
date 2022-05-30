@@ -55,9 +55,8 @@ void main()
     vec2 flarePos3 = calcFlaresPos(spacing, 2.25, sunToCenter);
     vec2 flarePos4 = calcFlaresPos(spacing, 3.5, sunToCenter);
     vec2 flarePos5 = calcFlaresPos(spacing, 4.35, sunToCenter);
-    // vec2 flarePos4 = calcFlaresPos(spacing, 4.0, sunToCenter);
 
-    vec4 sunImage = smoothstep(0.0, 0.7, texture2D(tLensFlare1, (newvUv-uSunCoords+0.12)*4.0)) * 0.9;
+    vec4 sunImage = smoothstep(0.0, 0.7, texture2D(tLensFlare1, (newvUv-uSunCoords+0.12)*4.0)) * 0.75;
 
     // distance * size, whiteness clamp
     float flare1 = circle(newvUv, flarePos1, 20.0, 0.9);
@@ -66,9 +65,8 @@ void main()
     float flare4 = clamp(circle(newvUv, flarePos4, 10.0, 0.9) - circle(newvUv, flarePos4, 10.05, 0.9), 0.0, 1.0) * 5.0;
     float flare5 = circle(newvUv, flarePos5, 20.0, 0.9);
 
-    // vec4 flares = vec4(flare1 + flare2 + flare3 ) * max( 0.4-flareLength*0.2, 0.0);
     vec4 flares = vec4(flare1 + flare2 + flare3 + flare4 + flare5) * max( 0.85-flareLength*0.5, 0.0);
-    vec4 orangeFilter = vec4(0.16, 0.08, 0.02, 0.0) * 0.5;
+    vec4 orangeFilter = vec4(0.16, 0.08, 0.02, 0.0) * 0.75;
 
     gl_FragColor = color + flares + orangeFilter + sunImage;
 }

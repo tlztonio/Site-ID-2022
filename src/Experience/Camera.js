@@ -62,7 +62,7 @@ export default class Camera {
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 75)
 
-        this.instance.position.set(0, 1, 0)
+        // this.instance.position.set(-10, 8, 5)
         // this.instance.lookAt(0, 0, 0)
         // this.instance.rotation.set(0, Math.PI * 0.5, 0)
 
@@ -99,20 +99,20 @@ export default class Camera {
         ])
 
         // vizualize the points of the curves
-        const geometry = new THREE.BoxGeometry(0.04, 0.04, 0.04)
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+        // const geometry = new THREE.BoxGeometry(0.04, 0.04, 0.04)
+        // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
 
-        lookAtSpline.points.forEach(point => {
-            this.cube = new THREE.Mesh(geometry, material)
-            this.cube.position.copy(point)
-            // this.scene.add(this.cube)
-        })
+        // lookAtSpline.points.forEach(point => {
+        //     this.cube = new THREE.Mesh(geometry, material)
+        //     this.cube.position.copy(point)
+        //     // this.scene.add(this.cube)
+        // })
 
-        positionSpline.points.forEach(point => {
-            this.cube = new THREE.Mesh(geometry, material)
-            this.cube.position.copy(point)
-            // this.scene.add(this.cube)
-        })
+        // positionSpline.points.forEach(point => {
+        //     this.cube = new THREE.Mesh(geometry, material)
+        //     this.cube.position.copy(point)
+        //     // this.scene.add(this.cube)
+        // })
 
         this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.1, 4, false)
         this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.1, 4, false)
@@ -120,8 +120,8 @@ export default class Camera {
         const material1 = new THREE.MeshBasicMaterial({ color: 0xff00ff })
         const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 })
 
-        const positionMesh = new THREE.Mesh(this.positionSplineGeometry, material1)
-        const lookAtMesh = new THREE.Mesh(this.lookAtSplineGeometry, material2)
+        // const positionMesh = new THREE.Mesh(this.positionSplineGeometry, material1)
+        // const lookAtMesh = new THREE.Mesh(this.lookAtSplineGeometry, material2)
 
         // this.scene.add(positionMesh)
         // this.scene.add(lookAtMesh)

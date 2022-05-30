@@ -13,6 +13,8 @@ export default class Environment {
             this.debugFolder = this.debug.ui.addFolder('Environment')
         }
 
+        this.scene.background = new THREE.Color( 0x18c5fe );
+
         this.setSunLight()
     }
 
@@ -35,12 +37,12 @@ export default class Environment {
 
         // Debug
         if (this.debug.active) {
-            this.helper = new THREE.DirectionalLightHelper(this.sunLight, 2)
-            this.scene.add(this.helper)
+            // this.helper = new THREE.DirectionalLightHelper(this.sunLight, 2)
+            // this.scene.add(this.helper)
             // this.debugFolder.add(this.sunLightObject.position, "x", -15, 0, 0.1)
             // this.debugFolder.add(this.sunLightObject.position, "y", 0, 15, 0.1)
-            this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera)
-            this.scene.add(this.shadowHelper)
+            // this.shadowHelper = new THREE.CameraHelper(this.sunLight.shadow.camera)
+            // this.scene.add(this.shadowHelper)
         }
     }
 }
