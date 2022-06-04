@@ -14,13 +14,7 @@ export default class Camera {
         this.time = this.experience.time
         this.dom = this.experience.dom
 
-        // debug
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Camera')
-        }
-
         this.setInstance()
-        // this.setOrbitControls()
         this.travelPath()
 
         //scroll
@@ -62,7 +56,6 @@ export default class Camera {
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 75)
 
-        // this.instance.position.set(-10, 8, 5)
         // this.instance.lookAt(0, 0, 0)
         // this.instance.rotation.set(0, Math.PI * 0.5, 0)
 
@@ -71,6 +64,9 @@ export default class Camera {
 
         // debug
         if (this.debug.active) {
+            this.setOrbitControls()
+            this.instance.position.set(-10, 8, 5)
+            this.debugFolder = this.debug.ui.addFolder('Camera')
             this.debugFolder.add(this.instance.rotation, 'x').min(-2).max(2).step(0.001).name("RotationX")
             this.debugFolder.add(this.instance.rotation, 'y').min(-2).max(2).step(0.001).name("RotationY")
             this.debugFolder.add(this.instance.rotation, 'z').min(-2).max(2).step(0.001).name("RotationZ")
@@ -98,33 +94,34 @@ export default class Camera {
             new THREE.Vector3(1, 0.6, -4), // scene
         ])
 
-        // vizualize the points of the curves
-        // const geometry = new THREE.BoxGeometry(0.04, 0.04, 0.04)
-        // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+        this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.03, 4, false)
+        this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.03, 4, false)
 
-        // lookAtSpline.points.forEach(point => {
-        //     this.cube = new THREE.Mesh(geometry, material)
-        //     this.cube.position.copy(point)
-        //     // this.scene.add(this.cube)
-        // })
+        if (this.debug.active) {
+            // vizualize the points of the curves
+            const geometry = new THREE.BoxGeometry(0.08, 0.08, 0.08)
+            
+            const material1 = new THREE.MeshBasicMaterial({ color: 0xff00ff })
+            const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 })
 
-        // positionSpline.points.forEach(point => {
-        //     this.cube = new THREE.Mesh(geometry, material)
-        //     this.cube.position.copy(point)
-        //     // this.scene.add(this.cube)
-        // })
+            lookAtSpline.points.forEach(point => {
+                this.cube = new THREE.Mesh(geometry, material1)
+                this.cube.position.copy(point)
+                this.scene.add(this.cube)
+            })
 
-        this.positionSplineGeometry = new THREE.TubeGeometry(positionSpline, 70, 0.1, 4, false)
-        this.lookAtSplineGeometry = new THREE.TubeGeometry(lookAtSpline, 70, 0.1, 4, false)
-
-        const material1 = new THREE.MeshBasicMaterial({ color: 0xff00ff })
-        const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 })
-
-        // const positionMesh = new THREE.Mesh(this.positionSplineGeometry, material1)
-        // const lookAtMesh = new THREE.Mesh(this.lookAtSplineGeometry, material2)
-
-        // this.scene.add(positionMesh)
-        // this.scene.add(lookAtMesh)
+            positionSpline.points.forEach(point => {
+                this.cube = new THREE.Mesh(geometry, material2)
+                this.cube.position.copy(point)
+                this.scene.add(this.cube)
+            })
+    
+            const positionMesh = new THREE.Mesh(this.positionSplineGeometry, material1)
+            const lookAtMesh = new THREE.Mesh(this.lookAtSplineGeometry, material2)
+    
+            this.scene.add(positionMesh)
+            this.scene.add(lookAtMesh)
+        }
     }
 
     travelUpdate() {
@@ -214,7 +211,7 @@ export default class Camera {
     }
 
     update() {
-        if (this.positionSplineGeometry && this.lookAtSplineGeometry) {
+        if (this.positionSplineGeometry && this.lookAtSplineGeometry && !this.debug.active) {
             this.travelUpdate()
         }
 
@@ -231,6 +228,8 @@ export default class Camera {
             this.zoomPosition += (0 - this.zoomPosition) * 0.08
         }
 
-        // this.controls.update()
+        if (this.debug.active) {
+            this.controls.update()
+        }
     }
 }
