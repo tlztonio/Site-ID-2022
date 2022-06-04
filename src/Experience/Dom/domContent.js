@@ -41,6 +41,7 @@ export default class Dom {
         this.overlayParasol = document.getElementById('parasol')
 
         this.hasClicked = false
+
     }
 
     setCursor(){

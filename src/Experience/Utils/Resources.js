@@ -86,9 +86,11 @@ export default class Resources extends EventEmitter {
             if (this.progressRatio > 0) {
                 this.numberUpdate += (this.progressRatio - this.numberUpdate) * 0.3 //classic lerp
                 this.number.innerHTML = 2001 + Math.round(this.numberUpdate * 20)
-                this.position = ( this.progressRatio * this.widthTranslate ).toFixed(2)
+                // this.position = ( this.progressRatio * this.widthTranslate ).toFixed(2)
             }
             if (this.numberUpdate > 0.999) {
+                this.position = ( this.progressRatio * this.widthTranslate ).toFixed(2)
+                this.numberContainer.style.transform = "translateX(" + this.position + "%)"
                 this.loadingDone = true
                 setTimeout(() => { loaderContainer.classList.add('done') }, 1500)
                 clearInterval(interval)
@@ -109,7 +111,7 @@ export default class Resources extends EventEmitter {
     }
 
     update() {
-        this.numberContainer.style.transform = "translateX(" + this.position + "%)"
+        // this.numberContainer.style.transform = "translateX(" + this.position + "%)"
     }
 
     setLoaders() {

@@ -24,16 +24,6 @@ $marron: #9B7764;
 $bleuC: #64889B;
 $bleuF: #092327;
 
-// #cursor{
-//     width: 20px;
-//     height: 20px;
-//     position: fixed;
-//     z-index: 150;
-//     background-color: $bleuC;
-//     border-radius: 100%;
-//     transform: translate(50vw, 75vh);
-// }
-
 * {
     margin: 0;
     padding: 0;
@@ -41,8 +31,8 @@ $bleuF: #092327;
 }
 
 html{
-    // overscroll-behavior: none;
     user-select: none;
+    // background-color: #abffff;
 }
 
 body{
@@ -120,7 +110,6 @@ body{
         bottom: 2em;
         left: 2.5em;
         padding: 0.1em 0 0.1em 0.35em;
-        // check if with bottom it gets hidden by the botton nav bar on iphone
     }
     @media only screen and (max-width: 700px)  {
         left: 1.5em;
@@ -221,17 +210,23 @@ button{
     border: solid 1px $marron;
     color: $marron;
     background-color: white;
-    padding: 0.2em 0.35em;
+    padding: 0.3em 0.45em;
     font-family: "Urbanist";
     font-size: 1.1em;
     width: fit-content;
     cursor: pointer;
     align-self: flex-end;
+    transition: all cubic-bezier(0.37, 0, 0.63, 1) 0.4s;
+    &:hover{
+        background-color: #9B7764;
+        color: white;
+    }
 }
+
 
 @media only screen and (max-width: 700px) {
     section{
-        padding: 1em 1.25em;
+        padding: 1em;
     }
 
     .titles {
@@ -245,14 +240,29 @@ button{
 }
 
 @media only screen and (max-width: 450px) {
+    section{
+        padding: 0.8em;
+    }
+
     .titles{
         flex-direction: column;
-        margin-bottom: 1.5em;
+        margin-bottom: 1em;
         &__big {
+            font-size: 4em;
             margin-bottom: 0.25em;
         }
         &__small {
+            font-size: 1.5em;
             margin-bottom: 0.25em;
         }
+    }
+
+    .yt {
+        margin: 1.5em 0 2em 0;
+    }
+
+    button{
+        padding: 0.45em 0.6em;
+        font-size: 0.95em;
     }
 }
